@@ -35,13 +35,15 @@ void MainForm::initialize()
     Setting::SetProjection(proj);
     Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
 
-    //Таймер обновления логики игры
-    id_timer = this->startTimer(1000/30);
+    //Таймер обновления логики игры win=40fps lin=30fps
+    id_timer = this->startTimer(1000/40);
 
 }
 
 void MainForm::timerEvent(QTimerEvent *t)
 {
+    m_context->makeCurrent(this);
+
     //Явный FPS
     this->setTitle("FPS="+QString::number(Resources::FPS()->GetFps()));
 
@@ -51,7 +53,7 @@ void MainForm::timerEvent(QTimerEvent *t)
     Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
     level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
-    renderNow();
+    m_context->swapBuffers(this);
 }
 
 void MainForm::render()
