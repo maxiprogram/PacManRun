@@ -19,7 +19,7 @@ ManagerGameObject* ManagerGameObject::getInstance()
     return instance;
 }
 
-void ManagerGameObject::Add(QString key, GameObject* value)
+QHash<QString,GameObject*>::iterator ManagerGameObject::Add(QString key, GameObject* value)
 {
     hash_tab.insertMulti(key, value);
 }
@@ -34,7 +34,7 @@ QList<GameObject*> ManagerGameObject::GetValues(QString key)
     return hash_tab.values(key);
 }
 
-QHash<QString, GameObject*> ManagerGameObject::GetHashTab()
+QMultiHash<QString, GameObject*> ManagerGameObject::GetHashTab()
 {
     return hash_tab;
 }

@@ -11,16 +11,16 @@ public:
     ManagerGameObject();
     ~ManagerGameObject();
     static ManagerGameObject* getInstance();
-    void Add(QString key, GameObject* value);
+    QMultiHash<QString,GameObject*>::iterator Add(QString key, GameObject* value);
     GameObject* GetValue(QString key);
     QList<GameObject*> GetValues(QString key);
-    QHash<QString, GameObject*> GetHashTab();
+    QMultiHash<QString, GameObject*> GetHashTab();
     void Clear();
     void Destroy();
 
 private:
     static ManagerGameObject* instance;
-    QHash<QString, GameObject*> hash_tab;
+    QMultiHash<QString, GameObject*> hash_tab;
 };
 
 #endif // MANAGERGAMEOBJECT_H

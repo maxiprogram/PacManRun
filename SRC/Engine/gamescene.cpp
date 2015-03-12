@@ -6,6 +6,7 @@ GameScene::GameScene()
 
 bool GameScene::Load(QString filename, CreatorGameObject* creator)
 {
+    Clear();
     QFile f(filename);
     if (!f.open(QIODevice::ReadOnly))
         return false;
@@ -161,7 +162,8 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
                             obj->SetName(reader.attributes().value("name").toString());
                         }
                         qDebug()<<"Tag:"<<reader.name()<<"Type:"<<type<<"Name:"<<obj->GetName();
-                        ManagerGameObject::getInstance()->Add(obj->GetName(), obj);
+                        QMultiHash<QString, GameObject*>::iterator it = ManagerGameObject::getInstance()->Add(obj->GetName(), obj);
+                        list_it.append(it);
                         QHash<QString,QString> property;
 
                         reader.readNext();
@@ -198,33 +200,21 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
 
 void GameScene::Update(float dt)
 {
-    QHash<QString, GameObject*> hash_tab = ManagerGameObject::getInstance()->GetHashTab();
-    QHash<QString, GameObject*>::iterator it = hash_tab.begin();
-    while (it!=hash_tab.end())
+    for (int i=0; i<list_it.size(); i++)
     {
-        QString key = it.key();
-        QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues(key);
-        for (int i=0; i<list.size(); i++)
-        {
-            list.at(i)->Update(dt);
-        }
-        it++;
+        QHash<QString, GameObject*>::iterator it = list_it.at(i);
+        GameObject* obj = it.value();
+        obj->Update();
     }
 }
 
 void GameScene::Draw()
 {
-    QHash<QString, GameObject*> hash_tab = ManagerGameObject::getInstance()->GetHashTab();
-    QHash<QString, GameObject*>::iterator it = hash_tab.begin();
-    while (it!=hash_tab.end())
+    for (int i=0; i<list_it.size(); i++)
     {
-        QString key = it.key();
-        QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues(key);
-        for (int i=0; i<list.size(); i++)
-        {
-            list.at(i)->Draw();
-        }
-        it++;
+        QHash<QString, GameObject*>::iterator it = list_it.at(i);
+        GameObject* obj = it.value();
+        obj->Draw();
     }
 }
 
@@ -255,5 +245,13 @@ void GameScene::Draw(QRectF rect)
 
 void GameScene::Clear()
 {
-
+    QMultiHash<QString, GameObject*> hash_tab = ManagerGameObject::getInstance()->GetHashTab();
+    for (int i=0; i<list_it.size(); i++)
+    {
+        QMultiHash<QString, GameObject*>::iterator it = list_it.at(i);
+        GameObject* obj = it.value();
+        hash_tab.remove(it.key(), it.value());
+        delete obj;
+    }
+    list_it.clear();
 }

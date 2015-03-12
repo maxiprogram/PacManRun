@@ -19,7 +19,8 @@ public:
     void Draw(QRectF rect);
     void Clear();
 private:
-    QHash<QString, GameObject*> hash_tab;
+    QList <QMultiHash<QString, GameObject*>::iterator> list_it;
+
 };
 
 #endif // GAMESCENE_H

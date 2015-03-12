@@ -43,6 +43,7 @@ void TileMap::SetShaderKey(int key)
 
 bool TileMap::Load(QString filename)
 {
+    Clear();
     QFile f(filename);
     if (!f.open(QIODevice::ReadOnly))
         return false;

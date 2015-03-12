@@ -22,6 +22,7 @@ Shader::~Shader()
 
 bool Shader::Load(QString vert_file, QString frag_file)
 {
+    //this->removeAllShaders();
     this->create();
     if (!this->addShaderFromSourceFile(QOpenGLShader::Vertex, vert_file))
         return false;

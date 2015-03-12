@@ -28,6 +28,9 @@ void MainForm::initialize()
     MainForm::CreateObject = new CreatorObject();
     if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
         qDebug()<<"Not Load Level";
+    level.Clear();
+    if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
+        qDebug()<<"Not Load Level";
 
     QMatrix4x4 proj;
     proj.setToIdentity();
@@ -51,7 +54,7 @@ void MainForm::timerEvent(QTimerEvent *t)
 
     level.Update(/*Fps::getInstance()->GetFps()/1000.0*/);
     Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-    level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+    level.Draw(/*Resources::CAMERA()->GetCurrentCamera()->GetRect()*/);
 
     m_context->swapBuffers(this);
 }
