@@ -39,7 +39,7 @@ void MainForm::initialize()
     Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
 
     //Таймер обновления логики игры win=40fps lin=30fps
-    id_timer = this->startTimer(1000/40);
+    id_timer = this->startTimer(1000/30);
 
 }
 
@@ -54,7 +54,7 @@ void MainForm::timerEvent(QTimerEvent *t)
 
     level.Update(/*Fps::getInstance()->GetFps()/1000.0*/);
     Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-    level.Draw(/*Resources::CAMERA()->GetCurrentCamera()->GetRect()*/);
+    level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
     m_context->swapBuffers(this);
 }

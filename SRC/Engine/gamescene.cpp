@@ -202,9 +202,9 @@ void GameScene::Update(float dt)
 {
     for (int i=0; i<list_it.size(); i++)
     {
-        QHash<QString, GameObject*>::iterator it = list_it.at(i);
-        GameObject* obj = it.value();
-        obj->Update();
+        QMultiHash<QString, GameObject*>::iterator it = list_it.at(i);
+        GameObject* obj = it.value();     
+        obj->Update(dt);
     }
 }
 
@@ -220,37 +220,32 @@ void GameScene::Draw()
 
 void GameScene::Draw(QRectF rect)
 {
-    QHash<QString, GameObject*> hash_tab = ManagerGameObject::getInstance()->GetHashTab();
-    QHash<QString, GameObject*>::iterator it = hash_tab.begin();
-    while (it!=hash_tab.end())
+    for (int i=0; i<list_it.size(); i++)
     {
-        QString key = it.key();
-        QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues(key);
-        for (int i=0; i<list.size(); i++)
-        {
-            QVector3D pos = list.at(i)->GetPos();
-            QVector3D scal = list.at(i)->GetScal();
-            QVector3D pivot = list.at(i)->GetPivot();
-            QRectF rect_pos;
-            rect_pos.setLeft(pos.x()-scal.x()*pivot.x());
-            rect_pos.setTop(pos.y()-scal.y()*pivot.y());
-            rect_pos.setWidth(scal.x());
-            rect_pos.setHeight(scal.y());
-            if (rect_pos.intersects(rect))
-                list.at(i)->Draw();
-        }
-        it++;
+        QHash<QString, GameObject*>::iterator it = list_it.at(i);
+        GameObject* obj = it.value();
+
+        QVector3D pos = obj->GetPos();
+        QVector3D scal = obj->GetScal();
+        QVector3D pivot = obj->GetPivot();
+        QRectF rect_pos;
+        rect_pos.setLeft(pos.x()-scal.x()*pivot.x());
+        rect_pos.setTop(pos.y()-scal.y()*pivot.y());
+        rect_pos.setWidth(scal.x());
+        rect_pos.setHeight(scal.y());
+        if (rect_pos.intersects(rect))
+            obj->Draw();
     }
 }
 
 void GameScene::Clear()
 {
-    QMultiHash<QString, GameObject*> hash_tab = ManagerGameObject::getInstance()->GetHashTab();
+    QMultiHash<QString, GameObject*>* hash_tab = ManagerGameObject::getInstance()->GetHashTab();
     for (int i=0; i<list_it.size(); i++)
     {
         QMultiHash<QString, GameObject*>::iterator it = list_it.at(i);
         GameObject* obj = it.value();
-        hash_tab.remove(it.key(), it.value());
+        hash_tab->remove(it.key(), it.value());
         delete obj;
     }
     list_it.clear();

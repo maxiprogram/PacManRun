@@ -14,7 +14,7 @@ public:
     QMultiHash<QString,GameObject*>::iterator Add(QString key, GameObject* value);
     GameObject* GetValue(QString key);
     QList<GameObject*> GetValues(QString key);
-    QMultiHash<QString, GameObject*> GetHashTab();
+    QMultiHash<QString, GameObject*>* GetHashTab();
     void Clear();
     void Destroy();
 
