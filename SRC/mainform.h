@@ -11,6 +11,7 @@
 #include "Engine/resources.h"
 
 #include "creatorobject.h"
+#include "statusgame.h"
 
 class MainForm : public QWindow, protected QOpenGLFunctions
 {
@@ -51,6 +52,7 @@ private:
     QOpenGLPaintDevice *m_device;
 
     GameScene level;
+    GameScene main_menu;
     static CreatorObject* CreateObject;
 
     QTime time;

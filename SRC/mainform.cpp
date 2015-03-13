@@ -24,13 +24,22 @@ void MainForm::render(QPainter *painter)
 
 void MainForm::initialize()
 {
+    ///*Глобальные Mesh и Shader
+    Resources::MESH()->Add(0, new Mesh());
+    Resources::MESH()->GetValue(0)->Create();
+    Resources::SHADER()->Add(0, new Shader());
+    //Глобальные Mesh и Shader*/
 
     MainForm::CreateObject = new CreatorObject();
+    ///*Загрузка главного меню
+    if (!main_menu.Load("Resources/main_menu.xml", MainForm::CreateObject))
+        qDebug()<<"Not Load MainMenu";
+    //Загрузка главного меню*/
+
+    /*Загрузка уровня
     if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
         qDebug()<<"Not Load Level";
-    level.Clear();
-    if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
-        qDebug()<<"Not Load Level";
+    Загрузка уровня*/
 
     QMatrix4x4 proj;
     proj.setToIdentity();
@@ -52,9 +61,22 @@ void MainForm::timerEvent(QTimerEvent *t)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    level.Update(/*Fps::getInstance()->GetFps()/1000.0*/);
-    Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-    level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+    switch(CurrentStatusGame)
+    {
+        case Main_Menu:
+        {
+            main_menu.Update();
+            main_menu.Draw();
+            break;
+        }
+        case Play:
+        {
+            level.Update(/*Fps::getInstance()->GetFps()/1000.0*/);
+            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            break;
+        }
+    }
 
     m_context->swapBuffers(this);
 }

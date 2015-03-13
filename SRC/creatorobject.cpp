@@ -14,6 +14,11 @@ GameObject* CreatorObject::CreateGameObject(uint type)
         return new Player();
         break;
     }
+    case MainMenuObject:
+    {
+        return new MainMenu();
+        break;
+    }
 
     default:{return 0;break;}
     }

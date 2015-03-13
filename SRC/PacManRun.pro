@@ -40,7 +40,9 @@ SOURCES += \
     player.cpp \
     creatorobject.cpp \
     Engine/tilemap.cpp \
-    Engine/resources.cpp
+    Engine/resources.cpp \
+    statusgame.cpp \
+    mainmenu.cpp
 
 HEADERS  += \
     mainform.h \
@@ -69,7 +71,9 @@ HEADERS  += \
     player.h \
     creatorobject.h \
     Engine/tilemap.h \
-    Engine/resources.h
+    Engine/resources.h \
+    statusgame.h \
+    mainmenu.h
 
 FORMS    +=
 

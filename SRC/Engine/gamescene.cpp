@@ -109,7 +109,7 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
                     while (reader.isStartElement())
                     {
                         QString name = reader.name().toString();
-                        qDebug()<<"Name:"<<name;
+                        //qDebug()<<"Name:"<<name;
                         reader.readNext();
                         if (name=="pos_x")
                         {

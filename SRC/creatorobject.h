@@ -4,8 +4,9 @@
 #include "Engine/creatorgameobject.h"
 
 #include "player.h"
+#include "mainmenu.h"
 
-enum Type_GameObject {Hero=0};
+enum Type_GameObject {Hero=0, MainMenuObject=1};
 
 class CreatorObject:public CreatorGameObject
 {
