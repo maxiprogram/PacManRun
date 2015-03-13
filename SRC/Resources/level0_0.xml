@@ -1,22 +1,27 @@
 <GameScene>
  <Resources>
-  <Texture id="0">Resources/tileset.png</Texture>
-  <Texture id="1">Resources/player_sprite.png</Texture>
+  <Texture id="1">Resources/tileset.png</Texture>
+  <Texture id="2">Resources/player_sprite.png</Texture>
  </Resources>
- <Sprite id="0" mid="0" sid="0" tid="1"></Sprite>
+
+ <Sprite id="1" mid="0" sid="0" tid="2"></Sprite>
+ 
  <GameObject name="Player" type="0">
   <pos_x>600</pos_x>
   <pos_y>200</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
-  <id_sprite>0</id_sprite>
+  <id_sprite>1</id_sprite>
   <speed_x>10</speed_x>
   <accel_y>1</accel_y>
  </GameObject>
- <TileMap mid="0" sid="0">Resources/level0_2.tmx</TileMap>
+ 
+ <TileMap mid="0" sid="0">Resources/level0_0.tmx</TileMap>
+ 
  <Camera name="MainCamera" type="2">
   <pos_x>0</pos_x>
   <pos_y>0</pos_y>
   <pos_z>0</pos_z>
  </Camera>
+
 </GameScene>

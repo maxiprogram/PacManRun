@@ -19,7 +19,23 @@ void MainMenu::Init(QHash<QString, QString> property)
 
 void MainMenu::Update(float dt)
 {
+    int m_x = Resources::MOUSE()->GetX();
+    int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
 
+    ///*Если нажата мышка
+    if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+    {
+        ///*Если нажата на Play
+        if (m_x>(Setting::GetViewPort().width()/2-279/2) && m_x<(Setting::GetViewPort().width()/2+279/2))
+        {
+            if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
+            {
+                CurrentStatusGame = Play;
+            }
+        }
+        //Если нажата на Play*/
+    }
+    //Если нажата мышка*/
 }
 
 void MainMenu::Draw()

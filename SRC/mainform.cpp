@@ -36,10 +36,10 @@ void MainForm::initialize()
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
 
-    /*Загрузка уровня
+    ///*Загрузка уровня
     if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
         qDebug()<<"Not Load Level";
-    Загрузка уровня*/
+    //Загрузка уровня*/
 
     QMatrix4x4 proj;
     proj.setToIdentity();
@@ -48,7 +48,7 @@ void MainForm::initialize()
     Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
 
     //Таймер обновления логики игры win=40fps lin=30fps
-    id_timer = this->startTimer(1000/30);
+    id_timer = this->startTimer(1000/40);
 
 }
 
@@ -57,7 +57,10 @@ void MainForm::timerEvent(QTimerEvent *t)
     m_context->makeCurrent(this);
 
     //Явный FPS
-    this->setTitle("FPS="+QString::number(Resources::FPS()->GetFps()));
+    this->setTitle("FPS="+QString::number(Resources::FPS()->GetFps()) +
+                   " X="+QString::number(Resources::MOUSE()->GetX()) +
+                   " Y="+QString::number(Setting::GetViewPort().height()-Resources::MOUSE()->GetY())
+                   );
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -170,17 +173,17 @@ void MainForm::setAnimating(bool animating)
 
 void MainForm::mouseMoveEvent(QMouseEvent *event)
 {
-
+    Resources::MOUSE()->Update(event, false);
 }
 
 void MainForm::mousePressEvent(QMouseEvent *event)
 {
-
+    Resources::MOUSE()->Update(event, true);
 }
 
 void MainForm::mouseReleaseEvent(QMouseEvent *event)
 {
-
+    Resources::MOUSE()->Update(event, false);
 }
 
 void MainForm::keyPressEvent(QKeyEvent *key)

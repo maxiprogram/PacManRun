@@ -3,6 +3,8 @@
 
 #include "Engine/resources.h"
 
+#include "statusgame.h"
+
 class MainMenu:public GameObject
 {
 public:
