@@ -14,7 +14,8 @@ public:
     void Update(float dt);
     void Draw();
 private:
-    int id_sprite;
+    int id_main_menu;
+    int id_level_menu1;
 };
 
 #endif // MAINMENU_H

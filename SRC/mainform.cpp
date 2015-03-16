@@ -72,6 +72,12 @@ void MainForm::timerEvent(QTimerEvent *t)
             main_menu.Draw();
             break;
         }
+        case Level_Menu1:
+        {
+            main_menu.Update();
+            main_menu.Draw();
+            break;
+        }
         case Play:
         {
             level.Update(/*Fps::getInstance()->GetFps()/1000.0*/);
