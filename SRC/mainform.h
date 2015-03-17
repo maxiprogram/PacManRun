@@ -12,6 +12,7 @@
 
 #include "creatorobject.h"
 #include "statusgame.h"
+#include "playprofile.h"
 
 class MainForm : public QWindow, protected QOpenGLFunctions
 {

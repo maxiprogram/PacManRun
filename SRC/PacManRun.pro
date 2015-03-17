@@ -42,7 +42,8 @@ SOURCES += \
     Engine/tilemap.cpp \
     Engine/resources.cpp \
     statusgame.cpp \
-    mainmenu.cpp
+    mainmenu.cpp \
+    playprofile.cpp
 
 HEADERS  += \
     mainform.h \
@@ -73,7 +74,8 @@ HEADERS  += \
     Engine/tilemap.h \
     Engine/resources.h \
     statusgame.h \
-    mainmenu.h
+    mainmenu.h \
+    playprofile.h
 
 FORMS    +=
 

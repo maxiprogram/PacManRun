@@ -12,7 +12,7 @@
   <id_level_menu1>1</id_level_menu1>
  </GameObject>
 
- <Camera name="MainCamera">
+ <Camera name="MainMenuCamera">
   <pos_x>0</pos_x>
   <pos_y>0</pos_y>
   <pos_z>0</pos_z>

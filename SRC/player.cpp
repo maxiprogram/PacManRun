@@ -114,6 +114,7 @@ void Player::Update(float dt)
                     TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
             {
                 TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
+                PlayProfile::score+=1;
             }
         }
         //Если шип
@@ -159,8 +160,8 @@ void Player::Update(float dt)
     //Взаимодействие с объктами*/
 
     ///*Задание местоположения камеры
-    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-400);
-    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-300);
+    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
+    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
     //Задание местоположения камеры*/
 
     ///*Анимация

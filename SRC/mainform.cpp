@@ -30,6 +30,11 @@ void MainForm::initialize()
     Resources::SHADER()->Add(0, new Shader());
     //Глобальные Mesh и Shader*/
 
+    ///*Загрузка информации об пройденных уровнях и очках
+    PlayProfile::Load();
+    //Загрузка информации об пройденных уровнях и очках*/
+
+
     MainForm::CreateObject = new CreatorObject();
     ///*Загрузка главного меню
     if (!main_menu.Load("Resources/main_menu.xml", MainForm::CreateObject))
@@ -122,6 +127,7 @@ bool MainForm::event(QEvent *event)
         return true;
     case QEvent::Close:
         qDebug()<<"Close()";
+        PlayProfile::Save();
         this->killTimer(id_timer);
         Resources::DestroyResources();
         return QWindow::event(event);

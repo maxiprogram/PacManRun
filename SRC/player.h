@@ -5,6 +5,8 @@
 #include "Engine/managerkeyboard.h"
 #include "Engine/fps.h"
 
+#include "playprofile.h"
+
 class Player:public GameObject
 {
 public:
