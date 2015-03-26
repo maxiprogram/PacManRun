@@ -2,14 +2,20 @@
  <Resources>
   <Texture id="0">Resources/buttons.png</Texture>
   <Texture id="1">Resources/level_menu1.png</Texture>
+  <Texture id="2">Resources/item_back.png</Texture>
+  <Texture id="3">Resources/item_lock.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="0"></Sprite>
  <Sprite id="1" mid="0" sid="0" tid="1"></Sprite>
+ <Sprite id="2" mid="0" sid="0" tid="2"></Sprite>
+ <Sprite id="3" mid="0" sid="0" tid="3"></Sprite>
 
  <GameObject name="MainMenu" type="1">
   <id_main_menu>0</id_main_menu>
   <id_level_menu1>1</id_level_menu1>
+  <id_item_back>2</id_item_back>
+  <id_item_lock>3</id_item_lock>
  </GameObject>
 
  <Camera name="MainMenuCamera">

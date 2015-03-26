@@ -13,6 +13,8 @@ void MainMenu::Init(QHash<QString, QString> property)
 {
     id_main_menu = property.value("id_main_menu").toInt();
     id_level_menu1 = property.value("id_level_menu1").toInt();
+    id_item_back = property.value("id_item_back").toInt();
+    id_item_lock = property.value("id_item_lock").toInt();
     SetPivot(QVector3D(0.5, 0.5, 0));
     SetPos(QVector3D(0, 0, 0));
 }
@@ -34,6 +36,7 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
                     CurrentStatusGame = Level_Menu1;
+                    PlayProfile::last_level = 2; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
@@ -127,6 +130,39 @@ void MainMenu::Draw()
         glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_level_menu1)->GetMesh()->GetCountVertex());
         Resources::SPRITE()->GetValue(id_level_menu1)->UnBind();
         //Вывод Уровней*/
+
+        ///*Вывод стрелки назад к главному меню
+        SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
+        SetPos(QVector3D(75, 50, 0));
+        Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
+        Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_item_back)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_item_back)->UnBind();
+        //Вывод стрелки назад к главному меню*/
+
+
+        ///*Вывод заблокированных уровней
+        SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_lock)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_lock)->GetTexture()->GetHeight(), 0));
+
+        for (int i=PlayProfile::last_level; i<9; i++)
+        {
+            int tmp_x = (i%3)*240+133;
+            int tmp_y = 600-((i/3)*180+120);
+            SetPos(QVector3D(tmp_x, tmp_y, 0));
+            Resources::SPRITE()->GetValue(id_item_lock)->Bind(GetScalX(), GetScalY());
+            Resources::SPRITE()->GetValue(id_item_lock)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_lock)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                   Setting::GetProjection() *
+                                                                                   Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                                   this->GetMatrix()
+                                                                                   );
+            glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_item_lock)->GetMesh()->GetCountVertex());
+            Resources::SPRITE()->GetValue(id_item_lock)->UnBind();
+        }
+        //Вывод заблокированных уровней*/
     }
     //Если сейчас в меню1 выбора уровня*/
 }
