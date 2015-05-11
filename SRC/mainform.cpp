@@ -67,6 +67,11 @@ void MainForm::timerEvent(QTimerEvent *t)
                    " Y="+QString::number(Setting::GetViewPort().height()-Resources::MOUSE()->GetY())
                    );
 
+    ///*Альфа смешивание
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //*/
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     switch(CurrentStatusGame)
