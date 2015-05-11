@@ -1,6 +1,7 @@
 #include "playprofile.h"
 
 int PlayProfile::last_level = 1;
+int PlayProfile::current_level = 0;
 int PlayProfile::score = 0;
 
 PlayProfile::PlayProfile()

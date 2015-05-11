@@ -6,6 +6,7 @@
 #include "Engine/fps.h"
 
 #include "playprofile.h"
+#include "statusgame.h"
 
 class Player:public GameObject
 {

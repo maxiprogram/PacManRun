@@ -11,6 +11,7 @@ public:
     static bool Save();
     static int last_level;
     static int score;
+    static int current_level;
 };
 
 #endif // PLAYPROFILE_H

@@ -41,10 +41,10 @@ void MainForm::initialize()
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
 
-    ///*Загрузка уровня
+    /*Загрузка уровня
     if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
         qDebug()<<"Not Load Level";
-    //Загрузка уровня*/
+    Загрузка уровня*/
 
     QMatrix4x4 proj;
     proj.setToIdentity();
@@ -86,6 +86,19 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             main_menu.Update();
             main_menu.Draw();
+            break;
+        }
+        case Load_Level:
+        {
+            qDebug()<<"CurrentStatusGame Load_Level";
+            level.Clear();
+            ///*Загрузка уровня
+            if (!level.Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
+                qDebug()<<"Not Load Level";
+            //Загрузка уровня*/
+            Resources::CAMERA()->SetCurrentCamera("MainCamera");
+            CurrentStatusGame = Play;
+            qDebug()<<"CurrentStatusGame Play";
             break;
         }
         case Play:

@@ -17,6 +17,28 @@ void MainMenu::Init(QHash<QString, QString> property)
     id_item_lock = property.value("id_item_lock").toInt();
     SetPivot(QVector3D(0.5, 0.5, 0));
     SetPos(QVector3D(0, 0, 0));
+
+    mas_pos[0].setX(206);
+    mas_pos[0].setY(463);
+    mas_pos[1].setX(398);
+    mas_pos[1].setY(463);
+    mas_pos[2].setX(591);
+    mas_pos[2].setY(463);
+
+    mas_pos[3].setX(206);
+    mas_pos[3].setY(300);
+    mas_pos[4].setX(398);
+    mas_pos[4].setY(300);
+    mas_pos[5].setX(591);
+    mas_pos[5].setY(300);
+
+    mas_pos[6].setX(206);
+    mas_pos[6].setY(138);
+    mas_pos[7].setX(398);
+    mas_pos[7].setY(138);
+    mas_pos[8].setX(591);
+    mas_pos[8].setY(138);
+
 }
 
 void MainMenu::Update(float dt)
@@ -36,7 +58,7 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
                     CurrentStatusGame = Level_Menu1;
-                    PlayProfile::last_level = 2; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
+                    PlayProfile::last_level = 1; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
@@ -57,7 +79,8 @@ void MainMenu::Update(float dt)
                 CurrentStatusGame = Main_Menu;
             }else
             {
-                CurrentStatusGame = Play;
+                PlayProfile::current_level+=1; //УБРАТЬ ЭТО ДЛЯ ТЕСТА ПРИДУМАТЬ ОБРАБОТКУ
+                CurrentStatusGame = Load_Level;
             }
         }
         //Если нажата мышка*/
@@ -153,12 +176,11 @@ void MainMenu::Draw()
 
         ///*Вывод заблокированных уровней
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_lock)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_lock)->GetTexture()->GetHeight(), 0));
+        //SetPivot(QVector3D(0.5, 0.5, 0.0));
 
         for (int i=PlayProfile::last_level; i<9; i++)
         {
-            int tmp_x = (i%3)*240+133;
-            int tmp_y = 600-((i/3)*180+120);
-            SetPos(QVector3D(tmp_x, tmp_y, 0));
+            SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2, 0));
             Resources::SPRITE()->GetValue(id_item_lock)->Bind(GetScalX(), GetScalY());
             Resources::SPRITE()->GetValue(id_item_lock)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_lock)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                    Setting::GetProjection() *

@@ -37,9 +37,6 @@ void Player::Init(QHash<QString, QString> property)
 void Player::Update(float dt)
 {
     ///*Движение и проверка коллизии
-    //float speed=speed_x-speed_x*dt;
-    //qDebug()<<"speed:"<<speed<<"dt:"<<dt;
-    //this->MoveX(speed);
     this->MoveX((speed_x+accel_x)*dt);
     direction.setX(1);
     QVector3D new_pos = this->GetPos();
@@ -47,6 +44,12 @@ void Player::Update(float dt)
     this->SetPos(new_pos);
     accel_x = 0;
 
+    if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Escape))
+    {
+        qDebug()<<"CurrentStatusGame Level_Menu1";
+        Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
+        CurrentStatusGame = Level_Menu1;
+    }
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
     {
@@ -59,11 +62,11 @@ void Player::Update(float dt)
     {
         if (speed_y>0)
         {
-            qDebug()<<"JUMP DO Speed:"<<speed_y<<"Pos:"<<GetPos();
+            //qDebug()<<"JUMP DO Speed:"<<speed_y<<"Pos:"<<GetPos();
             speed_y-=accel_y;
             direction.setY(1);
             MoveY(speed_y);
-            qDebug()<<"JUMP Speed:"<<speed_y<<"Pos:"<<GetPos();
+            //qDebug()<<"JUMP Speed:"<<speed_y<<"Pos:"<<GetPos();
         }else
         {
             Status = Down;
@@ -72,14 +75,14 @@ void Player::Update(float dt)
     }
     if (Status==Down)
     {
-        qDebug()<<"DOWN DO Speed:"<<speed_y<<"Pos:"<<GetPos();
+        //qDebug()<<"DOWN DO Speed:"<<speed_y<<"Pos:"<<GetPos();
         if (speed_y>-30)
         {
             speed_y-=accel_y;
         }
         MoveY(speed_y);
         direction.setY(-1);
-        qDebug()<<"DOWN Speed:"<<speed_y<<"Pos:"<<GetPos();
+        //qDebug()<<"DOWN Speed:"<<speed_y<<"Pos:"<<GetPos();
     }
 
     new_pos=this->GetPos();
@@ -90,7 +93,7 @@ void Player::Update(float dt)
         {
             Status = OnGround;
             speed_y = 0;
-            qDebug()<<"ONGROUND";
+            //qDebug()<<"ONGROUND";
         }
     }else
     {

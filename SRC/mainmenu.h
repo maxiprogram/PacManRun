@@ -19,6 +19,7 @@ private:
     int id_level_menu1;
     int id_item_back;
     int id_item_lock;
+    QVector2D mas_pos[9];
 };
 
 #endif // MAINMENU_H
