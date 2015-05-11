@@ -52,7 +52,13 @@ void MainMenu::Update(float dt)
         ///*Если нажата мышка
         if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
         {
-            CurrentStatusGame = Play;
+            if (Resources::MOUSE()->GetX()<120 && (Setting::GetViewPort().height()-Resources::MOUSE()->GetY())<80)
+            {
+                CurrentStatusGame = Main_Menu;
+            }else
+            {
+                CurrentStatusGame = Play;
+            }
         }
         //Если нажата мышка*/
     }
@@ -133,7 +139,7 @@ void MainMenu::Draw()
 
         ///*Вывод стрелки назад к главному меню
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
-        SetPos(QVector3D(75, 50, 0));
+        SetPos(QVector3D(60, 40, 0));
         Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
         Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
