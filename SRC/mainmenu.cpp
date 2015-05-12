@@ -58,7 +58,7 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
                     CurrentStatusGame = Level_Menu1;
-                    PlayProfile::last_level = 1; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
+                    PlayProfile::last_level = 2; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
@@ -74,13 +74,28 @@ void MainMenu::Update(float dt)
         ///*Если нажата мышка
         if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
         {
-            if (Resources::MOUSE()->GetX()<120 && (Setting::GetViewPort().height()-Resources::MOUSE()->GetY())<80)
+            int m_x = Resources::MOUSE()->GetX();
+            int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
+            if (m_x<120 && m_y<80)
             {
                 CurrentStatusGame = Main_Menu;
             }else
             {
-                PlayProfile::current_level+=1; //УБРАТЬ ЭТО ДЛЯ ТЕСТА ПРИДУМАТЬ ОБРАБОТКУ
-                CurrentStatusGame = Load_Level;
+                bool flag = false;
+                for (int i=0; i<PlayProfile::last_level; i++)
+                {
+                    int tmp_x = mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2;
+                    int tmp_y = mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2;
+                    if (m_x<tmp_x+50 && m_x>tmp_x-50 && m_y<tmp_y+51 && m_y>tmp_y-51)
+                    {
+                        flag = true;
+                        PlayProfile::current_level = i;
+                    }
+                }
+                if (flag)
+                {
+                    CurrentStatusGame = Load_Level;
+                }
             }
         }
         //Если нажата мышка*/
