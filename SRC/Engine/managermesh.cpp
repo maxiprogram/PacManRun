@@ -24,6 +24,13 @@ void ManagerMesh::Add(int key, Mesh* value)
     hash_tab.insert(key, value);
 }
 
+void ManagerMesh::Delete(int key)
+{
+    Mesh* mesh = GetValue(key);
+    delete mesh;
+    hash_tab.remove(key);
+}
+
 Mesh* ManagerMesh::GetValue(int key)
 {
     return hash_tab.value(key);

@@ -11,6 +11,7 @@ public:
     ~ManagerCamera();
     static ManagerCamera* getInstance();
     void Add(QString key, Camera* value);
+    void Delete(QString key);
     Camera* GetValue(QString key);
     Camera* GetCurrentCamera();
     void SetCurrentCamera(QString key);

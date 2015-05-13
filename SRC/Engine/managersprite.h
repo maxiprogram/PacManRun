@@ -10,6 +10,7 @@ public:
     ~ManagerSprite();
     static ManagerSprite* getInstance();
     void Add(int key, Sprite* value);
+    void Delete(int key);
     Sprite* GetValue(int key);
     void Clear();
     void Destroy();

@@ -10,6 +10,7 @@ public:
     ~ManagerShader();
     static ManagerShader* getInstance();
     void Add(int key, Shader* value);
+    void Delete(int key);
     Shader* GetValue(int key);
     void Clear();
     void Destroy();

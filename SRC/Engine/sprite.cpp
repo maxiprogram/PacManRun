@@ -5,6 +5,9 @@ Sprite::Sprite()
     mesh = 0;
     shader = 0;
     texture = 0;
+    key_mesh = 0;
+    key_shader = 0;
+    key_texture = 0;
     buf_tex = new float[6 * 2];
 
     ///*ST - 1 вершины
@@ -46,17 +49,35 @@ Sprite::~Sprite()
 
 void Sprite::SetMeshKey(int key)
 {
+    key_mesh = key;
     mesh = ManagerMesh::getInstance()->GetValue(key);
 }
 
 void Sprite::SetShaderKey(int key)
 {
+    key_shader = key;
     shader = ManagerShader::getInstance()->GetValue(key);
 }
 
 void Sprite::SetTextureKey(int key)
 {
+    key_texture = key;
     texture = ManagerTexture::getInstance()->GetValue(key);
+}
+
+int Sprite::GetMeshKey()
+{
+    return key_mesh;
+}
+
+int Sprite::GetShaderKey()
+{
+    return key_shader;
+}
+
+int Sprite::GetTextureKey()
+{
+    return key_texture;
 }
 
 Mesh* Sprite::GetMesh()

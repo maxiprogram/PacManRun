@@ -58,7 +58,7 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
                     CurrentStatusGame = Level_Menu1;
-                    PlayProfile::last_level = 2; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
+                    PlayProfile::last_level = 4; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }

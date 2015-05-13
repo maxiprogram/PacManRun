@@ -15,6 +15,9 @@ public:
     void SetMeshKey(int key);
     void SetShaderKey(int key);
     void SetTextureKey(int key);
+    int GetMeshKey();
+    int GetShaderKey();
+    int GetTextureKey();
     Mesh* GetMesh();
     Shader* GetShader();
     Texture* GetTexture();
@@ -25,6 +28,9 @@ private:
     Mesh* mesh;
     Shader* shader;
     Texture* texture;
+    int key_mesh;
+    int key_shader;
+    int key_texture;
     float* buf_tex;
     QOpenGLBuffer vbo_tex;
     QOpenGLVertexArrayObject vao;

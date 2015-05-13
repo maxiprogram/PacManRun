@@ -25,6 +25,13 @@ void ManagerCamera::Add(QString key, Camera* value)
     hash_tab.insert(key, value);
 }
 
+void ManagerCamera::Delete(QString key)
+{
+    Camera* camera = GetValue(key);
+    delete camera;
+    hash_tab.remove(key);
+}
+
 Camera* ManagerCamera::GetValue(QString key)
 {
     return hash_tab.value(key);

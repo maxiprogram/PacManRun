@@ -92,6 +92,8 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Load_Level";
             level.Clear();
+            Resources::TILEMAP()->Clear();
+            Resources::CAMERA()->Delete("MainCamera");
             ///*Загрузка уровня
             if (!level.Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
                 qDebug()<<"Not Load Level";

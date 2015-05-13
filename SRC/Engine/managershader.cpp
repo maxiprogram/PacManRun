@@ -24,6 +24,13 @@ void ManagerShader::Add(int key, Shader* value)
     hash_tab.insert(key, value);
 }
 
+void ManagerShader::Delete(int key)
+{
+    Shader* shader = GetValue(key);
+    delete shader;
+    hash_tab.remove(key);
+}
+
 Shader* ManagerShader::GetValue(int key)
 {
     return hash_tab.value(key);

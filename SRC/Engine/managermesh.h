@@ -10,6 +10,7 @@ public:
     ~ManagerMesh();
     static ManagerMesh* getInstance();
     void Add(int key, Mesh* value);
+    void Delete(int key);
     Mesh* GetValue(int key);
     void Clear();
     void Destroy();

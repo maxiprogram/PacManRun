@@ -24,6 +24,13 @@ void ManagerSprite::Add(int key, Sprite* value)
     hash_tab.insert(key, value);
 }
 
+void ManagerSprite::Delete(int key)
+{
+    Sprite* sprite = GetValue(key);
+    delete sprite;
+    hash_tab.remove(key);
+}
+
 Sprite* ManagerSprite::GetValue(int key)
 {
     return hash_tab.value(key);

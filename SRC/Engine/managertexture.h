@@ -10,6 +10,7 @@ public:
     ~ManagerTexture();
     static ManagerTexture* getInstance();
     void Add(int key, Texture* value);
+    void Delete(int key);
     Texture* GetValue(int key);
     void Clear();
     void Destroy();
