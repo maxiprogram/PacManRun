@@ -41,8 +41,6 @@ protected:
     void keyPressEvent(QKeyEvent* key);
     void keyReleaseEvent(QKeyEvent* key);
 
-    void resizeEvent(QResizeEvent * event);
-
     void timerEvent(QTimerEvent* t);
 
 private:

@@ -59,6 +59,7 @@ void MainForm::initialize()
 
 void MainForm::timerEvent(QTimerEvent *t)
 {
+    Q_UNUSED(t);
     m_context->makeCurrent(this);
 
     //Явный FPS
@@ -94,10 +95,8 @@ void MainForm::timerEvent(QTimerEvent *t)
             level.Clear();
             Resources::TILEMAP()->Clear();
             Resources::CAMERA()->Delete("MainCamera");
-            ///*Загрузка уровня
             if (!level.Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
                 qDebug()<<"Not Load Level";
-            //Загрузка уровня*/
             Resources::CAMERA()->SetCurrentCamera("MainCamera");
             CurrentStatusGame = Play;
             qDebug()<<"CurrentStatusGame Play";
@@ -226,9 +225,4 @@ void MainForm::keyPressEvent(QKeyEvent *key)
 void MainForm::keyReleaseEvent(QKeyEvent *key)
 {
     Resources::KEYBOARD()->Update(key, false);
-}
-
-void MainForm::resizeEvent(QResizeEvent * event)
-{
-
 }
