@@ -43,7 +43,8 @@ SOURCES += \
     Engine/resources.cpp \
     statusgame.cpp \
     mainmenu.cpp \
-    playprofile.cpp
+    playprofile.cpp \
+    Engine/font.cpp
 
 HEADERS  += \
     mainform.h \
@@ -75,7 +76,8 @@ HEADERS  += \
     Engine/resources.h \
     statusgame.h \
     mainmenu.h \
-    playprofile.h
+    playprofile.h \
+    Engine/font.h
 
 FORMS    +=
 
