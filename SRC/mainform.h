@@ -14,6 +14,8 @@
 #include "statusgame.h"
 #include "playprofile.h"
 
+#include "Engine/font.h"
+
 class MainForm : public QWindow, protected QOpenGLFunctions
 {
     Q_OBJECT

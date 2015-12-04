@@ -24,7 +24,7 @@ public:
     void Create();
     void Bind(int width = 0, int height = 0, int frameX = 0, int frameY = 0);
     void UnBind();
-private:
+protected:
     Mesh* mesh;
     Shader* shader;
     Texture* texture;

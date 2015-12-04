@@ -40,6 +40,12 @@ void MainForm::initialize()
     if (!main_menu.Load("Resources/main_menu.xml", MainForm::CreateObject))
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
+    Font f;
+    f.SetMeshKey(0);
+    f.SetShaderKey(0);
+    f.SetTextureKey(4);
+    f.Create();
+    f.Draw(" 01234");
 
     /*Загрузка уровня
     if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
