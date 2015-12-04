@@ -40,12 +40,6 @@ void MainForm::initialize()
     if (!main_menu.Load("Resources/main_menu.xml", MainForm::CreateObject))
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
-    Font f;
-    f.SetMeshKey(0);
-    f.SetShaderKey(0);
-    f.SetTextureKey(4);
-    f.Create();
-    f.Draw(" 01234");
 
     /*Загрузка уровня
     if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
@@ -87,6 +81,14 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             main_menu.Update();
             main_menu.Draw();
+            ///*Тестирование Font позже удалить
+            Font f;
+            f.SetMeshKey(0);
+            f.SetShaderKey(0);
+            f.SetTextureKey(6);
+            f.Create();
+            f.Draw(" !\"#$%&\'()*+,-./", 100, 450);
+            //Тестирование Font позже удалить*/
             break;
         }
         case Level_Menu1:
