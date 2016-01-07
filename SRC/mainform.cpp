@@ -55,6 +55,13 @@ void MainForm::initialize()
     //Таймер обновления логики игры win=40fps lin=30fps
     id_timer = this->startTimer(1000/40);
 
+    ///*Тестирование Font позже удалить
+    f.Load("Resources/font.font");
+    f.SetMeshKey(0);
+    f.SetShaderKey(0);
+    f.SetTextureKey(6);
+    f.Create();
+    //Тестирование Font позже удалить*/
 }
 
 void MainForm::timerEvent(QTimerEvent *t)
@@ -82,12 +89,7 @@ void MainForm::timerEvent(QTimerEvent *t)
             main_menu.Update();
             main_menu.Draw();
             ///*Тестирование Font позже удалить
-            Font f;
-            f.SetMeshKey(0);
-            f.SetShaderKey(0);
-            f.SetTextureKey(6);
-            f.Create();
-            f.Draw(" !\"#$%&\'()*+,-./", 100, 450);
+            f.Draw("Hello Wordl! Score:1234", 100, 450);
             //Тестирование Font позже удалить*/
             break;
         }
@@ -116,6 +118,26 @@ void MainForm::timerEvent(QTimerEvent *t)
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             break;
+        }
+        case Pause:
+        {
+            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            f.Draw("PAUSE", Resources::CAMERA()->GetCurrentCamera()->GetPosX()+400, Resources::CAMERA()->GetCurrentCamera()->GetPosY()+400);
+            if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
+                CurrentStatusGame = Play;
+            if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+            {
+                Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
+                CurrentStatusGame = Level_Menu1;
+            }
+            break;
+        }
+        case Exit:
+        {
+            QEvent event_exit(QEvent::Close);
+            QCoreApplication::sendEvent(this, &event_exit);
+            return;
         }
     }
 

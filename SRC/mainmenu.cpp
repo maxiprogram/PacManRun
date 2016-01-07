@@ -62,7 +62,17 @@ void MainMenu::Update(float dt)
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
-            //Если нажата на Play*/
+            //Если нажата на Exit*/
+            ///*Если нажата на Play
+            if (m_x>(Setting::GetViewPort().width()/2-279/2) && m_x<(Setting::GetViewPort().width()/2+279/2))
+            {
+                if (m_y>Setting::GetViewPort().height()/2-200-72/2 && m_y<Setting::GetViewPort().height()/2-200+72/2)
+                {
+                    CurrentStatusGame = Exit;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }
+            //Если нажата на Exit*/
         }
         //Если нажата мышка*/
     }
@@ -71,6 +81,10 @@ void MainMenu::Update(float dt)
     ///*Если сейчас в меню1 выбора уровня
     if (CurrentStatusGame==Level_Menu1)
     {
+        if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
+        {
+            CurrentStatusGame = Main_Menu;
+        }
         ///*Если нажата мышка
         if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
         {

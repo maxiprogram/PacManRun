@@ -35,6 +35,13 @@ void Player::Init(QHash<QString, QString> property)
     Status = Down;
 
     frame = 0;
+
+    font_text.Load("Resources/font.font");
+    font_text.SetMeshKey(0);
+    font_text.SetShaderKey(0);
+    font_text.SetTextureKey(6);
+    font_text.SetKerning(5);
+    font_text.Create();
 }
 
 void Player::Update(float dt)
@@ -49,9 +56,8 @@ void Player::Update(float dt)
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Escape))
     {
-        qDebug()<<"CurrentStatusGame Level_Menu1";
-        Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
-        CurrentStatusGame = Level_Menu1;
+        qDebug()<<"CurrentStatusGame Pause";
+        CurrentStatusGame = Pause;
     }
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
@@ -179,6 +185,9 @@ void Player::Update(float dt)
 
 void Player::Draw()
 {
+    font_text.Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
+                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 35);
+
     ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(this->GetScalX(), this->GetScalY(), qFloor(frame));
     ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                     Setting::GetProjection() *

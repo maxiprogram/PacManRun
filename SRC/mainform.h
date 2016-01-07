@@ -58,6 +58,8 @@ private:
 
     QTime time;
     int id_timer;
+
+    Font f;
 };
 
 #endif // MAINFORM_H

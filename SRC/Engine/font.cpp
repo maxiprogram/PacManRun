@@ -2,33 +2,50 @@
 
 Font::Font()
 {
-    width_char = 30;
-    height_char = 39;
+    kerning = 0;
 }
 
 Font::~Font()
 {
-
+    qDebug()<<"~Font";
 }
 
-void Font::SetWidthChar(int width)
+void Font::SetKerning(int kerning)
 {
-    width_char = width;
+    this->kerning = kerning;
 }
 
-void Font::SetHeightChar(int height)
+int Font::GetKerning()
 {
-    height_char = height;
+    return kerning;
 }
 
-int Font::GetWidthChar()
+bool Font::Load(QString filename)
 {
-    return width_char;
-}
+    QFile f(filename);
+    if (!f.open(QIODevice::ReadOnly))
+        return false;
+    int count = 0;
+    f.read((char*)&count, sizeof(count));
 
-int Font::GetHeightChar()
-{
-    return height_char;
+    for(int i=0; i<count; i++)
+    {
+        int buf_char, buf;
+        QRect buf_rect;
+        f.read((char*)&buf_char, sizeof(buf_char));
+        f.read((char*)&buf, sizeof(buf));
+        buf_rect.setX(buf);
+        f.read((char*)&buf, sizeof(buf));
+        buf_rect.setY(buf);
+        f.read((char*)&buf, sizeof(buf));
+        buf_rect.setWidth(buf);
+        f.read((char*)&buf, sizeof(buf));
+        buf_rect.setHeight(buf);
+        hash.insert(buf_char, buf_rect);
+        //qDebug()<<"char="<<(QChar)buf_char<<"x="<<buf_rect.x()<<"y="<<buf_rect.y()<<"width="<<buf_rect.width()<<"height="<<buf_rect.height();
+    }
+
+    return true;
 }
 
 void Font::Draw(QString text, int x, int y, int z)
@@ -36,33 +53,17 @@ void Font::Draw(QString text, int x, int y, int z)
     int frameX, frameY;
     for (int i=0; i<text.length(); i++)
     {
-        ushort s = text.at(i).unicode();
-        if ((s>=32 && s<=122) || (s>=1040 && s<=1103))
-        {
-            if (s>=32 && s<=122)
-                frameX = s-31;
-            if (s>=1040 && s<=1103)
-                frameX = s-1039;
-            int count_col = texture->GetWidth()/width_char;
-            int count_row = texture->GetHeight()/height_char;
-            frameY = frameX/count_col;
-            frameX = frameX%count_col;
-            if (frameX==0)
-            {
-                frameX = count_col;
-                frameY--;
-            }
-            qDebug()<<"Font frameX="<<frameX-1<<"frameY="<<frameY<<"key"<<s;
-            Transformer tr;
-            tr.SetScal(QVector3D(30, 39, 1));
-            tr.SetPos(QVector3D(x, y, z));
+        QRect rect = hash.value(text.at(i));
+        Transformer tr;
+        tr.SetScal(QVector3D(rect.width(), rect.height(), 1));
+        tr.SetPos(QVector3D(x, y, z));
 
-            Bind(width_char, height_char, frameX-1, frameY);
-            GetShader()->setUniformValue(GetShader()->GetNameMatrixPos().toStdString().c_str(), Setting::GetProjection()*ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix()*tr.GetMatrix());
-            glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetCountVertex());
-            UnBind();
-            x+=30;
-        }
+        Bind(rect.width(), rect.height(), rect.x(), rect.y(), true);
+        GetShader()->setUniformValue(GetShader()->GetNameMatrixPos().toStdString().c_str(), Setting::GetProjection()*ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix()*tr.GetMatrix());
+        glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetCountVertex());
+        UnBind();
+
+        x+=rect.width()+kerning;
     }
 
 }

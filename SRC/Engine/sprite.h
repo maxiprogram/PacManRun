@@ -22,7 +22,7 @@ public:
     Shader* GetShader();
     Texture* GetTexture();
     void Create();
-    void Bind(int width = 0, int height = 0, int frameX = 0, int frameY = 0);
+    void Bind(int width = 0, int height = 0, int frameX = 0, int frameY = 0, bool atlas = false);
     void UnBind();
 protected:
     Mesh* mesh;

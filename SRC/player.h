@@ -4,6 +4,7 @@
 #include "Engine/gamescene.h"
 #include "Engine/managerkeyboard.h"
 #include "Engine/fps.h"
+#include "Engine/font.h"
 
 #include "playprofile.h"
 #include "statusgame.h"
@@ -18,6 +19,7 @@ public:
     void Draw();
     QRectF GetBoundBox();
 private:
+    Font font_text;
     int id_sprite;
     float frame;
     QVector2D direction;

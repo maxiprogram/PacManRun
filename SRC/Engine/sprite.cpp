@@ -111,23 +111,36 @@ void Sprite::Create()
     shader->setAttributeBuffer(shader->GetNameTexture().toStdString().c_str(), GL_FLOAT, 0, 2);
 }
 
-void Sprite::Bind(int width, int height, int frameX, int frameY)
+void Sprite::Bind(int width, int height, int frameX, int frameY, bool atlas)
 {
     shader->bind();
     texture->Bind();
     vao.bind();
-    if (width == 0 && height == 0)
+    if (atlas == false)
     {
-        QMatrix4x4 mat_tex;
-        mat_tex.setToIdentity();
-        shader->setUniformValue(shader->GetNameMatrixTex().toStdString().c_str(), mat_tex);
+        if (width == 0 && height == 0)
+        {
+            QMatrix4x4 mat_tex;
+            mat_tex.setToIdentity();
+            shader->setUniformValue(shader->GetNameMatrixTex().toStdString().c_str(), mat_tex);
+        }else
+        {
+            QMatrix4x4 mat_tex;
+            float scal_x = (float)width / texture->GetWidth();
+            float scal_y = (float)height / texture->GetHeight();
+            mat_tex.scale(scal_x, scal_y);
+            mat_tex.translate(frameX, frameY);
+            shader->setUniformValue(shader->GetNameMatrixTex().toStdString().c_str(), mat_tex);
+        }
     }else
     {
         QMatrix4x4 mat_tex;
+        float pos_x = (float)frameX / texture->GetWidth();
+        float pos_y = (float)frameY / texture->GetHeight();
         float scal_x = (float)width / texture->GetWidth();
         float scal_y = (float)height / texture->GetHeight();
+        mat_tex.translate(pos_x, pos_y);
         mat_tex.scale(scal_x, scal_y);
-        mat_tex.translate(frameX, frameY);
         shader->setUniformValue(shader->GetNameMatrixTex().toStdString().c_str(), mat_tex);
     }
 }
