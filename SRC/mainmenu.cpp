@@ -11,10 +11,15 @@ MainMenu::~MainMenu()
 
 void MainMenu::Init(QHash<QString, QString> property)
 {
-    id_main_menu = property.value("id_main_menu").toInt();
+    id_button = property.value("id_button").toInt();
+    id_header = property.value("id_header").toInt();
     id_level_menu1 = property.value("id_level_menu1").toInt();
+    id_level_menu2 = property.value("id_level_menu2").toInt();
+    id_level_menu3 = property.value("id_level_menu3").toInt();
     id_item_back = property.value("id_item_back").toInt();
+    id_item_next = property.value("id_item_next").toInt();
     id_item_lock = property.value("id_item_lock").toInt();
+    id_player = property.value("id_player").toInt();
     SetPivot(QVector3D(0.5, 0.5, 0));
     SetPos(QVector3D(0, 0, 0));
 
@@ -39,6 +44,11 @@ void MainMenu::Init(QHash<QString, QString> property)
     mas_pos[8].setX(591);
     mas_pos[8].setY(138);
 
+    flag_header= 0;
+    frame_player = 0;
+    pos_x_player = -200;
+
+    current_level_menu = 1;
 }
 
 void MainMenu::Update(float dt)
@@ -49,6 +59,18 @@ void MainMenu::Update(float dt)
     ///*Если сейчас в главном меню
     if (CurrentStatusGame==Main_Menu)
     {
+        flag_header += 0.03;
+        if (flag_header>=2)
+            flag_header = 0;
+
+        frame_player += 0.09;
+        if (frame_player>3)
+            frame_player = 0;
+
+        pos_x_player += 6;
+        if (pos_x_player>(Setting::GetViewPort().width()+200))
+                pos_x_player = -200;
+
         ///*Если нажата мышка
         if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
         {
@@ -57,8 +79,8 @@ void MainMenu::Update(float dt)
             {
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
-                    CurrentStatusGame = Level_Menu1;
-                    PlayProfile::last_level = 4; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
+                    CurrentStatusGame = Level_Menu;
+                    PlayProfile::last_level = 24; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
@@ -78,8 +100,8 @@ void MainMenu::Update(float dt)
     }
     //Если сейчас в главном меню*/
 
-    ///*Если сейчас в меню1 выбора уровня
-    if (CurrentStatusGame==Level_Menu1)
+    ///*Если сейчас в меню выбора уровня
+    if (CurrentStatusGame==Level_Menu)
     {
         if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
         {
@@ -92,9 +114,51 @@ void MainMenu::Update(float dt)
             int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
             if (m_x<120 && m_y<80)
             {
-                CurrentStatusGame = Main_Menu;
+                if (current_level_menu==1)
+                {
+                    CurrentStatusGame = Main_Menu;
+                }else
+                {
+                    current_level_menu--;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }else
+            if (m_x>Setting::GetViewPort().width()-120 && m_y<80)
+            {
+                if (current_level_menu!=3 && PlayProfile::last_level>(current_level_menu*9))
+                {
+                    current_level_menu++;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
             }else
             {
+                int start_lock = 0;
+                int inc = 0;
+                if (current_level_menu==1)
+                {
+                    inc = 0;
+                    if (PlayProfile::last_level>=9)
+                        start_lock = 9;
+                    else
+                        start_lock = PlayProfile::last_level;
+                }
+                if (current_level_menu==2)
+                {
+                    inc = 9;
+                    if (PlayProfile::last_level>=18)
+                        start_lock = 9;
+                    else
+                        start_lock = PlayProfile::last_level - 9;
+                }
+                if (current_level_menu==3)
+                {
+                    inc = 18;
+                    if (PlayProfile::last_level>=27)
+                        start_lock = 9;
+                    else
+                        start_lock = PlayProfile::last_level - 18;
+                }
+
                 bool flag = false;
                 for (int i=0; i<PlayProfile::last_level; i++)
                 {
@@ -103,18 +167,19 @@ void MainMenu::Update(float dt)
                     if (m_x<tmp_x+50 && m_x>tmp_x-50 && m_y<tmp_y+51 && m_y>tmp_y-51)
                     {
                         flag = true;
-                        PlayProfile::current_level = i;
+                        PlayProfile::current_level = (i + inc);
                     }
                 }
                 if (flag)
                 {
-                    CurrentStatusGame = Load_Level;
+                    //CurrentStatusGame = Load_Level;
+                    qDebug()<<"SELECT LEVEL:"<<PlayProfile::current_level;
                 }
             }
         }
         //Если нажата мышка*/
     }
-    //Если сейчас в меню1 выбора уровня*/
+    //Если сейчас в меню выбора уровня*/
 }
 
 void MainMenu::Draw()
@@ -122,71 +187,107 @@ void MainMenu::Draw()
     ///*Если сейчас в главном меню
     if (CurrentStatusGame==Main_Menu)
     {
-        SetScal(QVector3D(279, 72, 0));
-        ///*Вывод кнопки Play
-        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2+100, 0));
-        Resources::SPRITE()->GetValue(id_main_menu)->Bind(GetScalX(), GetScalY(), 0, 3);
-        Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+        SetScal(QVector3D(660, 124, 0));
+        ///*Вывод заголовка Header
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-62, 0));
+        Resources::SPRITE()->GetValue(id_header)->Bind(GetScalX(), GetScalY(), 0, qFloor(flag_header));
+        Resources::SPRITE()->GetValue(id_header)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
                                                                                Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
                                                                                this->GetMatrix()
                                                                                );
-        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_main_menu)->GetMesh()->GetCountVertex());
-        Resources::SPRITE()->GetValue(id_main_menu)->UnBind();
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_header)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_header)->UnBind();
+        //Вывод заголовка Header*/
+
+        SetScal(QVector3D(48, 48, 0));
+        ///*Вывод Player
+        SetPos(QVector3D(pos_x_player, Setting::GetViewPort().height()-128, 0));
+        Resources::SPRITE()->GetValue(id_player)->Bind(GetScalX(), GetScalY(), qFloor(frame_player));
+        Resources::SPRITE()->GetValue(id_player)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_player)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_player)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_player)->UnBind();
+        //Вывод Player*/
+
+        SetScal(QVector3D(279, 72, 0));
+        ///*Вывод кнопки Play
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2+100, 0));
+        Resources::SPRITE()->GetValue(id_button)->Bind(GetScalX(), GetScalY(), 0, 3);
+        Resources::SPRITE()->GetValue(id_button)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_button)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_button)->UnBind();
         //Вывод кнопки Play*/
 
         ///*Вывод кнопки Setting
         SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2, 0));
-        Resources::SPRITE()->GetValue(id_main_menu)->Bind(GetScalX(), GetScalY(), 0, 2);
-        Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+        Resources::SPRITE()->GetValue(id_button)->Bind(GetScalX(), GetScalY(), 0, 2);
+        Resources::SPRITE()->GetValue(id_button)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
                                                                                Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
                                                                                this->GetMatrix()
                                                                                );
-        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_main_menu)->GetMesh()->GetCountVertex());
-        Resources::SPRITE()->GetValue(id_main_menu)->UnBind();
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_button)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_button)->UnBind();
         //Вывод кнопки Setting*/
 
         ///*Вывод кнопки Author
         SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2-100, 0));
-        Resources::SPRITE()->GetValue(id_main_menu)->Bind(GetScalX(), GetScalY(), 0, 1);
-        Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+        Resources::SPRITE()->GetValue(id_button)->Bind(GetScalX(), GetScalY(), 0, 1);
+        Resources::SPRITE()->GetValue(id_button)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
                                                                                Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
                                                                                this->GetMatrix()
                                                                                );
-        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_main_menu)->GetMesh()->GetCountVertex());
-        Resources::SPRITE()->GetValue(id_main_menu)->UnBind();
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_button)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_button)->UnBind();
         //Вывод кнопки Author*/
 
         ///*Вывод кнопки Exit
         SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2-200, 0));
-        Resources::SPRITE()->GetValue(id_main_menu)->Bind(GetScalX(), GetScalY(), 0, 0);
-        Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_main_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+        Resources::SPRITE()->GetValue(id_button)->Bind(GetScalX(), GetScalY(), 0, 0);
+        Resources::SPRITE()->GetValue(id_button)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
                                                                                Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
                                                                                this->GetMatrix()
                                                                                );
-        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_main_menu)->GetMesh()->GetCountVertex());
-        Resources::SPRITE()->GetValue(id_main_menu)->UnBind();
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_button)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_button)->UnBind();
         //Вывод кнопки Exit*/
     }
     //Если сейчас в главном меню*/
 
-    ///*Если сейчас в меню1 выбора уровня
-    if (CurrentStatusGame==Level_Menu1)
+    ///*Если сейчас в меню выбора уровня
+    if (CurrentStatusGame==Level_Menu)
     {
+        int id_level = id_level_menu1;
+        if (current_level_menu==1)
+            id_level = id_level_menu1;
+        else
+        if (current_level_menu==2)
+            id_level = id_level_menu2;
+        else
+        if (current_level_menu==3)
+            id_level = id_level_menu3;
+
         SetScal(QVector3D(800, 600, 0));
         ///*Вывод Уровней
         SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2, 0));
-        Resources::SPRITE()->GetValue(id_level_menu1)->Bind(GetScalX(), GetScalY());
-        Resources::SPRITE()->GetValue(id_level_menu1)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_level_menu1)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+        Resources::SPRITE()->GetValue(id_level)->Bind(GetScalX(), GetScalY());
+        Resources::SPRITE()->GetValue(id_level)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_level)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
                                                                                Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
                                                                                this->GetMatrix()
                                                                                );
-        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_level_menu1)->GetMesh()->GetCountVertex());
-        Resources::SPRITE()->GetValue(id_level_menu1)->UnBind();
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_level)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_level)->UnBind();
         //Вывод Уровней*/
 
         ///*Вывод стрелки назад к главному меню
@@ -202,12 +303,51 @@ void MainMenu::Draw()
         Resources::SPRITE()->GetValue(id_item_back)->UnBind();
         //Вывод стрелки назад к главному меню*/
 
+        ///*Вывод стрелки вперед к главному меню
+        if (current_level_menu!=3 && PlayProfile::last_level>(current_level_menu*9))
+        {
+            SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_next)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_next)->GetTexture()->GetHeight(), 0));
+            SetPos(QVector3D(Setting::GetViewPort().width()-60, 40, 0));
+            Resources::SPRITE()->GetValue(id_item_next)->Bind(GetScalX(), GetScalY());
+            Resources::SPRITE()->GetValue(id_item_next)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_next)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                   Setting::GetProjection() *
+                                                                                   Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                                   this->GetMatrix()
+                                                                                   );
+            glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_item_next)->GetMesh()->GetCountVertex());
+            Resources::SPRITE()->GetValue(id_item_next)->UnBind();
+        }
+        //Вывод стрелки вперед к главному меню*/
+
 
         ///*Вывод заблокированных уровней
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_lock)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_lock)->GetTexture()->GetHeight(), 0));
         //SetPivot(QVector3D(0.5, 0.5, 0.0));
 
-        for (int i=PlayProfile::last_level; i<9; i++)
+        int start_lock = 0;
+        if (current_level_menu==1)
+        {
+            if (PlayProfile::last_level>=9)
+                start_lock = 9;
+            else
+                start_lock = PlayProfile::last_level;
+        }
+        if (current_level_menu==2)
+        {
+            if (PlayProfile::last_level>=18)
+                start_lock = 9;
+            else
+                start_lock = PlayProfile::last_level - 9;
+        }
+        if (current_level_menu==3)
+        {
+            if (PlayProfile::last_level>=27)
+                start_lock = 9;
+            else
+                start_lock = PlayProfile::last_level - 18;
+        }
+
+        for (int i=start_lock; i<9; i++)
         {
             SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2, 0));
             Resources::SPRITE()->GetValue(id_item_lock)->Bind(GetScalX(), GetScalY());
@@ -221,5 +361,5 @@ void MainMenu::Draw()
         }
         //Вывод заблокированных уровней*/
     }
-    //Если сейчас в меню1 выбора уровня*/
+    //Если сейчас в меню выбора уровня*/
 }

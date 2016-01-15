@@ -15,11 +15,20 @@ public:
     void Update(float dt);
     void Draw();
 private:
-    int id_main_menu;
+    int id_button;
+    int id_header;
     int id_level_menu1;
+    int id_level_menu2;
+    int id_level_menu3;
     int id_item_back;
+    int id_item_next;
     int id_item_lock;
+    int id_player;
+    float flag_header;
+    float frame_player;
+    float pos_x_player;
     QVector2D mas_pos[9];
+    int current_level_menu;
 };
 
 #endif // MAINMENU_H

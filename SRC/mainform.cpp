@@ -10,10 +10,16 @@ MainForm::MainForm(QWindow *parent) :
     m_device(0)
 {
     setSurfaceType(QWindow::OpenGLSurface);
+
+    main_menu = new GameScene();
+    level = new GameScene();
 }
 
 MainForm::~MainForm()
 {
+    delete main_menu;
+    delete level;
+
     delete m_device;
 }
 
@@ -37,7 +43,7 @@ void MainForm::initialize()
 
     MainForm::CreateObject = new CreatorObject();
     ///*Загрузка главного меню
-    if (!main_menu.Load("Resources/main_menu.xml", MainForm::CreateObject))
+    if (!main_menu->Load("Resources/main_menu.xml", MainForm::CreateObject))
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
 
@@ -55,13 +61,6 @@ void MainForm::initialize()
     //Таймер обновления логики игры win=40fps lin=30fps
     id_timer = this->startTimer(1000/40);
 
-    ///*Тестирование Font позже удалить
-    f.Load("Resources/font.font");
-    f.SetMeshKey(0);
-    f.SetShaderKey(0);
-    f.SetTextureKey(6);
-    f.Create();
-    //Тестирование Font позже удалить*/
 }
 
 void MainForm::timerEvent(QTimerEvent *t)
@@ -86,26 +85,25 @@ void MainForm::timerEvent(QTimerEvent *t)
     {
         case Main_Menu:
         {
-            main_menu.Update();
-            main_menu.Draw();
-            ///*Тестирование Font позже удалить
-            f.Draw("Hello Wordl! Score:1234", 100, 450);
-            //Тестирование Font позже удалить*/
+            qDebug()<<"CurrentStatusGame Main_Menu";
+            main_menu->Update();
+            main_menu->Draw();
             break;
         }
-        case Level_Menu1:
+        case Level_Menu:
         {
-            main_menu.Update();
-            main_menu.Draw();
+            qDebug()<<"CurrentStatusGame Level_Menu1";
+            main_menu->Update();
+            main_menu->Draw();
             break;
         }
         case Load_Level:
         {
             qDebug()<<"CurrentStatusGame Load_Level";
-            level.Clear();
+            level->Clear();
             Resources::TILEMAP()->Clear();
             Resources::CAMERA()->Delete("MainCamera");
-            if (!level.Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
+            if (!level->Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
                 qDebug()<<"Not Load Level";
             Resources::CAMERA()->SetCurrentCamera("MainCamera");
             CurrentStatusGame = Play;
@@ -114,22 +112,22 @@ void MainForm::timerEvent(QTimerEvent *t)
         }
         case Play:
         {
-            level.Update(/*Fps::getInstance()->GetFps()/1000.0*/);
+            level->Update(/*Fps::getInstance()->GetFps()/1000.0*/);
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             break;
         }
         case Pause:
         {
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            level.Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             f.Draw("PAUSE", Resources::CAMERA()->GetCurrentCamera()->GetPosX()+400, Resources::CAMERA()->GetCurrentCamera()->GetPosY()+400);
             if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
                 CurrentStatusGame = Play;
             if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
             {
                 Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
-                CurrentStatusGame = Level_Menu1;
+                CurrentStatusGame = Level_Menu;
             }
             break;
         }

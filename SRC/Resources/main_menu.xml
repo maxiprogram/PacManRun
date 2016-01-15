@@ -1,22 +1,36 @@
 <GameScene>
  <Resources>
   <Texture id="0">Resources/buttons.png</Texture>
-  <Texture id="1">Resources/level_menu1.png</Texture>
-  <Texture id="2">Resources/item_back.png</Texture>
-  <Texture id="3">Resources/item_lock.png</Texture>
-  <Texture id="6">Resources/font.png</Texture>
+  <Texture id="1">Resources/header.png</Texture>
+  <Texture id="2">Resources/level_menu1.png</Texture>
+  <Texture id="3">Resources/level_menu2.png</Texture>
+  <Texture id="4">Resources/level_menu3.png</Texture>
+  <Texture id="5">Resources/item_back.png</Texture>
+  <Texture id="6">Resources/item_next.png</Texture>
+  <Texture id="7">Resources/item_lock.png</Texture>
+  <Texture id="8">Resources/player_sprite.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="0"></Sprite>
  <Sprite id="1" mid="0" sid="0" tid="1"></Sprite>
  <Sprite id="2" mid="0" sid="0" tid="2"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="3"></Sprite>
+ <Sprite id="4" mid="0" sid="0" tid="4"></Sprite>
+ <Sprite id="5" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="6" mid="0" sid="0" tid="6"></Sprite>
+ <Sprite id="7" mid="0" sid="0" tid="7"></Sprite>
+ <Sprite id="8" mid="0" sid="0" tid="8"></Sprite>
 
  <GameObject name="MainMenu" type="1">
-  <id_main_menu>0</id_main_menu>
-  <id_level_menu1>1</id_level_menu1>
-  <id_item_back>2</id_item_back>
-  <id_item_lock>3</id_item_lock>
+  <id_button>0</id_button>
+  <id_header>1</id_header>
+  <id_level_menu1>2</id_level_menu1>
+  <id_level_menu2>3</id_level_menu2>
+  <id_level_menu3>4</id_level_menu3>
+  <id_item_back>5</id_item_back>
+  <id_item_next>6</id_item_next>
+  <id_item_lock>7</id_item_lock>
+  <id_player>8</id_player>	
  </GameObject>
 
  <Camera name="MainMenuCamera">
