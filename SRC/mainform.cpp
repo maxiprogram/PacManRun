@@ -30,12 +30,6 @@ void MainForm::render(QPainter *painter)
 
 void MainForm::initialize()
 {
-    ///*Глобальные Mesh и Shader
-    Resources::MESH()->Add(0, new Mesh());
-    Resources::MESH()->GetValue(0)->Create();
-    Resources::SHADER()->Add(0, new Shader());
-    //Глобальные Mesh и Shader*/
-
     ///*Загрузка информации об пройденных уровнях и очках
     PlayProfile::Load();
     //Загрузка информации об пройденных уровнях и очках*/
@@ -100,9 +94,12 @@ void MainForm::timerEvent(QTimerEvent *t)
         case Load_Level:
         {
             qDebug()<<"CurrentStatusGame Load_Level";
+
             level->Clear();
+
             Resources::TILEMAP()->Clear();
             Resources::CAMERA()->Delete("MainCamera");
+
             if (!level->Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
                 qDebug()<<"Not Load Level";
             Resources::CAMERA()->SetCurrentCamera("MainCamera");
@@ -121,13 +118,17 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            f.Draw("PAUSE", Resources::CAMERA()->GetCurrentCamera()->GetPosX()+400, Resources::CAMERA()->GetCurrentCamera()->GetPosY()+400);
+            //f.Draw("PAUSE", Resources::CAMERA()->GetCurrentCamera()->GetPosX()+400, Resources::CAMERA()->GetCurrentCamera()->GetPosY()+400);
             if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
+            {
                 CurrentStatusGame = Play;
+                Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
+            }
             if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
             {
                 Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
                 CurrentStatusGame = Level_Menu;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(), false);
             }
             break;
         }

@@ -39,7 +39,7 @@ void Player::Init(QHash<QString, QString> property)
     font_text.Load("Resources/font.font");
     font_text.SetMeshKey(0);
     font_text.SetShaderKey(0);
-    font_text.SetTextureKey(6);
+    font_text.SetTextureKey(9);
     font_text.SetKerning(5);
     font_text.Create();
 }
@@ -58,6 +58,7 @@ void Player::Update(float dt)
     {
         qDebug()<<"CurrentStatusGame Pause";
         CurrentStatusGame = Pause;
+        Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
     }
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
@@ -65,6 +66,7 @@ void Player::Update(float dt)
         Status = Jump;
         speed_y = 15;
         direction.setY(1);
+        Resources::KEYBOARD()->SetKey(Qt::Key_Space, false);
     }
 
     if(Status==Jump)

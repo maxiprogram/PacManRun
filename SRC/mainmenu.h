@@ -2,6 +2,7 @@
 #define MAINMENU_H
 
 #include "Engine/resources.h"
+#include "Engine/font.h"
 
 #include "statusgame.h"
 #include "playprofile.h"
@@ -29,6 +30,13 @@ private:
     float pos_x_player;
     QVector2D mas_pos[9];
     int current_level_menu;
+
+    ///*Тестирование Font УБРАТЬ
+    int id_font;
+    QString path_font;
+    Font font;
+    //Тестирование Font УБРАТЬ*/
+
 };
 
 #endif // MAINMENU_H

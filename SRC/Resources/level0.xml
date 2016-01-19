@@ -1,5 +1,7 @@
 <GameScene>
  <Resources>
+  <Shader id="0"></Shader>
+  <Mesh id="0"></Mesh>
   <Texture id="4">Resources/tileset.png</Texture>
   <Texture id="5">Resources/player_sprite.png</Texture>
  </Resources>

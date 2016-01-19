@@ -13,6 +13,7 @@ public:
     static ManagerKeyboard* getInstance();
     void Update(QKeyEvent* event,bool press=true);
     bool GetKey(Qt::Key key);
+    void SetKey(Qt::Key key, bool press);
     QKeyEvent* GetEvent();
     void Destroy();
 private:

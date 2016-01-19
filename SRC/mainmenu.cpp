@@ -20,6 +20,18 @@ void MainMenu::Init(QHash<QString, QString> property)
     id_item_next = property.value("id_item_next").toInt();
     id_item_lock = property.value("id_item_lock").toInt();
     id_player = property.value("id_player").toInt();
+
+    ///*Тестирование Font УБРАТЬ
+    id_font = property.value("id_font").toInt();
+    path_font = property.value("path_font");
+
+    font.SetShaderKey(0);
+    font.SetMeshKey(0);
+    font.SetTextureKey(id_font);
+    font.Create();
+    font.Load(path_font);
+    //Тестирование Font УБРАТЬ*/
+
     SetPivot(QVector3D(0.5, 0.5, 0));
     SetPos(QVector3D(0, 0, 0));
 
@@ -80,7 +92,7 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
                     CurrentStatusGame = Level_Menu;
-                    PlayProfile::last_level = 24; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
+                    PlayProfile::last_level = 7; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
@@ -172,7 +184,7 @@ void MainMenu::Update(float dt)
                 }
                 if (flag)
                 {
-                    //CurrentStatusGame = Load_Level;
+                    CurrentStatusGame = Load_Level;
                     qDebug()<<"SELECT LEVEL:"<<PlayProfile::current_level;
                 }
             }
@@ -184,6 +196,8 @@ void MainMenu::Update(float dt)
 
 void MainMenu::Draw()
 {
+    font.Draw("TestFont", 100, 100); // УБРАТЬ ЭТО ТЕСТИРОВАНИЕ FONT
+
     ///*Если сейчас в главном меню
     if (CurrentStatusGame==Main_Menu)
     {

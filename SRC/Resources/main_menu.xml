@@ -1,5 +1,7 @@
 <GameScene>
  <Resources>
+  <Shader id="0"></Shader>
+  <Mesh id="0"></Mesh>
   <Texture id="0">Resources/buttons.png</Texture>
   <Texture id="1">Resources/header.png</Texture>
   <Texture id="2">Resources/level_menu1.png</Texture>
@@ -9,6 +11,7 @@
   <Texture id="6">Resources/item_next.png</Texture>
   <Texture id="7">Resources/item_lock.png</Texture>
   <Texture id="8">Resources/player_sprite.png</Texture>
+  <Texture id="9">Resources/font.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="0"></Sprite>
@@ -30,7 +33,9 @@
   <id_item_back>5</id_item_back>
   <id_item_next>6</id_item_next>
   <id_item_lock>7</id_item_lock>
-  <id_player>8</id_player>	
+  <id_player>8</id_player>
+  <id_font>9</id_font>
+  <path_font>Resources/font.font</path_font>	
  </GameObject>
 
  <Camera name="MainMenuCamera">

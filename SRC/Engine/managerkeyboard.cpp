@@ -20,10 +20,11 @@ ManagerKeyboard* ManagerKeyboard::getInstance()
     return instance;
 }
 
-void ManagerKeyboard::Update(QKeyEvent *event,bool press)
+void ManagerKeyboard::Update(QKeyEvent *event, bool press)
 {
     this->event = event;
-    buffer_key.insert(event->key(),press);
+    if (!event->isAutoRepeat())
+        buffer_key.insert(event->key(), press);
 }
 
 bool ManagerKeyboard::GetKey(Qt::Key key)
@@ -33,6 +34,11 @@ bool ManagerKeyboard::GetKey(Qt::Key key)
         return buffer_key.value(key);
     }
     return false;
+}
+
+void ManagerKeyboard::SetKey(Qt::Key key, bool press)
+{
+    buffer_key.insert(key, press);
 }
 
 QKeyEvent* ManagerKeyboard::GetEvent()
