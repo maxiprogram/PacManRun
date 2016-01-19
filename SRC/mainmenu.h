@@ -26,6 +26,7 @@ private:
     int id_item_lock;
     int id_player;
     float flag_header;
+    float pos_y_header;
     float frame_player;
     float pos_x_player;
     QVector2D mas_pos[9];

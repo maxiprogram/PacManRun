@@ -57,6 +57,8 @@ void MainMenu::Init(QHash<QString, QString> property)
     mas_pos[8].setY(138);
 
     flag_header= 0;
+    pos_y_header = Setting::GetViewPort().height()+62;
+    qDebug()<<"Header Y="<<pos_y_header;
     frame_player = 0;
     pos_x_player = -200;
 
@@ -71,17 +73,23 @@ void MainMenu::Update(float dt)
     ///*Если сейчас в главном меню
     if (CurrentStatusGame==Main_Menu)
     {
-        flag_header += 0.03;
-        if (flag_header>=2)
-            flag_header = 0;
+        pos_y_header -= 1;
+        if (pos_y_header<=(Setting::GetViewPort().height()-62))
+        {
+                pos_y_header = Setting::GetViewPort().height()-62;
+                flag_header = 1;
+        }
 
-        frame_player += 0.09;
-        if (frame_player>3)
-            frame_player = 0;
+        if (flag_header==1)
+        {
+            frame_player += 0.09;
+            if (frame_player>3)
+                frame_player = 0;
 
-        pos_x_player += 6;
-        if (pos_x_player>(Setting::GetViewPort().width()+200))
-                pos_x_player = -200;
+            pos_x_player += 6;
+            if (pos_x_player>(Setting::GetViewPort().width()+200))
+                    pos_x_player = -200;
+        }
 
         ///*Если нажата мышка
         if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
@@ -203,7 +211,7 @@ void MainMenu::Draw()
     {
         SetScal(QVector3D(660, 124, 0));
         ///*Вывод заголовка Header
-        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-62, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, pos_y_header/*Setting::GetViewPort().height()-62*/, 0));
         Resources::SPRITE()->GetValue(id_header)->Bind(GetScalX(), GetScalY(), 0, qFloor(flag_header));
         Resources::SPRITE()->GetValue(id_header)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *

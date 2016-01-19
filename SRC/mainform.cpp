@@ -34,23 +34,19 @@ void MainForm::initialize()
     PlayProfile::Load();
     //Загрузка информации об пройденных уровнях и очках*/
 
+    ///*Настройки экрана
+    QMatrix4x4 proj;
+    proj.setToIdentity();
+    proj.ortho(0, this->width(), 0, this->height(), -1, 1);
+    Setting::SetProjection(proj);
+    Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
+    //Настройки экрана*/
 
     MainForm::CreateObject = new CreatorObject();
     ///*Загрузка главного меню
     if (!main_menu->Load("Resources/main_menu.xml", MainForm::CreateObject))
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
-
-    /*Загрузка уровня
-    if (!level.Load("Resources/level0_0.xml", MainForm::CreateObject))
-        qDebug()<<"Not Load Level";
-    Загрузка уровня*/
-
-    QMatrix4x4 proj;
-    proj.setToIdentity();
-    proj.ortho(0, this->width(), 0, this->height(), -1, 1);
-    Setting::SetProjection(proj);
-    Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
 
     //Таймер обновления логики игры win=40fps lin=30fps
     id_timer = this->startTimer(1000/40);
