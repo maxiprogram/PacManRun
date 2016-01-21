@@ -12,6 +12,9 @@
   <Texture id="7">Resources/item_lock.png</Texture>
   <Texture id="8">Resources/player_sprite.png</Texture>
   <Texture id="9">Resources/font.png</Texture>
+  <Texture id="10">Resources/setting_menu.png</Texture>
+  <Texture id="11">Resources/button_apply.png</Texture>
+  <Texture id="12">Resources/header_menu.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="0"></Sprite>
@@ -23,6 +26,9 @@
  <Sprite id="6" mid="0" sid="0" tid="6"></Sprite>
  <Sprite id="7" mid="0" sid="0" tid="7"></Sprite>
  <Sprite id="8" mid="0" sid="0" tid="8"></Sprite>
+ <Sprite id="9" mid="0" sid="0" tid="10"></Sprite>
+ <Sprite id="10" mid="0" sid="0" tid="11"></Sprite>
+ <Sprite id="11" mid="0" sid="0" tid="12"></Sprite>
 
  <GameObject name="MainMenu" type="1">
   <id_button>0</id_button>
@@ -35,7 +41,9 @@
   <id_item_lock>7</id_item_lock>
   <id_player>8</id_player>
   <id_font>9</id_font>
-  <path_font>Resources/font.font</path_font>	
+  <path_font>Resources/font.font</path_font>
+  <id_button_apply>10</id_button_apply>
+  <id_header_menu>11</id_header_menu>		
  </GameObject>
 
  <Camera name="MainMenuCamera">

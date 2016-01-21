@@ -25,12 +25,15 @@ private:
     int id_item_next;
     int id_item_lock;
     int id_player;
+    int id_button_apply;
+    int id_header_menu;
     float flag_header;
     float pos_y_header;
     float frame_player;
     float pos_x_player;
     QVector2D mas_pos[9];
     int current_level_menu;
+    float pos_y_author;
 
     ///*Тестирование Font УБРАТЬ
     int id_font;

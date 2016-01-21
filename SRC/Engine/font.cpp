@@ -55,8 +55,9 @@ void Font::Draw(QString text, int x, int y, int z)
     {
         QRect rect = hash.value(text.at(i));
         Transformer tr;
-        tr.SetScal(QVector3D(rect.width(), rect.height(), 1));
+        //tr.SetPivot(QVector3D(0.5, 0.5, 0));
         tr.SetPos(QVector3D(x, y, z));
+        tr.SetScal(QVector3D(rect.width(), rect.height(), 1));
 
         Bind(rect.width(), rect.height(), rect.x(), rect.y(), true);
         GetShader()->setUniformValue(GetShader()->GetNameMatrixPos().toStdString().c_str(), Setting::GetProjection()*ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix()*tr.GetMatrix());

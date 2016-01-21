@@ -20,6 +20,8 @@ void MainMenu::Init(QHash<QString, QString> property)
     id_item_next = property.value("id_item_next").toInt();
     id_item_lock = property.value("id_item_lock").toInt();
     id_player = property.value("id_player").toInt();
+    id_button_apply = property.value("id_button_apply").toInt();
+    id_header_menu = property.value("id_header_menu").toInt();
 
     ///*Тестирование Font УБРАТЬ
     id_font = property.value("id_font").toInt();
@@ -30,6 +32,7 @@ void MainMenu::Init(QHash<QString, QString> property)
     font.SetTextureKey(id_font);
     font.Create();
     font.Load(path_font);
+    font.SetKerning(5);
     //Тестирование Font УБРАТЬ*/
 
     SetPivot(QVector3D(0.5, 0.5, 0));
@@ -58,9 +61,10 @@ void MainMenu::Init(QHash<QString, QString> property)
 
     flag_header= 0;
     pos_y_header = Setting::GetViewPort().height()+62;
-    qDebug()<<"Header Y="<<pos_y_header;
     frame_player = 0;
     pos_x_player = -200;
+    pos_y_author = -200;
+
 
     current_level_menu = 1;
 }
@@ -100,12 +104,35 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2+100-72/2 && m_y<Setting::GetViewPort().height()/2+100+72/2)
                 {
                     CurrentStatusGame = Level_Menu;
-                    PlayProfile::last_level = 7; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
+                    PlayProfile::last_level = 23; //УБРАТЬ ЭТО ДЛЯ ТЕСТА
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
             }
-            //Если нажата на Exit*/
-            ///*Если нажата на Play
+            //Если нажата на Play*/
+
+            ///*Если нажата на Setting
+            if (m_x>(Setting::GetViewPort().width()/2-279/2) && m_x<(Setting::GetViewPort().width()/2+279/2))
+            {
+                if (m_y>Setting::GetViewPort().height()/2-72/2 && m_y<Setting::GetViewPort().height()/2+72/2)
+                {
+                    CurrentStatusGame = Setting_Menu;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }
+            //Если нажата на Setting*/
+
+            ///*Если нажата на Author
+            if (m_x>(Setting::GetViewPort().width()/2-279/2) && m_x<(Setting::GetViewPort().width()/2+279/2))
+            {
+                if (m_y>Setting::GetViewPort().height()/2-100-72/2 && m_y<Setting::GetViewPort().height()/2-100+72/2)
+                {
+                    CurrentStatusGame = Author_Menu;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }
+            //Если нажата на Author*/
+
+            ///*Если нажата на Exit
             if (m_x>(Setting::GetViewPort().width()/2-279/2) && m_x<(Setting::GetViewPort().width()/2+279/2))
             {
                 if (m_y>Setting::GetViewPort().height()/2-200-72/2 && m_y<Setting::GetViewPort().height()/2-200+72/2)
@@ -137,6 +164,7 @@ void MainMenu::Update(float dt)
                 if (current_level_menu==1)
                 {
                     CurrentStatusGame = Main_Menu;
+                    Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
                 }else
                 {
                     current_level_menu--;
@@ -180,7 +208,7 @@ void MainMenu::Update(float dt)
                 }
 
                 bool flag = false;
-                for (int i=0; i<PlayProfile::last_level; i++)
+                for (int i=0; i<start_lock; i++)
                 {
                     int tmp_x = mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2;
                     int tmp_y = mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2;
@@ -200,6 +228,59 @@ void MainMenu::Update(float dt)
         //Если нажата мышка*/
     }
     //Если сейчас в меню выбора уровня*/
+
+    ///*Если сейчас в меню настроек
+    if (CurrentStatusGame==Setting_Menu)
+    {
+        if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
+        {
+            CurrentStatusGame = Main_Menu;
+            Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
+        }
+        ///*Если нажата мышка
+        if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+        {
+            int m_x = Resources::MOUSE()->GetX();
+            int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
+            if (m_x<120 && m_y<80) //Стрелка назад
+            {
+                CurrentStatusGame = Main_Menu;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }else
+            if (m_x>Setting::GetViewPort().width()-120 && m_y<80)
+            {
+                //ОБРАБОТАТЬ СОХРАНЕНИЕ НАСТРОЕК
+                CurrentStatusGame = Main_Menu;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }
+        }
+    }
+    //Если сейчас в меню настроек*/
+
+    ///*Если сейчас в меню Author
+    if (CurrentStatusGame==Author_Menu)
+    {
+        if (pos_y_author<(Setting::GetViewPort().height()/2))
+            pos_y_author += 5;
+
+        if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
+        {
+            CurrentStatusGame = Main_Menu;
+            Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
+        }
+        ///*Если нажата мышка
+        if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+        {
+            int m_x = Resources::MOUSE()->GetX();
+            int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
+            if (m_x<120 && m_y<80) //Стрелка назад
+            {
+                CurrentStatusGame = Main_Menu;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }
+        }
+    }
+    //Если сейчас в меню Author*/
 }
 
 void MainMenu::Draw()
@@ -312,6 +393,19 @@ void MainMenu::Draw()
         Resources::SPRITE()->GetValue(id_level)->UnBind();
         //Вывод Уровней*/
 
+        SetScal(QVector3D(418, 124, 0));
+        ///*Вывод заголовка Header_menu
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-48, 0));
+        Resources::SPRITE()->GetValue(id_header_menu)->Bind(GetScalX(), GetScalY(), 0, 2);
+        Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_header_menu)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_header_menu)->UnBind();
+        //Вывод заголовка Header_menu*/
+
         ///*Вывод стрелки назад к главному меню
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
         SetPos(QVector3D(60, 40, 0));
@@ -384,4 +478,98 @@ void MainMenu::Draw()
         //Вывод заблокированных уровней*/
     }
     //Если сейчас в меню выбора уровня*/
+
+
+    ///*Если сейчас в меню настроек
+    if (CurrentStatusGame==Setting_Menu)
+    {
+        SetScal(QVector3D(Resources::SPRITE()->GetValue(9)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(9)->GetTexture()->GetHeight(), 0));
+        SetPos(QVector3D(400, 300, 0));
+        Resources::SPRITE()->GetValue(9)->Bind();
+        Resources::SPRITE()->GetValue(9)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(9)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(9)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(9)->UnBind();
+
+        SetScal(QVector3D(418, 124, 0));
+        ///*Вывод заголовка Header_menu
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-62, 0));
+        Resources::SPRITE()->GetValue(id_header_menu)->Bind(GetScalX(), GetScalY(), 0, 1);
+        Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_header_menu)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_header_menu)->UnBind();
+        //Вывод заголовка Header_menu*/
+
+        ///*Вывод стрелки назад в меню настроек
+        SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
+        SetPos(QVector3D(60, 40, 0));
+        Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
+        Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_item_back)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_item_back)->UnBind();
+        //Вывод стрелки назад в меню настроек*/
+
+        ///*Вывод кнопки Apply в меню настроек
+        SetScal(QVector3D(Resources::SPRITE()->GetValue(id_button_apply)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_button_apply)->GetTexture()->GetHeight(), 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()-60, 40, 0));
+        Resources::SPRITE()->GetValue(id_button_apply)->Bind(GetScalX(), GetScalY());
+        Resources::SPRITE()->GetValue(id_button_apply)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_button_apply)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_button_apply)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_button_apply)->UnBind();
+        //Вывод кнопки Apply в меню настроек*/
+    }
+    //Если сейчас в меню настроек*/
+
+    ///*Если сейчас в меню Author
+    if (CurrentStatusGame==Author_Menu)
+    {
+        SetScal(QVector3D(418, 124, 0));
+        ///*Вывод заголовка Header_menu
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-62, 0));
+        Resources::SPRITE()->GetValue(id_header_menu)->Bind(GetScalX(), GetScalY(), 0, 0);
+        Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_header_menu)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_header_menu)->UnBind();
+        //Вывод заголовка Header_menu*/
+
+        ///*Вывод стрелки назад в меню Author
+        SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
+        SetPos(QVector3D(60, 40, 0));
+        Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
+        Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_item_back)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_item_back)->UnBind();
+        //Вывод стрелки назад в меню Author*/
+
+        ///*Вывод текста Author
+        font.Draw("Author", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author);
+        font.Draw("This", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author-30);
+        font.Draw("Game", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author-60);
+        font.Draw("MaxiProgram", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author-90);
+        //Вывод текста Author*/
+    }
+    //Если сейчас в меню Author*/
 }

@@ -87,6 +87,20 @@ void MainForm::timerEvent(QTimerEvent *t)
             main_menu->Draw();
             break;
         }
+        case Setting_Menu:
+        {
+            qDebug()<<"CurrentStatusGame Setting_Menu";
+            main_menu->Update();
+            main_menu->Draw();
+            break;
+        }
+        case Author_Menu:
+        {
+            qDebug()<<"CurrentStatusGame Author_Menu";
+            main_menu->Update();
+            main_menu->Draw();
+            break;
+        }
         case Load_Level:
         {
             qDebug()<<"CurrentStatusGame Load_Level";

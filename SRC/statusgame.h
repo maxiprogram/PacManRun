@@ -1,7 +1,7 @@
 #ifndef STATUSGAME_H
 #define STATUSGAME_H
 
-enum StatusGame {Main_Menu, Level_Menu, Play, Load_Level, Pause, Exit};
+enum StatusGame {Main_Menu, Level_Menu, Setting_Menu, Author_Menu, Exit, Load_Level, Play, Pause};
 
 extern StatusGame CurrentStatusGame;
 
