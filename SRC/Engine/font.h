@@ -8,6 +8,16 @@
 #include "setting.h"
 #include "managercamera.h"
 
+struct CharInfo
+{
+    int x;
+    int y;
+    int width;
+    int height;
+    int x_offset;
+    int y_offset;
+};
+
 class Font:public Sprite
 {
 public:
@@ -18,7 +28,7 @@ public:
     bool Load(QString filename);
     void Draw(QString text, int x = 0, int y = 0, int z = 0);
 private:
-    QHash<QChar, QRect> hash;
+    QHash<QChar, CharInfo> hash;
     int kerning;
 };
 

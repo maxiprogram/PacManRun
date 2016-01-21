@@ -31,18 +31,22 @@ bool Font::Load(QString filename)
     for(int i=0; i<count; i++)
     {
         int buf_char, buf;
-        QRect buf_rect;
+        CharInfo buf_charinfo;
         f.read((char*)&buf_char, sizeof(buf_char));
         f.read((char*)&buf, sizeof(buf));
-        buf_rect.setX(buf);
+        buf_charinfo.x = buf;
         f.read((char*)&buf, sizeof(buf));
-        buf_rect.setY(buf);
+        buf_charinfo.y = buf;
         f.read((char*)&buf, sizeof(buf));
-        buf_rect.setWidth(buf);
+        buf_charinfo.width = buf;
         f.read((char*)&buf, sizeof(buf));
-        buf_rect.setHeight(buf);
-        hash.insert(buf_char, buf_rect);
-        //qDebug()<<"char="<<(QChar)buf_char<<"x="<<buf_rect.x()<<"y="<<buf_rect.y()<<"width="<<buf_rect.width()<<"height="<<buf_rect.height();
+        buf_charinfo.height = buf;
+        f.read((char*)&buf, sizeof(buf));
+        buf_charinfo.x_offset = buf;
+        f.read((char*)&buf, sizeof(buf));
+        buf_charinfo.y_offset = buf;
+        hash.insert(buf_char, buf_charinfo);
+        //qDebug()<<"char="<<(QChar)buf_char<<"x="<<buf_charinfo.x<<"y="<<buf_charinfo.y<<"width="<<buf_charinfo.width<<"height="<<buf_charinfo.height<<"x_offset="<<buf_charinfo.x_offset<<"y_offset="<<buf_charinfo.y_offset;
     }
 
     return true;
@@ -53,18 +57,19 @@ void Font::Draw(QString text, int x, int y, int z)
     int frameX, frameY;
     for (int i=0; i<text.length(); i++)
     {
-        QRect rect = hash.value(text.at(i));
+        CharInfo char_info = hash.value(text.at(i));
+        qDebug()<<"char="<<text.at(i)<<"x="<<char_info.x<<"y="<<char_info.y<<"width="<<char_info.width<<"height="<<char_info.height<<"x_offset="<<char_info.x_offset<<"y_offset="<<char_info.y_offset;
         Transformer tr;
-        //tr.SetPivot(QVector3D(0.5, 0.5, 0));
-        tr.SetPos(QVector3D(x, y, z));
-        tr.SetScal(QVector3D(rect.width(), rect.height(), 1));
+        tr.SetPivot(QVector3D((float)char_info.x_offset/char_info.width, (float)char_info.y_offset/char_info.height, 0));
+        tr.SetPos(QVector3D(x/*+char_info.x_offset*/, y/*+char_info.y_offset*/, z));
+        tr.SetScal(QVector3D(char_info.width, char_info.height, 1));
 
-        Bind(rect.width(), rect.height(), rect.x(), rect.y(), true);
+        Bind(char_info.width, char_info.height, char_info.x, char_info.y, true);
         GetShader()->setUniformValue(GetShader()->GetNameMatrixPos().toStdString().c_str(), Setting::GetProjection()*ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix()*tr.GetMatrix());
         glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetCountVertex());
         UnBind();
 
-        x+=rect.width()+kerning;
+        x+=char_info.width+kerning;
     }
 
 }
