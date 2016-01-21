@@ -22,6 +22,7 @@ void MainMenu::Init(QHash<QString, QString> property)
     id_player = property.value("id_player").toInt();
     id_button_apply = property.value("id_button_apply").toInt();
     id_header_menu = property.value("id_header_menu").toInt();
+    id_checkbox = property.value("id_checkbox").toInt();
 
     ///*Тестирование Font УБРАТЬ
     id_font = property.value("id_font").toInt();
@@ -65,6 +66,8 @@ void MainMenu::Init(QHash<QString, QString> property)
     pos_x_player = -200;
     pos_y_author = -200;
 
+    checkbox_fullscreen = 1;
+    checkbox_sound = 1;
 
     current_level_menu = 1;
 }
@@ -247,10 +250,28 @@ void MainMenu::Update(float dt)
                 CurrentStatusGame = Main_Menu;
                 Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
             }else
-            if (m_x>Setting::GetViewPort().width()-120 && m_y<80)
+            if (m_x>Setting::GetViewPort().width()-120 && m_y<80) //Apply
             {
                 //ОБРАБОТАТЬ СОХРАНЕНИЕ НАСТРОЕК
                 CurrentStatusGame = Main_Menu;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }else
+            //checkbox_fullscreen click
+            if (m_x>Setting::GetViewPort().width()/2+50 && m_x<Setting::GetViewPort().width()/2+50+72 && m_y>Setting::GetViewPort().height()/2+75 && m_y<Setting::GetViewPort().height()/2+75+78)
+            {
+                if (checkbox_fullscreen==0)
+                    checkbox_fullscreen = 1;
+                else
+                    checkbox_fullscreen = 0;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }else
+            //checkbox_sound click
+            if (m_x>Setting::GetViewPort().width()/2+50 && m_x<Setting::GetViewPort().width()/2+50+72 && m_y>Setting::GetViewPort().height()/2-75 && m_y<Setting::GetViewPort().height()/2-75+78)
+            {
+                if (checkbox_sound==0)
+                    checkbox_sound = 1;
+                else
+                    checkbox_sound = 0;
                 Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
             }
         }
@@ -484,7 +505,7 @@ void MainMenu::Draw()
     if (CurrentStatusGame==Setting_Menu)
     {
         SetScal(QVector3D(Resources::SPRITE()->GetValue(9)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(9)->GetTexture()->GetHeight(), 0));
-        SetPos(QVector3D(400, 300, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()/2, 0));
         Resources::SPRITE()->GetValue(9)->Bind();
         Resources::SPRITE()->GetValue(9)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(9)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -506,6 +527,31 @@ void MainMenu::Draw()
         glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_header_menu)->GetMesh()->GetCountVertex());
         Resources::SPRITE()->GetValue(id_header_menu)->UnBind();
         //Вывод заголовка Header_menu*/
+
+        SetPivot(QVector3D(0, 0, 0));
+        SetScal(QVector3D(72, 78, 0));
+        ///*Вывод checkbox_fullscreen и checkbox_sound
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+50, Setting::GetViewPort().height()/2+75, 0));
+        Resources::SPRITE()->GetValue(id_checkbox)->Bind(GetScalX(), GetScalY(), checkbox_fullscreen, 0);
+        Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_checkbox)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_checkbox)->UnBind();
+        //--
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+50, Setting::GetViewPort().height()/2-75, 0));
+        Resources::SPRITE()->GetValue(id_checkbox)->Bind(GetScalX(), GetScalY(), checkbox_sound, 0);
+        Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                               Setting::GetProjection() *
+                                                                               Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                               this->GetMatrix()
+                                                                               );
+        glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_checkbox)->GetMesh()->GetCountVertex());
+        Resources::SPRITE()->GetValue(id_checkbox)->UnBind();
+        //Вывод checkbox_fullscreen и checkbox_sound*/
+        SetPivot(QVector3D(0.5, 0.5, 0));
 
         ///*Вывод стрелки назад в меню настроек
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));

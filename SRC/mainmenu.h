@@ -27,6 +27,7 @@ private:
     int id_player;
     int id_button_apply;
     int id_header_menu;
+    int id_checkbox;
     float flag_header;
     float pos_y_header;
     float frame_player;
@@ -34,6 +35,8 @@ private:
     QVector2D mas_pos[9];
     int current_level_menu;
     float pos_y_author;
+    int checkbox_fullscreen;
+    int checkbox_sound;
 
     ///*Тестирование Font УБРАТЬ
     int id_font;
