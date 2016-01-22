@@ -58,10 +58,10 @@ void Font::Draw(QString text, int x, int y, int z)
     for (int i=0; i<text.length(); i++)
     {
         CharInfo char_info = hash.value(text.at(i));
-        qDebug()<<"char="<<text.at(i)<<"x="<<char_info.x<<"y="<<char_info.y<<"width="<<char_info.width<<"height="<<char_info.height<<"x_offset="<<char_info.x_offset<<"y_offset="<<char_info.y_offset;
+        //qDebug()<<"char="<<text.at(i)<<"x="<<char_info.x<<"y="<<char_info.y<<"width="<<char_info.width<<"height="<<char_info.height<<"x_offset="<<char_info.x_offset<<"y_offset="<<char_info.y_offset;
         Transformer tr;
-        tr.SetPivot(QVector3D((float)char_info.x_offset/char_info.width, (float)char_info.y_offset/char_info.height, 0));
-        tr.SetPos(QVector3D(x/*+char_info.x_offset*/, y/*+char_info.y_offset*/, z));
+        tr.SetPivot(QVector3D((float)char_info.x_offset/char_info.width, 1+(float)char_info.y_offset/char_info.height, 0));
+        tr.SetPos(QVector3D(x, y, z));
         tr.SetScal(QVector3D(char_info.width, char_info.height, 1));
 
         Bind(char_info.width, char_info.height, char_info.x, char_info.y, true);
