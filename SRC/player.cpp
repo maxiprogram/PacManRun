@@ -6,9 +6,6 @@ Player::Player()
 
 Player::~Player()
 {
-    Resources::TEXTURE()->Delete(Resources::SPRITE()->GetValue(id_sprite)->GetTextureKey());
-    Resources::SPRITE()->Delete(id_sprite);
-    Resources::TEXTURE()->Delete(4);
     qDebug()<<"Destroy ~Player";
 }
 

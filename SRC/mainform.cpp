@@ -73,6 +73,25 @@ void MainForm::timerEvent(QTimerEvent *t)
 
     switch(CurrentStatusGame)
     {
+        case Load_Main_Menu:
+        {
+            qDebug()<<"CurrentStatusGame Load_Main_Menu";
+
+            level->Clear();
+            Resources::MESH()->Clear();
+            Resources::SHADER()->Clear();
+            Resources::SPRITE()->Clear();
+            Resources::TEXTURE()->Clear();
+            Resources::CAMERA()->Clear();
+            Resources::TILEMAP()->Clear();
+
+            if (!main_menu->Load("Resources/main_menu.xml", MainForm::CreateObject))
+                qDebug()<<"Not Load MainMenu";
+
+            Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
+            CurrentStatusGame = Level_Menu;
+            break;
+        }
         case Main_Menu:
         {
             qDebug()<<"CurrentStatusGame Main_Menu";
@@ -105,10 +124,14 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Load_Level";
 
+            main_menu->Clear();
             level->Clear();
-
+            Resources::MESH()->Clear();
+            Resources::SHADER()->Clear();
+            Resources::SPRITE()->Clear();
+            Resources::TEXTURE()->Clear();
+            Resources::CAMERA()->Clear();
             Resources::TILEMAP()->Clear();
-            Resources::CAMERA()->Delete("MainCamera");
 
             if (!level->Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
                 qDebug()<<"Not Load Level";
@@ -119,6 +142,8 @@ void MainForm::timerEvent(QTimerEvent *t)
         }
         case Play:
         {
+            qDebug()<<"CurrentStatusGame Play";
+
             level->Update(/*Fps::getInstance()->GetFps()/1000.0*/);
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
@@ -126,24 +151,20 @@ void MainForm::timerEvent(QTimerEvent *t)
         }
         case Pause:
         {
+            qDebug()<<"CurrentStatusGame Pause";
+
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            //f.Draw("PAUSE", Resources::CAMERA()->GetCurrentCamera()->GetPosX()+400, Resources::CAMERA()->GetCurrentCamera()->GetPosY()+400);
-            if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
-            {
-                CurrentStatusGame = Play;
-                Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
-            }
-            if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
-            {
-                Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
-                CurrentStatusGame = Level_Menu;
-                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(), false);
-            }
+
+            Resources::GAMEOBJECT()->GetValue("Pause")->Update();
+            Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
+
             break;
         }
         case Exit:
         {
+            qDebug()<<"CurrentStatusGame Exit";
+
             QEvent event_exit(QEvent::Close);
             QCoreApplication::sendEvent(this, &event_exit);
             return;
