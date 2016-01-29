@@ -149,6 +149,28 @@ void MainForm::timerEvent(QTimerEvent *t)
             level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             break;
         }
+        case Dead:
+        {
+            qDebug()<<"CurrentStatusGame Dead";
+            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+
+            Resources::GAMEOBJECT()->GetValue("Pause")->Update();
+            Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
+
+            break;
+        }
+        case Finish:
+        {
+            qDebug()<<"CurrentStatusGame Finish";
+            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+
+            Resources::GAMEOBJECT()->GetValue("Pause")->Update();
+            Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
+
+            break;
+        }
         case Pause:
         {
             qDebug()<<"CurrentStatusGame Pause";

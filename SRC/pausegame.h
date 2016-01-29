@@ -20,7 +20,7 @@ public:
 private:
     int id_header;
     int id_button;
-    int stat_pause;
+    int time_pause_dead;
 };
 
 #endif // PAUSEGAME_H

@@ -438,3 +438,23 @@ bool TileMap::CollisionY(QString layer_name, QVector3D& pos, QRectF bound, QVect
 
     return flag;
 }
+
+int TileMap::GetTileWidth()
+{
+    return tile_width;
+}
+
+int TileMap::GetTileHeight()
+{
+    return tile_height;
+}
+
+int TileMap::GetTileCountWidth()
+{
+    return count_x;
+}
+
+int TileMap::GetTileCountHeight()
+{
+    return count_y;
+}

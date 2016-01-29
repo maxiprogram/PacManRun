@@ -24,6 +24,10 @@ public:
     static TileMap* getInstance();
     void SetMeshKey(int key);
     void SetShaderKey(int key);
+    int GetTileWidth();
+    int GetTileHeight();
+    int GetTileCountWidth();
+    int GetTileCountHeight();
     bool Load(QString filename);
     void Clear();
     void Destroy();

@@ -135,7 +135,9 @@ void Player::Update(float dt)
                     TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
             {
                 speed_x = 0;
+                frame = 4;
                 qDebug()<<"DEAD";
+                CurrentStatusGame = Dead;
             }
         }
         //Если лед
@@ -175,17 +177,35 @@ void Player::Update(float dt)
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
     //Задание местоположения камеры*/
 
-    ///*Анимация
-    frame+=0.08;
-    if (frame>3)
-        frame = 0;
-    //Анимация*/
+    if (GetPosY()<=0)
+    {
+        speed_x = 0;
+        frame = 4;
+        qDebug()<<"DEAD";
+        CurrentStatusGame = Dead;
+    }
+
+    if (GetPosX()>=Resources::TILEMAP()->GetTileWidth()*Resources::TILEMAP()->GetTileCountWidth()-48)
+    {
+        speed_x = 0;
+        qDebug()<<"FINISH";
+        CurrentStatusGame = Finish;
+    }
+
+    if (CurrentStatusGame!=Dead)
+    {
+        ///*Анимация
+        frame+=0.08;
+        if (frame>3)
+            frame = 0;
+        //Анимация*/
+    }
 }
 
 void Player::Draw()
 {
     font_text.Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
-                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 35);
+                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
     ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(this->GetScalX(), this->GetScalY(), qFloor(frame));
     ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),

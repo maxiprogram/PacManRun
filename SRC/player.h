@@ -25,7 +25,7 @@ private:
     QVector2D direction;
     float speed_x, speed_y;
     float accel_x, accel_y;
-    enum _Status {OnGround, Jump, Down, Dead} Status;
+    enum _Status {OnGround, Jump, Down} Status;
 };
 
 #endif // PLAYER_H
