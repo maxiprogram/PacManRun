@@ -21,6 +21,7 @@ public:
 private:
     Font font_text;
     int id_sprite;
+    int id_close;
     float frame;
     QVector2D direction;
     float speed_x, speed_y;

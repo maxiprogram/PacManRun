@@ -22,6 +22,7 @@ void Player::Init(QHash<QString, QString> property)
     this->SetPosX(property.value("pos_x").toFloat());
     this->SetPosY(property.value("pos_y").toFloat());
     id_sprite = property.value("id_sprite").toInt();
+    id_close = property.value("id_close").toInt();
     speed_x = property.value("speed_x").toFloat();
     accel_y = property.value("accel_y").toFloat();
     speed_y = 15;
@@ -56,6 +57,24 @@ void Player::Update(float dt)
         qDebug()<<"CurrentStatusGame Pause";
         CurrentStatusGame = Pause;
         Resources::KEYBOARD()->SetKey(Qt::Key_Escape, false);
+    }
+
+    int m_x = Resources::MOUSE()->GetX();
+    int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
+
+    ///*Если нажата мышка
+    if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+    {
+        ///*Если нажата на Close
+        if (m_x>(Setting::GetViewPort().width()-58-10) && m_x<(Setting::GetViewPort().width()-10))
+        {
+            if (m_y>Setting::GetViewPort().height()-58-10 && m_y<Setting::GetViewPort().height()-10)
+            {
+                CurrentStatusGame = Pause;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }
+        }
+        //Если нажата на Close*/
     }
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
@@ -207,6 +226,7 @@ void Player::Draw()
     font_text.Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
+    ///*Вывод Player
     ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(this->GetScalX(), this->GetScalY(), qFloor(frame));
     ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                     Setting::GetProjection() *
@@ -214,4 +234,19 @@ void Player::Draw()
                                                                                     this->GetMatrix());
     glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_sprite)->GetMesh()->GetCountVertex());
     ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
+    //Вывод Player*/
+
+    ///*Вывод Close
+    Transformer tr;
+    tr.SetScal(QVector3D(58, 58, 0));
+    tr.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+Setting::GetViewPort().width()-58-10,
+                        Resources::CAMERA()->GetCurrentCamera()->GetPosY()+Setting::GetViewPort().height()-58-10, 0));
+    ManagerSprite::getInstance()->GetValue(id_close)->Bind();
+    ManagerSprite::getInstance()->GetValue(id_close)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_close)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                    Setting::GetProjection() *
+                                                                                    ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                    tr.GetMatrix());
+    glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_close)->GetMesh()->GetCountVertex());
+    ManagerSprite::getInstance()->GetValue(id_close)->UnBind();
+    //Вывод Close*/
 }

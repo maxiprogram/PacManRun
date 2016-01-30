@@ -118,6 +118,7 @@ void MainMenu::Update(float dt)
             {
                 if (m_y>Setting::GetViewPort().height()/2-72/2 && m_y<Setting::GetViewPort().height()/2+72/2)
                 {
+                    checkbox_fullscreen = PlayProfile::setting_fullscreen;
                     CurrentStatusGame = Setting_Menu;
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
@@ -253,7 +254,9 @@ void MainMenu::Update(float dt)
             if (m_x>Setting::GetViewPort().width()-120 && m_y<80) //Apply
             {
                 //ОБРАБОТАТЬ СОХРАНЕНИЕ НАСТРОЕК
-                CurrentStatusGame = Main_Menu;
+                PlayProfile::setting_fullscreen = checkbox_fullscreen;
+
+                CurrentStatusGame = Update_Setting;
                 Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
             }else
             //checkbox_fullscreen click

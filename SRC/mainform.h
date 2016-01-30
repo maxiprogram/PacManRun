@@ -2,6 +2,8 @@
 #define MAINFORM_H
 
 #include <QCoreApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QWindow>
 #include <QOpenGLFunctions>
 #include <QOpenGLPaintDevice>

@@ -30,10 +30,6 @@ void MainForm::render(QPainter *painter)
 
 void MainForm::initialize()
 {
-    ///*Загрузка информации об пройденных уровнях и очках
-    PlayProfile::Load();
-    //Загрузка информации об пройденных уровнях и очках*/
-
     ///*Настройки экрана
     QMatrix4x4 proj;
     proj.setToIdentity();
@@ -111,6 +107,38 @@ void MainForm::timerEvent(QTimerEvent *t)
             qDebug()<<"CurrentStatusGame Setting_Menu";
             main_menu->Update();
             main_menu->Draw();
+            break;
+        }
+        case Update_Setting:
+        {
+            if (PlayProfile::setting_fullscreen==1)
+            {
+                this->resize(QApplication::desktop()->width(), QApplication::desktop()->height());
+                this->setMaximumSize(QSize(QApplication::desktop()->width(), QApplication::desktop()->height()));
+                this->setMinimumSize(QSize(0, 0));
+                this->showFullScreen();
+                ///*Настройки экрана
+                QMatrix4x4 proj;
+                proj.setToIdentity();
+                proj.ortho(0, this->width(), 0, this->height(), -1, 1);
+                Setting::SetProjection(proj);
+                Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
+                //Настройки экрана*/
+            }else
+            {
+                this->resize(800, 600);
+                this->setMaximumSize(QSize(800, 600));
+                this->setMinimumSize(QSize(800, 600));
+                this->show();
+                ///*Настройки экрана
+                QMatrix4x4 proj;
+                proj.setToIdentity();
+                proj.ortho(0, this->width(), 0, this->height(), -1, 1);
+                Setting::SetProjection(proj);
+                Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
+                //Настройки экрана*/
+            }
+            CurrentStatusGame = Main_Menu;
             break;
         }
         case Author_Menu:

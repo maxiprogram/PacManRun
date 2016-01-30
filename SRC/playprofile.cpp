@@ -3,6 +3,7 @@
 int PlayProfile::last_level = 1;
 int PlayProfile::current_level = 0;
 int PlayProfile::score = 0;
+int PlayProfile::setting_fullscreen = 1;
 
 PlayProfile::PlayProfile()
 {
@@ -22,11 +23,13 @@ bool PlayProfile::Load()
             return flag;
         f.write((char*)&last_level, sizeof(int));
         f.write((char*)&score, sizeof(int));
+        f.write((char*)&setting_fullscreen, sizeof(bool));
         flag = true;
     }else
     {
         f.read((char*)&last_level, sizeof(int));
         f.read((char*)&score, sizeof(int));
+        f.read((char*)&setting_fullscreen, sizeof(bool));
         flag = true;
     }
     f.close();
@@ -40,6 +43,7 @@ bool PlayProfile::Save()
         return false;
     f.write((char*)&last_level, sizeof(int));
     f.write((char*)&score, sizeof(int));
+    f.write((char*)&setting_fullscreen, sizeof(bool));
     f.close();
     return true;
 }

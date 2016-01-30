@@ -12,6 +12,7 @@ public:
     static int last_level;
     static int score;
     static int current_level;
+    static int setting_fullscreen;
 };
 
 #endif // PLAYPROFILE_H
