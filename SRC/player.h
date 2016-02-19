@@ -8,6 +8,7 @@
 
 #include "playprofile.h"
 #include "statusgame.h"
+#include "portal.h"
 
 class Player:public GameObject
 {
@@ -19,7 +20,6 @@ public:
     void Draw();
     QRectF GetBoundBox();
 private:
-    Font font_text;
     int id_sprite;
     int id_close;
     float frame;

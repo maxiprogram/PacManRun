@@ -107,6 +107,48 @@ void PauseGame::Update(float dt)
     }
     //Если стату Dead*/
 
+    ///*Если стату Finish
+    if (CurrentStatusGame==Finish)
+    {
+        if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+        {
+            ///*Если нажата на Continue
+            if (m_x>(Setting::GetViewPort().width()/2-100) && m_x<(Setting::GetViewPort().width()/2+100))
+            {
+                if (m_y>Setting::GetViewPort().height()/2+80-39/2 && m_y<Setting::GetViewPort().height()/2+80+39/2)
+                {
+                    PlayProfile::current_level = PlayProfile::current_level + 1;
+                    CurrentStatusGame = Load_Level;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }
+            //Если нажата на Continue*/
+
+            ///*Если нажата на Restart
+            if (m_x>(Setting::GetViewPort().width()/2-100) && m_x<(Setting::GetViewPort().width()/2+100))
+            {
+                if (m_y>Setting::GetViewPort().height()/2-39/2 && m_y<Setting::GetViewPort().height()/2+39/2)
+                {
+                    CurrentStatusGame = Load_Level;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }
+            //Если нажата на Restart*/
+
+            ///*Если нажата на Main menu
+            if (m_x>(Setting::GetViewPort().width()/2-100) && m_x<(Setting::GetViewPort().width()/2+100))
+            {
+                if (m_y>Setting::GetViewPort().height()/2-80-39/2 && m_y<Setting::GetViewPort().height()/2-80+39/2)
+                {
+                    CurrentStatusGame = Load_Main_Menu;
+                    Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+                }
+            }
+            //Если нажата на Main menu*/
+        }
+    }
+    //Если стату Finish*/
+
 
 }
 

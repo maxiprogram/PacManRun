@@ -77,6 +77,7 @@ void MainForm::timerEvent(QTimerEvent *t)
             Resources::MESH()->Clear();
             Resources::SHADER()->Clear();
             Resources::SPRITE()->Clear();
+            Resources::FONT()->Clear();
             Resources::TEXTURE()->Clear();
             Resources::CAMERA()->Clear();
             Resources::TILEMAP()->Clear();
@@ -157,6 +158,7 @@ void MainForm::timerEvent(QTimerEvent *t)
             Resources::MESH()->Clear();
             Resources::SHADER()->Clear();
             Resources::SPRITE()->Clear();
+            Resources::FONT()->Clear();
             Resources::TEXTURE()->Clear();
             Resources::CAMERA()->Clear();
             Resources::TILEMAP()->Clear();

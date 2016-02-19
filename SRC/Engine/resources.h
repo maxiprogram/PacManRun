@@ -8,6 +8,7 @@
 #include "managershader.h"
 #include "managertexture.h"
 #include "managersprite.h"
+#include "managerfont.h"
 #include "tilemap.h"
 #include "managergameobject.h"
 #include "managercamera.h"
@@ -23,6 +24,7 @@ public:
     static ManagerShader* SHADER();
     static ManagerTexture* TEXTURE();
     static ManagerSprite* SPRITE();
+    static ManagerFont* FONT();
     static TileMap* TILEMAP();
     static ManagerGameObject* GAMEOBJECT();
     static ManagerCamera* CAMERA();

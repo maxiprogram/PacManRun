@@ -38,12 +38,6 @@ private:
     int checkbox_fullscreen;
     int checkbox_sound;
 
-    ///*Тестирование Font УБРАТЬ
-    int id_font;
-    QString path_font;
-    Font font;
-    //Тестирование Font УБРАТЬ*/
-
 };
 
 #endif // MAINMENU_H

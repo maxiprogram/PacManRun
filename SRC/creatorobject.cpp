@@ -24,6 +24,11 @@ GameObject* CreatorObject::CreateGameObject(uint type)
         return new PauseGame();
         break;
     }
+    case PortalObject:
+    {
+        return new Portal();
+        break;
+    }
 
     default:{return 0;break;}
     }

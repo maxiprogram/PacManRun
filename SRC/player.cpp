@@ -33,13 +33,6 @@ void Player::Init(QHash<QString, QString> property)
     Status = Down;
 
     frame = 0;
-
-    font_text.Load("Resources/font.font");
-    font_text.SetMeshKey(0);
-    font_text.SetShaderKey(0);
-    font_text.SetTextureKey(9);
-    font_text.SetKerning(5);
-    font_text.Create();
 }
 
 void Player::Update(float dt)
@@ -188,6 +181,28 @@ void Player::Update(float dt)
                 direction.setY(1);
             }
         }
+        //Если портал
+        if (tiles.at(i).id==1)
+        {
+            if (TileMap::getInstance()->CollisionX("Object", new_pos, GetBoundBox(), direction)==true ||
+                    TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
+            {
+                QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues("Portal");
+                for(int i1=0; i1<list.size(); i1++)
+                {
+                    if(tiles.at(i).ij.x()==((Portal*)list.at(i1))->GetPosStart().x() &&
+                            tiles.at(i).ij.y()==((Portal*)list.at(i1))->GetPosStart().y())
+                    {
+                        QVector3D pos = this->GetPos();
+                        pos.setX(((Portal*)list.at(i1))->GetPosFinish().x() * 32 - 48);
+                        pos.setY((TileMap::getInstance()->GetTileCountHeight() - ((Portal*)list.at(i1))->GetPosFinish().y() -1) * 32);
+                        this->SetPos(pos);
+                        break;
+                    }
+                }
+            }
+
+        }
     }
     //Взаимодействие с объктами*/
 
@@ -208,6 +223,7 @@ void Player::Update(float dt)
     {
         speed_x = 0;
         qDebug()<<"FINISH";
+        PlayProfile::last_level = PlayProfile::last_level + 1;
         CurrentStatusGame = Finish;
     }
 
@@ -223,7 +239,7 @@ void Player::Update(float dt)
 
 void Player::Draw()
 {
-    font_text.Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
+    Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
     ///*Вывод Player

@@ -39,6 +39,11 @@ ManagerSprite* Resources::SPRITE()
     return ManagerSprite::getInstance();
 }
 
+ManagerFont* Resources::FONT()
+{
+    return ManagerFont::getInstance();
+}
+
 TileMap* Resources::TILEMAP()
 {
     return TileMap::getInstance();
@@ -61,6 +66,7 @@ void Resources::DestroyResources()
     ManagerCamera::getInstance()->Destroy();
     ManagerGameObject::getInstance()->Destroy();
 
+    ManagerFont::getInstance()->Destroy();
     ManagerSprite::getInstance()->Destroy();
     ManagerTexture::getInstance()->Destroy();
     ManagerMesh::getInstance()->Destroy();

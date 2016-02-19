@@ -43,14 +43,14 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
             {
                 if (reader.attributes().hasAttribute("id"))
                 {
+                    QString tag_name = reader.name().toString();
                     int id = reader.attributes().value("id").toInt();
-                    qDebug()<<"Tag:"<<reader.name()<<"Id:"<<id;
                     reader.readNext();
                     QString filename = reader.text().toString();
-                    qDebug()<<"Path:"<<filename;
                     Texture* texture = new Texture(filename);
                     texture->Create();
                     ManagerTexture::getInstance()->Add(id, texture);
+                    qDebug()<<"Tag:"<<tag_name<<"Id:"<<id<<"Path:"<<filename;
                 }
             }
             //Считка спрайта
@@ -77,20 +77,48 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
                     ManagerSprite::getInstance()->Add(id, sprite);
                 }
             }
+            //Считка шрифта
+            if (reader.name()=="Font")
+            {
+                if (reader.attributes().hasAttribute("name"))
+                {
+                    QString tag_name = reader.name().toString();
+                    QString name = reader.attributes().value("name").toString();
+                    Font* font = new Font();
+                    if (reader.attributes().hasAttribute("mid"))
+                    {
+                        font->SetMeshKey(reader.attributes().value("mid").toInt());
+                    }
+                    if (reader.attributes().hasAttribute("tid"))
+                    {
+                        font->SetTextureKey(reader.attributes().value("tid").toInt());
+                    }
+                    if (reader.attributes().hasAttribute("sid"))
+                    {
+                        font->SetShaderKey(reader.attributes().value("sid").toInt());
+                    }
+                    reader.readNext();
+                    QString filename = reader.text().toString();
+                    font->Load(filename);
+                    font->Create();
+                    ManagerFont::getInstance()->Add(name, font);
+                    qDebug()<<"Tag:"<<tag_name<<"Name:"<<name<<"Path:"<<filename;
+                }
+            }
             //Считка тайл-карты
             if (reader.name()=="TileMap")
             {
                 if (reader.attributes().hasAttribute("mid")==true && reader.attributes().hasAttribute("sid")==true)
                 {
+                    QString tag_name = reader.name().toString();
                     int mid = reader.attributes().value("mid").toInt();
-                    int sid = reader.attributes().value("sid").toInt();
-                    qDebug()<<"Tag:"<<reader.name()<<"mid:"<<mid<<"sid:"<<sid;
+                    int sid = reader.attributes().value("sid").toInt();            
                     reader.readNext();
                     QString filename = reader.text().toString();
-                    qDebug()<<"Path:"<<filename;
                     TileMap::getInstance()->SetMeshKey(mid);
                     TileMap::getInstance()->SetShaderKey(sid);
                     TileMap::getInstance()->Load(filename);
+                    qDebug()<<"Tag:"<<tag_name<<"mid:"<<mid<<"sid:"<<sid<<"Path:"<<filename;
                 }
             }
             //Считка камеры
@@ -171,14 +199,13 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
                         while (reader.isStartElement())
                         {
                             QString name = reader.name().toString();
-                            qDebug()<<"Name:"<<name;
                             reader.readNext();
                             QString value = reader.text().toString();
-                            qDebug()<<"value:"<<value;
                             property.insert(name, value);
                             reader.readNext();
                             reader.readNext();
                             reader.readNext();
+                            qDebug()<<"Name:"<<name<<"value:"<<value;
                         }
 
                         obj->Init(property);

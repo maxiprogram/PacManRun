@@ -15,16 +15,39 @@
  <Sprite id="1" mid="0" sid="0" tid="2"></Sprite>
  <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
+
+ <Font name="green" mid="0" sid="0" tid="9">Resources/font.font</Font>
  
  <GameObject name="Player" type="0">
-  <pos_x>100</pos_x>
-  <pos_y>200</pos_y>
+  <pos_x>60</pos_x>
+  <pos_y>100</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
   <id_sprite>0</id_sprite>
   <id_close>3</id_close>
   <speed_x>10</speed_x>
   <accel_y>1</accel_y>
+ </GameObject>
+
+ <GameObject name="Portal" type="3">
+  <pos_i_start>15</pos_i_start>
+  <pos_j_start>15</pos_j_start>
+  <pos_i_finish>33</pos_i_finish>
+  <pos_j_finish>15</pos_j_finish>
+ </GameObject>
+
+ <GameObject name="Portal" type="3">
+  <pos_i_start>71</pos_i_start>
+  <pos_j_start>11</pos_j_start>
+  <pos_i_finish>83</pos_i_finish>
+  <pos_j_finish>3</pos_j_finish>
+ </GameObject>
+
+ <GameObject name="Portal" type="3">
+  <pos_i_start>157</pos_i_start>
+  <pos_j_start>8</pos_j_start>
+  <pos_i_finish>206</pos_i_finish>
+  <pos_j_finish>8</pos_j_finish>
  </GameObject>
 
  <GameObject name="Pause" type="2">
