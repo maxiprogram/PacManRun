@@ -29,6 +29,11 @@ GameObject* CreatorObject::CreateGameObject(uint type)
         return new Portal();
         break;
     }
+    case GhostObject:
+    {
+        return new Ghost();
+        break;
+    }
 
     default:{return 0;break;}
     }

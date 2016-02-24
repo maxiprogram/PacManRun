@@ -47,7 +47,8 @@ SOURCES += \
     Engine/font.cpp \
     pausegame.cpp \
     portal.cpp \
-    Engine/managerfont.cpp
+    Engine/managerfont.cpp \
+    ghost.cpp
 
 HEADERS  += \
     mainform.h \
@@ -83,7 +84,8 @@ HEADERS  += \
     Engine/font.h \
     pausegame.h \
     portal.h \
-    Engine/managerfont.h
+    Engine/managerfont.h \
+    ghost.h
 
 FORMS    +=
 

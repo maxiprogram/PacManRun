@@ -204,6 +204,23 @@ void Player::Update(float dt)
 
         }
     }
+    ///*Взаимодействие с Ghost
+    QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues("Ghost");
+    for(int i=0; i<list.size(); i++)
+    {
+        QRectF rect_new_pos = this->GetBoundBox();
+        QRectF rect_ghost_pos(list.at(i)->GetPosX(), list.at(i)->GetPosY(), list.at(i)->GetScalX(), list.at(i)->GetScalY());
+        if (rect_new_pos.intersects(rect_ghost_pos)==true)
+        {
+            speed_x = 0;
+            frame = 4;
+            qDebug()<<"DEAD";
+            CurrentStatusGame = Dead;
+            break;
+        }
+    }
+    //Взаимодействие с Ghost1*/
+
     //Взаимодействие с объктами*/
 
     ///*Задание местоположения камеры

@@ -7,8 +7,9 @@
 #include "mainmenu.h"
 #include "pausegame.h"
 #include "portal.h"
+#include "ghost.h"
 
-enum Type_GameObject {Hero=0, MainMenuObject=1, PauseObject=2, PortalObject=3};
+enum Type_GameObject {Hero=0, MainMenuObject=1, PauseObject=2, PortalObject=3, GhostObject=4};
 
 class CreatorObject:public CreatorGameObject
 {
