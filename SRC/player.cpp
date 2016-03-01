@@ -31,6 +31,8 @@ void Player::Init(QHash<QString, QString> property)
     direction.setX(0);
     direction.setY(0);
     Status = Down;
+    count_bonus = 0;
+    y_sprite = 1;
 
     frame = 0;
 }
@@ -148,6 +150,7 @@ void Player::Update(float dt)
             {
                 speed_x = 0;
                 frame = 4;
+                y_sprite = 1;
                 qDebug()<<"DEAD";
                 CurrentStatusGame = Dead;
             }
@@ -203,6 +206,16 @@ void Player::Update(float dt)
             }
 
         }
+        //Если бонус
+        if (tiles.at(i).id==14)
+        {
+            if (TileMap::getInstance()->CollisionX("Object", new_pos, GetBoundBox(), direction)==true ||
+                    TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
+            {
+                TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
+                count_bonus++;
+            }
+        }
     }
     ///*Взаимодействие с Ghost
     QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues("Ghost");
@@ -212,14 +225,23 @@ void Player::Update(float dt)
         QRectF rect_ghost_pos(list.at(i)->GetPosX(), list.at(i)->GetPosY(), list.at(i)->GetScalX(), list.at(i)->GetScalY());
         if (rect_new_pos.intersects(rect_ghost_pos)==true)
         {
-            speed_x = 0;
-            frame = 4;
-            qDebug()<<"DEAD";
-            CurrentStatusGame = Dead;
-            break;
+            if (count_bonus>0)
+            {
+                count_bonus--;
+                int n = ManagerGameObject::getInstance()->GetHashTab()->remove("Ghost", list.at(i));
+                qDebug()<<"Remove Ghost n="<<n;
+            }else
+            {
+                speed_x = 0;
+                frame = 4;
+                y_sprite = 1;
+                qDebug()<<"DEAD";
+                CurrentStatusGame = Dead;
+                break;
+            }
         }
     }
-    //Взаимодействие с Ghost1*/
+    //Взаимодействие с Ghost*/
 
     //Взаимодействие с объктами*/
 
@@ -232,6 +254,7 @@ void Player::Update(float dt)
     {
         speed_x = 0;
         frame = 4;
+        y_sprite = 1;
         qDebug()<<"DEAD";
         CurrentStatusGame = Dead;
     }
@@ -253,18 +276,29 @@ void Player::Update(float dt)
             frame = 0;
         //Анимация*/
     }
+
+    if (count_bonus>0)
+        y_sprite = 0;
+    else
+        y_sprite = 1;
 }
 
 void Player::Draw()
 {
+    ///*Вывод текста
     Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
     Resources::FONT()->GetValue("green")->Draw("Level "+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
+    Resources::FONT()->GetValue("green")->Draw("CountBonus:"+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
+                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 40);
+
+    //Вывод текста*/
+
     ///*Вывод Player
-    ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(this->GetScalX(), this->GetScalY(), qFloor(frame));
+    ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(this->GetScalX(), this->GetScalY(), qFloor(frame), y_sprite);
     ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                     Setting::GetProjection() *
                                                                                     ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *

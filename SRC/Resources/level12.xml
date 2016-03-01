@@ -1,0 +1,58 @@
+<GameScene>
+ <Resources>
+  <Shader id="0"></Shader>
+  <Mesh id="0"></Mesh>
+  <Texture id="0">Resources/tileset.png</Texture>
+  <Texture id="1">Resources/player_sprite.png</Texture>
+  <Texture id="2">Resources/header_pause.png</Texture>
+  <Texture id="3">Resources/buttons_pause.png</Texture>
+  <Texture id="4">Resources/close.png</Texture>
+  <Texture id="5">Resources/ghost.png</Texture>
+
+  <Texture id="9">Resources/font.png</Texture>
+ </Resources>
+
+ <Sprite id="0" mid="0" sid="0" tid="1"></Sprite>
+ <Sprite id="1" mid="0" sid="0" tid="2"></Sprite>
+ <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
+ <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
+ <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+
+ <Font name="green" mid="0" sid="0" tid="9">Resources/font.font</Font>
+ 
+ <GameObject name="Player" type="0">
+  <pos_x>60</pos_x>
+  <pos_y>160</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>0</id_sprite>
+  <id_close>3</id_close>
+  <speed_x>10</speed_x>
+  <accel_y>1</accel_y>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>1344</pos_x>
+  <pos_y>320</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>64</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+ <GameObject name="Pause" type="2">
+  <id_header>1</id_header>
+  <id_button>2</id_button>
+ </GameObject>
+ 
+ <TileMap mid="0" sid="0">Resources/level1_3.tmx</TileMap>
+ 
+ <Camera name="MainCamera" type="2">
+  <pos_x>0</pos_x>
+  <pos_y>0</pos_y>
+  <pos_z>0</pos_z>
+ </Camera>
+
+</GameScene>
