@@ -11,7 +11,9 @@
 #include "managerfont.h"
 #include "tilemap.h"
 #include "managergameobject.h"
+#include "managergamescene.h"
 #include "managercamera.h"
+
 
 class Resources
 {
@@ -27,6 +29,7 @@ public:
     static ManagerFont* FONT();
     static TileMap* TILEMAP();
     static ManagerGameObject* GAMEOBJECT();
+    static ManagerGameScene* GAMESCENE();
     static ManagerCamera* CAMERA();
 
     static void DestroyResources();

@@ -11,14 +11,15 @@ MainForm::MainForm(QWindow *parent) :
 {
     setSurfaceType(QWindow::OpenGLSurface);
 
-    main_menu = new GameScene();
-    level = new GameScene();
+
+    GameScene* main_menu = new GameScene();
+    GameScene* level = new GameScene();
+    Resources::GAMESCENE()->Add("MainMenu", main_menu);
+    Resources::GAMESCENE()->Add("Level", level);
 }
 
 MainForm::~MainForm()
 {
-    delete main_menu;
-    delete level;
 
     delete m_device;
 }
@@ -40,7 +41,7 @@ void MainForm::initialize()
 
     MainForm::CreateObject = new CreatorObject();
     ///*Загрузка главного меню
-    if (!main_menu->Load("Resources/main_menu.xml", MainForm::CreateObject))
+    if (!Resources::GAMESCENE()->GetValue("MainMenu")->Load("Resources/main_menu.xml", MainForm::CreateObject))
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
 
@@ -73,7 +74,7 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Load_Main_Menu";
 
-            level->Clear();
+            Resources::GAMESCENE()->GetValue("Level")->Clear();
             Resources::MESH()->Clear();
             Resources::SHADER()->Clear();
             Resources::SPRITE()->Clear();
@@ -82,7 +83,7 @@ void MainForm::timerEvent(QTimerEvent *t)
             Resources::CAMERA()->Clear();
             Resources::TILEMAP()->Clear();
 
-            if (!main_menu->Load("Resources/main_menu.xml", MainForm::CreateObject))
+            if (!Resources::GAMESCENE()->GetValue("MainMenu")->Load("Resources/main_menu.xml", MainForm::CreateObject))
                 qDebug()<<"Not Load MainMenu";
 
             Resources::CAMERA()->SetCurrentCamera("MainMenuCamera");
@@ -92,22 +93,22 @@ void MainForm::timerEvent(QTimerEvent *t)
         case Main_Menu:
         {
             qDebug()<<"CurrentStatusGame Main_Menu";
-            main_menu->Update();
-            main_menu->Draw();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Update();
+           Resources::GAMESCENE()->GetValue("MainMenu")->Draw();
             break;
         }
         case Level_Menu:
         {
             qDebug()<<"CurrentStatusGame Level_Menu1";
-            main_menu->Update();
-            main_menu->Draw();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Update();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Draw();
             break;
         }
         case Setting_Menu:
         {
             qDebug()<<"CurrentStatusGame Setting_Menu";
-            main_menu->Update();
-            main_menu->Draw();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Update();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Draw();
             break;
         }
         case Update_Setting:
@@ -145,16 +146,16 @@ void MainForm::timerEvent(QTimerEvent *t)
         case Author_Menu:
         {
             qDebug()<<"CurrentStatusGame Author_Menu";
-            main_menu->Update();
-            main_menu->Draw();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Update();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Draw();
             break;
         }
         case Load_Level:
         {
             qDebug()<<"CurrentStatusGame Load_Level";
 
-            main_menu->Clear();
-            level->Clear();
+            Resources::GAMESCENE()->GetValue("MainMenu")->Clear();
+            Resources::GAMESCENE()->GetValue("Level")->Clear();
             Resources::MESH()->Clear();
             Resources::SHADER()->Clear();
             Resources::SPRITE()->Clear();
@@ -163,7 +164,7 @@ void MainForm::timerEvent(QTimerEvent *t)
             Resources::CAMERA()->Clear();
             Resources::TILEMAP()->Clear();
 
-            if (!level->Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
+            if (!Resources::GAMESCENE()->GetValue("Level")->Load("Resources/level"+QString::number(PlayProfile::current_level)+".xml", MainForm::CreateObject))
                 qDebug()<<"Not Load Level";
             Resources::CAMERA()->SetCurrentCamera("MainCamera");
             CurrentStatusGame = Play;
@@ -174,16 +175,16 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Play";
 
-            level->Update(/*Fps::getInstance()->GetFps()/1000.0*/);
+            Resources::GAMESCENE()->GetValue("Level")->Update(/*Fps::getInstance()->GetFps()/1000.0*/);
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             break;
         }
         case Dead:
         {
             qDebug()<<"CurrentStatusGame Dead";
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
             Resources::GAMEOBJECT()->GetValue("Pause")->Update();
             Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
@@ -194,7 +195,7 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Finish";
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
             Resources::GAMEOBJECT()->GetValue("Pause")->Update();
             Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
@@ -206,7 +207,7 @@ void MainForm::timerEvent(QTimerEvent *t)
             qDebug()<<"CurrentStatusGame Pause";
 
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
-            level->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
             Resources::GAMEOBJECT()->GetValue("Pause")->Update();
             Resources::GAMEOBJECT()->GetValue("Pause")->Draw();

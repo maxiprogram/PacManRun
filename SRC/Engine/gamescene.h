@@ -6,13 +6,21 @@
 #include <QXmlStreamReader>
 #include <QDebug>
 
-#include "resources.h"
+#include "managergameobject.h"
+#include "managermesh.h"
+#include "managershader.h"
+#include "managertexture.h"
+#include "managersprite.h"
+#include "managerfont.h"
+#include "tilemap.h"
 #include "creatorgameobject.h"
 
 class GameScene
 {
 public:
     GameScene();
+    void AddGameObject(GameObject* object);
+    void DeleteGameObject(GameObject* object, bool scene=false);
     bool Load(QString filename, CreatorGameObject* creator);
     void Update(float dt=1);
     void Draw();

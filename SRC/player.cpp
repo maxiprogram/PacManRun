@@ -47,6 +47,16 @@ void Player::Update(float dt)
     this->SetPos(new_pos);
     accel_x = 0;
 
+    //УБРАТЬ
+    if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_P))
+    {
+        if (speed_x)
+            speed_x = 0;
+        else
+            speed_x = 10;
+        Resources::KEYBOARD()->SetKey(Qt::Key_P, false);
+    }
+
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Escape))
     {
         qDebug()<<"CurrentStatusGame Pause";
@@ -228,8 +238,9 @@ void Player::Update(float dt)
             if (count_bonus>0)
             {
                 count_bonus--;
-                int n = ManagerGameObject::getInstance()->GetHashTab()->remove("Ghost", list.at(i));
-                qDebug()<<"Remove Ghost n="<<n;
+                Resources::GAMESCENE()->GetValue("Level")->DeleteGameObject(list.at(i));
+                //int n = ManagerGameObject::getInstance()->GetHashTab()->remove("Ghost", list.at(i));
+                qDebug()<<"Remove Ghost";
             }else
             {
                 speed_x = 0;
@@ -275,12 +286,13 @@ void Player::Update(float dt)
         if (frame>3)
             frame = 0;
         //Анимация*/
+
+        if (count_bonus>0)
+            y_sprite = 0;
+        else
+            y_sprite = 1;
     }
 
-    if (count_bonus>0)
-        y_sprite = 0;
-    else
-        y_sprite = 1;
 }
 
 void Player::Draw()
@@ -289,7 +301,7 @@ void Player::Draw()
     Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
-    Resources::FONT()->GetValue("green")->Draw("Level "+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
+    Resources::FONT()->GetValue("green")->Draw("Level-"+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
     Resources::FONT()->GetValue("green")->Draw("CountBonus:"+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,

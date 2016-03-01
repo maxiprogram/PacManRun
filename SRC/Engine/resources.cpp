@@ -54,6 +54,11 @@ ManagerGameObject* Resources::GAMEOBJECT()
     return ManagerGameObject::getInstance();
 }
 
+ManagerGameScene* Resources::GAMESCENE()
+{
+    return ManagerGameScene::getInstance();
+}
+
 ManagerCamera* Resources::CAMERA()
 {
     return ManagerCamera::getInstance();
@@ -64,6 +69,7 @@ void Resources::DestroyResources()
     TileMap::getInstance()->Destroy();
 
     ManagerCamera::getInstance()->Destroy();
+    ManagerGameScene::getInstance()->Destroy();
     ManagerGameObject::getInstance()->Destroy();
 
     ManagerFont::getInstance()->Destroy();

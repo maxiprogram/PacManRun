@@ -4,6 +4,42 @@ GameScene::GameScene()
 {
 }
 
+void GameScene::AddGameObject(GameObject* object)
+{
+    QMultiHash<QString, GameObject*>::iterator it = ManagerGameObject::getInstance()->Add(object->GetName(), object);
+    list_it.append(it);
+}
+
+void GameScene::DeleteGameObject(GameObject* object, bool scene)
+{
+    if (scene==true)
+    {
+        for (int i=0; i<list_it.size(); i++)
+        {
+            QMultiHash<QString, GameObject*>::iterator it = list_it.at(i);
+            if (it.value()==object)
+            {
+                list_it.removeAt(i);
+                break;
+            }
+        }
+    }else
+    {
+        QMultiHash<QString, GameObject*>* hash_tab = ManagerGameObject::getInstance()->GetHashTab();
+        for (int i=0; i<list_it.size(); i++)
+        {
+            QMultiHash<QString, GameObject*>::iterator it = list_it.at(i);
+            if (it.value()==object)
+            {
+                hash_tab->remove(it.key(), it.value());
+                delete object;
+                list_it.removeAt(i);
+                break;
+            }
+        }
+    }
+}
+
 bool GameScene::Load(QString filename, CreatorGameObject* creator)
 {
     Clear();

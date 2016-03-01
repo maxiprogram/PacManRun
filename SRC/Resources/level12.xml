@@ -42,6 +42,105 @@
   <speed_y>0</speed_y>
  </GameObject>
 
+ <GameObject name="Ghost" type="4">
+  <pos_x>1856</pos_x>
+  <pos_y>320</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>64</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>2944</pos_x>
+  <pos_y>512</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>200</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>3552</pos_x>
+  <pos_y>512</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>200</radius>
+  <speed_x>1</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+<GameObject name="Ghost" type="4">
+  <pos_x>4608</pos_x>
+  <pos_y>512</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>200</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+<GameObject name="Ghost" type="4">
+  <pos_x>5216</pos_x>
+  <pos_y>512</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>84</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+<GameObject name="Ghost" type="4">
+  <pos_x>3744</pos_x>
+  <pos_y>160</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>100</radius>
+  <speed_x>3</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+<GameObject name="Ghost" type="4">
+  <pos_x>4128</pos_x>
+  <pos_y>160</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>100</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+<GameObject name="Ghost" type="4">
+  <pos_x>4480</pos_x>
+  <pos_y>224</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>100</radius>
+  <speed_x>0</speed_x>
+  <speed_y>3</speed_y>
+ </GameObject>
+
+<GameObject name="Ghost" type="4">
+  <pos_x>7360</pos_x>
+  <pos_y>384</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>100</radius>
+  <speed_x>3</speed_x>
+  <speed_y>2</speed_y>
+ </GameObject>
+
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>
   <id_button>2</id_button>

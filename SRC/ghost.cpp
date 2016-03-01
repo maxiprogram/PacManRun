@@ -6,7 +6,7 @@ Ghost::Ghost()
 
 Ghost::~Ghost()
 {
-    qDebug()<<"Destroy ~Ghost1";
+    qDebug()<<"Destroy ~Ghost";
 }
 
 void Ghost::Init(QHash<QString, QString> property)

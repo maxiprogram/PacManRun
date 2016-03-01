@@ -1,10 +1,11 @@
 #ifndef PAUSEGAME_H
 #define PAUSEGAME_H
 
-#include "Engine/gamescene.h"
-#include "Engine/managerkeyboard.h"
-#include "Engine/fps.h"
-#include "Engine/font.h"
+//#include "Engine/gamescene.h"
+//#include "Engine/managerkeyboard.h"
+//#include "Engine/fps.h"
+//#include "Engine/font.h"
+#include "Engine/resources.h"
 
 #include "playprofile.h"
 #include "statusgame.h"

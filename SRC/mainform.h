@@ -54,8 +54,6 @@ private:
     QOpenGLContext *m_context;
     QOpenGLPaintDevice *m_device;
 
-    GameScene* level;
-    GameScene* main_menu;
     static CreatorObject* CreateObject;
 
     QTime time;
