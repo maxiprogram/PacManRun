@@ -301,7 +301,7 @@ void Player::Draw()
     Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
-    Resources::FONT()->GetValue("green")->Draw("Level-"+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
+    Resources::FONT()->GetValue("orange")->Draw("Level-"+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
     Resources::FONT()->GetValue("green")->Draw("CountBonus:"+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,

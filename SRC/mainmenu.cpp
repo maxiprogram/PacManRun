@@ -297,7 +297,6 @@ void MainMenu::Update(float dt)
 
 void MainMenu::Draw()
 {
-    Resources::FONT()->GetValue("green")->Draw("TestFont", 100, 100);// УБРАТЬ ЭТО ТЕСТИРОВАНИЕ FONT
 
     ///*Если сейчас в главном меню
     if (CurrentStatusGame==Main_Menu)
@@ -318,7 +317,7 @@ void MainMenu::Draw()
         SetScal(QVector3D(48, 48, 0));
         ///*Вывод Player
         SetPos(QVector3D(pos_x_player, Setting::GetViewPort().height()-128, 0));
-        Resources::SPRITE()->GetValue(id_player)->Bind(GetScalX(), GetScalY(), qFloor(frame_player));
+        Resources::SPRITE()->GetValue(id_player)->Bind(GetScalX(), GetScalY(), qFloor(frame_player), 1);
         Resources::SPRITE()->GetValue(id_player)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_player)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
                                                                                Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *

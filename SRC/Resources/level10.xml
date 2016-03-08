@@ -9,7 +9,8 @@
   <Texture id="4">Resources/close.png</Texture>
   <Texture id="5">Resources/ghost.png</Texture>
 
-  <Texture id="9">Resources/font.png</Texture>
+  <Texture id="9">Resources/font_green.png</Texture>
+  <Texture id="10">Resources/font_orange.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="1"></Sprite>
@@ -18,7 +19,8 @@
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
  <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
 
- <Font name="green" mid="0" sid="0" tid="9">Resources/font.font</Font>
+ <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
+ <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
  
  <GameObject name="Player" type="0">
   <pos_x>60</pos_x>

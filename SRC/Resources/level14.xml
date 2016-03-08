@@ -24,7 +24,7 @@
  
  <GameObject name="Player" type="0">
   <pos_x>60</pos_x>
-  <pos_y>100</pos_y>
+  <pos_y>160</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
   <id_sprite>0</id_sprite>
@@ -34,56 +34,77 @@
  </GameObject>
 
  <GameObject name="Ghost" type="4">
-  <pos_x>800</pos_x>
+  <pos_x>3904</pos_x>
   <pos_y>192</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
   <id_sprite>4</id_sprite>
-  <radius>0</radius>
-  <speed_x>0</speed_x>
+  <radius>280</radius>
+  <speed_x>10</speed_x>
   <speed_y>0</speed_y>
  </GameObject>
 
  <GameObject name="Ghost" type="4">
-  <pos_x>2176</pos_x>
+  <pos_x>4992</pos_x>
   <pos_y>192</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
   <id_sprite>4</id_sprite>
-  <radius>64</radius>
-  <speed_x>1</speed_x>
+  <radius>280</radius>
+  <speed_x>9</speed_x>
   <speed_y>0</speed_y>
  </GameObject>
 
  <GameObject name="Ghost" type="4">
-  <pos_x>4000</pos_x>
-  <pos_y>288</pos_y>
+  <pos_x>5504</pos_x>
+  <pos_y>224</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
   <id_sprite>4</id_sprite>
   <radius>64</radius>
-  <speed_x>0</speed_x>
-  <speed_y>1</speed_y>
+  <speed_x>3</speed_x>
+  <speed_y>4</speed_y>
  </GameObject>
 
  <GameObject name="Ghost" type="4">
-  <pos_x>6624</pos_x>
-  <pos_y>256</pos_y>
+  <pos_x>5856</pos_x>
+  <pos_y>192</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
   <id_sprite>4</id_sprite>
-  <radius>64</radius>
-  <speed_x>2</speed_x>
-  <speed_y>1</speed_y>
+  <radius>260</radius>
+  <speed_x>9</speed_x>
+  <speed_y>0</speed_y>
  </GameObject>
 
+ <GameObject name="Ghost" type="4">
+  <pos_x>4288</pos_x>
+  <pos_y>544</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>260</radius>
+  <speed_x>9</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>5248</pos_x>
+  <pos_y>512</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>260</radius>
+  <speed_x>8</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
 
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>
   <id_button>2</id_button>
  </GameObject>
  
- <TileMap mid="0" sid="0">Resources/level1_0.tmx</TileMap>
+ <TileMap mid="0" sid="0">Resources/level1_5.tmx</TileMap>
  
  <Camera name="MainCamera" type="2">
   <pos_x>0</pos_x>
