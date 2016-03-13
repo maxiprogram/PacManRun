@@ -118,6 +118,7 @@ void MainMenu::Update(float dt)
             {
                 if (m_y>Setting::GetViewPort().height()/2-100-72/2 && m_y<Setting::GetViewPort().height()/2-100+72/2)
                 {
+                    pos_y_author = -200;
                     CurrentStatusGame = Author_Menu;
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
@@ -272,7 +273,7 @@ void MainMenu::Update(float dt)
     ///*Если сейчас в меню Author
     if (CurrentStatusGame==Author_Menu)
     {
-        if (pos_y_author<(Setting::GetViewPort().height()/2))
+        if (pos_y_author<(Setting::GetViewPort().height()-120))
             pos_y_author += 5;
 
         if (Resources::KEYBOARD()->GetKey(Qt::Key_Escape))
@@ -601,10 +602,20 @@ void MainMenu::Draw()
         //Вывод стрелки назад в меню Author*/
 
         ///*Вывод текста Author
-        Resources::FONT()->GetValue("green")->Draw("Author", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author);
-        Resources::FONT()->GetValue("green")->Draw("This", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author-30);
-        Resources::FONT()->GetValue("green")->Draw("Game", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author-60);
-        Resources::FONT()->GetValue("green")->Draw("MaxiProgram", (Setting::GetViewPort().width()/2)-(Setting::GetViewPort().width()/4), pos_y_author-90);
+        Resources::FONT()->GetValue("orange")->Draw("Developer this game:", (Setting::GetViewPort().width()/2)-(295/2), pos_y_author);
+        Resources::FONT()->GetValue("green")->Draw("Tihonov Maxim", (Setting::GetViewPort().width()/2)-(210/2), pos_y_author-30);
+
+        Resources::FONT()->GetValue("orange")->Draw("My site:", (Setting::GetViewPort().width()/2)-(116/2), pos_y_author-90);
+        Resources::FONT()->GetValue("green")->Draw("http://maxiprogram.net", (Setting::GetViewPort().width()/2)-(324/2), pos_y_author-120);
+
+        Resources::FONT()->GetValue("orange")->Draw("My e-mail:", (Setting::GetViewPort().width()/2)-(140/2), pos_y_author-190);
+        Resources::FONT()->GetValue("green")->Draw("maxiprogram@gmail.com", (Setting::GetViewPort().width()/2)-(356/2), pos_y_author-220);
+
+        Resources::FONT()->GetValue("orange")->Draw("Thank you very much:", (Setting::GetViewPort().width()/2)-(310/2), pos_y_author-290);
+        Resources::FONT()->GetValue("green")->Draw("bla-bla", (Setting::GetViewPort().width()/2), pos_y_author-320);
+
+        Resources::FONT()->GetValue("orange")->Draw("Thank you:", (Setting::GetViewPort().width()/2)-(154/2), pos_y_author-390);
+        Resources::FONT()->GetValue("green")->Draw("bla-bla", (Setting::GetViewPort().width()/2), pos_y_author-420);
         //Вывод текста Author*/
     }
     //Если сейчас в меню Author*/

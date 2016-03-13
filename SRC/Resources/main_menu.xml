@@ -12,6 +12,7 @@
   <Texture id="7">Resources/item_lock.png</Texture>
   <Texture id="8">Resources/player_sprite.png</Texture>
   <Texture id="9">Resources/font_green.png</Texture>
+  <Texture id="14">Resources/font_orange.png</Texture>
   <Texture id="10">Resources/setting_menu.png</Texture>
   <Texture id="11">Resources/button_apply.png</Texture>
   <Texture id="12">Resources/header_menu.png</Texture>
@@ -33,6 +34,7 @@
  <Sprite id="12" mid="0" sid="0" tid="13"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
+ <Font name="orange" mid="0" sid="0" tid="14">Resources/font_orange.font</Font>
 
  <GameObject name="MainMenu" type="1">
   <id_button>0</id_button>
