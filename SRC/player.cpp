@@ -226,6 +226,15 @@ void Player::Update(float dt)
                 count_bonus++;
             }
         }
+        //Если разрушающая земля
+        if (tiles.at(i).id==20)
+        {
+            if (TileMap::getInstance()->CollisionX("Object", new_pos, GetBoundBox(), direction)==true ||
+                    TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
+            {
+                TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
+            }
+        }
     }
     ///*Взаимодействие с Ghost
     QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues("Ghost");
@@ -304,8 +313,33 @@ void Player::Draw()
     Resources::FONT()->GetValue("orange")->Draw("Level-"+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
 
-    Resources::FONT()->GetValue("green")->Draw("CountBonus:"+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
-                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 40);
+    ///*  :) балуемся с динамикой sprite :)
+    if (count_bonus>0)
+    {
+        int tmp_id_tex = ManagerSprite::getInstance()->GetValue(id_sprite)->GetTextureKey();
+        //qDebug()<<"id_tmp"<<tmp_id_tex;
+        ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(0);
+
+        Transformer pos;
+        pos.SetScal(QVector3D(32, 32, 1));
+        pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
+                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 0) );
+
+        ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 1, 2);
+        ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                        Setting::GetProjection() *
+                                                                                        ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                        pos.GetMatrix());
+        glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_sprite)->GetMesh()->GetCountVertex());
+        ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
+
+
+        ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(tmp_id_tex);
+
+        Resources::FONT()->GetValue("green")->Draw("-"+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
+                       Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50);
+    }
+    //  :) балуемся с динамикой sprite :) */
 
     //Вывод текста*/
 
