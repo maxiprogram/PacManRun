@@ -32,6 +32,8 @@ void Player::Init(QHash<QString, QString> property)
     direction.setY(0);
     Status = Down;
     count_bonus = 0;
+    count_bonus_shoot = 0;
+    rotation_shoot = 0;
     y_sprite = 1;
 
     frame = 0;
@@ -80,6 +82,13 @@ void Player::Update(float dt)
             }
         }
         //Если нажата на Close*/
+
+        ///*Выстрел пули
+        if (count_bonus_shoot>0)
+        {
+
+        }
+        //Выстрел пули*/
     }
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
@@ -235,6 +244,16 @@ void Player::Update(float dt)
                 TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
             }
         }
+        //Если оружие
+        if (tiles.at(i).id==15)
+        {
+            if (TileMap::getInstance()->CollisionX("Object", new_pos, GetBoundBox(), direction)==true ||
+                    TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
+            {
+                TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
+                count_bonus_shoot++;
+            }
+        }
     }
     ///*Взаимодействие с Ghost
     QList<GameObject*> list = ManagerGameObject::getInstance()->GetValues("Ghost");
@@ -269,6 +288,30 @@ void Player::Update(float dt)
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
     //Задание местоположения камеры*/
+
+    ///*Определение угла вращения Shoot
+    if (count_bonus_shoot>0)
+    {
+        QVector3D center;
+        center.setX(Setting::GetViewPort().width()/2);
+        center.setY(Setting::GetViewPort().height()/2);
+        //center.normalize();
+
+        QVector3D mouse_pos;
+        mouse_pos.setX(m_x); mouse_pos.setY(m_y);
+        //mouse_pos.normalize();
+
+        QVector3D res;
+        res = mouse_pos - center;
+        res.normalize();
+
+        float dot = QVector3D::dotProduct(QVector3D(1, 0, 0), res);
+        if (res.x()>0 && res.y()>0)
+            rotation_shoot = acos(dot);
+        if(res.x()>0 && res.y()<0)
+            rotation_shoot = -acos(dot);
+    }
+    //Определение угла вращения Shoot*/
 
     if (GetPosY()<=0)
     {
@@ -339,6 +382,33 @@ void Player::Draw()
         Resources::FONT()->GetValue("green")->Draw(" "+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
                        Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50);
     }
+    //Отображение bonus_shoot
+    if (count_bonus_shoot>0)
+    {
+        int tmp_id_tex = ManagerSprite::getInstance()->GetValue(id_sprite)->GetTextureKey();
+        //qDebug()<<"id_tmp"<<tmp_id_tex;
+        ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(0);
+
+        Transformer pos;
+        pos.SetScal(QVector3D(32, 32, 1));
+        pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
+                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 0) );
+
+        ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 2, 2);
+        ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                        Setting::GetProjection() *
+                                                                                        ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                        pos.GetMatrix());
+        glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_sprite)->GetMesh()->GetCountVertex());
+        ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
+
+
+        ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(tmp_id_tex);
+
+        Resources::FONT()->GetValue("green")->Draw(" "+QString::number(count_bonus_shoot), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
+                       Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50);
+
+    }
     //  :) балуемся с динамикой sprite :) */
 
     //Вывод текста*/
@@ -352,6 +422,30 @@ void Player::Draw()
     glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_sprite)->GetMesh()->GetCountVertex());
     ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
     //Вывод Player*/
+
+    ///*Вывод Shoot
+    if (count_bonus_shoot>0)
+    {
+        Transformer tr;
+        tr.SetScal(QVector3D(48, 24, 1));
+        QVector3D tmp_pos = this->GetPos();
+        tmp_pos.setX(tmp_pos.x()+24);
+        tmp_pos.setY(tmp_pos.y()+24);
+        //tmp_pos.setZ(1);
+        tr.SetRotZ(Geometry::RadianToDegree(rotation_shoot));
+        tr.SetPivot(QVector3D(0.2, 0.2, 0));
+        tr.SetPos(tmp_pos);
+        ///*Вывод Shoot
+        ManagerSprite::getInstance()->GetValue(5)->Bind(48, 24);
+        ManagerSprite::getInstance()->GetValue(5)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(5)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                        Setting::GetProjection() *
+                                                                                        ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                        tr.GetMatrix());
+        glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(5)->GetMesh()->GetCountVertex());
+        ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
+        //Вывод Shoot*/
+    }
+    //Вывод Shoot*/
 
     ///*Вывод Close
     Transformer tr;

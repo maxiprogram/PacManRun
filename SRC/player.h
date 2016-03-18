@@ -28,7 +28,9 @@ private:
     float accel_x, accel_y;
     enum _Status {OnGround, Jump, Down} Status;
     int count_bonus;
+    int count_bonus_shoot;
     int y_sprite;
+    float rotation_shoot;
 };
 
 #endif // PLAYER_H
