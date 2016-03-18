@@ -336,7 +336,7 @@ void Player::Draw()
 
         ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(tmp_id_tex);
 
-        Resources::FONT()->GetValue("green")->Draw("-"+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
+        Resources::FONT()->GetValue("green")->Draw(" "+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
                        Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50);
     }
     //  :) балуемся с динамикой sprite :) */
