@@ -49,7 +49,8 @@ SOURCES += \
     portal.cpp \
     Engine/managerfont.cpp \
     ghost.cpp \
-    Engine/managergamescene.cpp
+    Engine/managergamescene.cpp \
+    bullet.cpp
 
 HEADERS  += \
     mainform.h \
@@ -87,7 +88,8 @@ HEADERS  += \
     portal.h \
     Engine/managerfont.h \
     ghost.h \
-    Engine/managergamescene.h
+    Engine/managergamescene.h \
+    bullet.h
 
 FORMS    +=
 

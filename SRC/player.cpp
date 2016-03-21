@@ -82,13 +82,6 @@ void Player::Update(float dt)
             }
         }
         //Если нажата на Close*/
-
-        ///*Выстрел пули
-        if (count_bonus_shoot>0)
-        {
-
-        }
-        //Выстрел пули*/
     }
 
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
@@ -310,6 +303,27 @@ void Player::Update(float dt)
             rotation_shoot = acos(dot);
         if(res.x()>0 && res.y()<0)
             rotation_shoot = -acos(dot);
+
+        if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
+        {
+            ///*Выстрел пули
+            QHash<QString, QString> prop;
+            prop.insert("x", QString::number(res.x()));
+            prop.insert("y", QString::number(res.y()));
+            if ((res.x()>0 && res.y()>0) || (res.x()>0 && res.y()<0))
+            {
+                GameObject* bullet = new Bullet;
+                bullet->SetPos(this->GetPos());
+                bullet->SetRotZ(Geometry::RadianToDegree(rotation_shoot));
+                bullet->SetScal(QVector3D(32, 16, 1));
+                bullet->Init(prop);
+                Resources::GAMESCENE()->GetValue("Level")->AddGameObject(bullet);
+                count_bonus_shoot--;
+            }
+            //Выстрел пули*/
+            Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+        }
+
     }
     //Определение угла вращения Shoot*/
 

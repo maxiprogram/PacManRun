@@ -9,6 +9,7 @@
 #include "playprofile.h"
 #include "statusgame.h"
 #include "portal.h"
+#include "bullet.h"
 
 class Player:public GameObject
 {
