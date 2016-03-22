@@ -20,14 +20,16 @@ public:
     void Update(float dt=1);
     void Draw();
     QRectF GetBoundBox();
+    void SetJolt(bool flag);
 private:
+    enum _Status {OnGround, Jump, Down} Status;
+    bool flag_jolt;
     int id_sprite;
     int id_close;
     float frame;
     QVector2D direction;
     float speed_x, speed_y;
     float accel_x, accel_y;
-    enum _Status {OnGround, Jump, Down} Status;
     int count_bonus;
     int count_bonus_shoot;
     int y_sprite;

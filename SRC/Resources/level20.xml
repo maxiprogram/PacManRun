@@ -10,6 +10,8 @@
   <Texture id="5">Resources/ghost.png</Texture>
   <Texture id="6">Resources/shoot.png</Texture>
   <Texture id="7">Resources/bullet.png</Texture>
+  <Texture id="8">Resources/tileset2.png</Texture>
+  <Texture id="11">Resources/fire.png</Texture>
 
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
@@ -22,6 +24,7 @@
  <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
  <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
  <Sprite id="6" mid="0" sid="0" tid="7"></Sprite>
+ <Sprite id="7" mid="0" sid="0" tid="11"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
@@ -37,6 +40,52 @@
   <accel_y>1</accel_y>
  </GameObject>
 
+ <GameObject name="Portal" type="3">
+  <pos_i_start>193</pos_i_start>
+  <pos_j_start>10</pos_j_start>
+  <pos_i_finish>212</pos_i_finish>
+  <pos_j_finish>16</pos_j_finish>
+ </GameObject>
+
+ <GameObject name="Portal" type="3">
+  <pos_i_start>223</pos_i_start>
+  <pos_j_start>4</pos_j_start>
+  <pos_i_finish>267</pos_i_finish>
+  <pos_j_finish>4</pos_j_finish>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>960</pos_x>
+  <pos_y>384</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>210</radius>
+  <speed_x>0</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>6496</pos_x>
+  <pos_y>288</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>210</radius>
+  <speed_x>9</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+ <GameObject name="Ghost" type="4">
+  <pos_x>7936</pos_x>
+  <pos_y>96</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>210</radius>
+  <speed_x>7</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
 
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>

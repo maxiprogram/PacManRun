@@ -15,6 +15,11 @@ QRectF Player::GetBoundBox()
     return rect;
 }
 
+void Player::SetJolt(bool flag)
+{
+    flag_jolt = flag;
+}
+
 void Player::Init(QHash<QString, QString> property)
 {
     this->SetScalX(property.value("scal_x").toFloat());
@@ -35,6 +40,7 @@ void Player::Init(QHash<QString, QString> property)
     count_bonus_shoot = 0;
     rotation_shoot = 0;
     y_sprite = 1;
+    flag_jolt = false;
 
     frame = 0;
 }
@@ -280,6 +286,13 @@ void Player::Update(float dt)
     ///*Задание местоположения камеры
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
+    //Тряска камеры
+    if (flag_jolt)
+    {
+        //qDebug()<<"Jolt"<<qrand()%20-10<<qrand()%20-10;
+        ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2)+qrand()%20-10);
+        ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2)+qrand()%20-10);
+    }
     //Задание местоположения камеры*/
 
     ///*Определение угла вращения Shoot
@@ -303,23 +316,32 @@ void Player::Update(float dt)
             rotation_shoot = acos(dot);
         if(res.x()>0 && res.y()<0)
             rotation_shoot = -acos(dot);
+        if (res.x()<0 && res.y()>0)
+            rotation_shoot = Geometry::DegreeToRadian(180) - acos(dot);
+        if (res.x()<0 && res.y()<0)
+            rotation_shoot = Geometry::DegreeToRadian(180) + acos(dot);
 
         if (Resources::MOUSE()->GetButton()==Qt::LeftButton)
         {
             ///*Выстрел пули
             QHash<QString, QString> prop;
+            if ((res.x()<0 && res.y()>0) || (res.x()<0 && res.y()<0))
+            {
+                res.setX(fabs(res.x()));
+            }
             prop.insert("x", QString::number(res.x()));
             prop.insert("y", QString::number(res.y()));
-            if ((res.x()>0 && res.y()>0) || (res.x()>0 && res.y()<0))
-            {
-                GameObject* bullet = new Bullet;
-                bullet->SetPos(this->GetPos());
-                bullet->SetRotZ(Geometry::RadianToDegree(rotation_shoot));
-                bullet->SetScal(QVector3D(32, 16, 1));
-                bullet->Init(prop);
-                Resources::GAMESCENE()->GetValue("Level")->AddGameObject(bullet);
-                count_bonus_shoot--;
-            }
+            GameObject* bullet = new Bullet;
+            QVector3D pos_bullet = this->GetPos();
+            pos_bullet.setX(pos_bullet.x()+24);
+            pos_bullet.setY(pos_bullet.y()+24);
+            bullet->SetPos(pos_bullet);
+            bullet->SetRotZ(Geometry::RadianToDegree(rotation_shoot));
+            bullet->SetScal(QVector3D(48, 16, 1));
+
+            bullet->Init(prop);
+            Resources::GAMESCENE()->GetValue("Level")->AddGameObject(bullet);
+            count_bonus_shoot--;
             //Выстрел пули*/
             Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
         }

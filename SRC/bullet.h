@@ -3,6 +3,8 @@
 
 #include "Engine/resources.h"
 
+#include "player.h"
+
 class Bullet : public GameObject
 {
 public:
@@ -13,11 +15,13 @@ public:
     void Draw();
 private:
     int id_sprite;
-    float frame;
+    int id_sprite_fire;
+    float frame, frame_y;
     float x, y;
     float speed;
     float distance;
     QVector3D start;
+    bool flag_move;
 };
 
 #endif // BULLET_H
