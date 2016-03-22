@@ -286,6 +286,8 @@ void Player::Update(float dt)
     ///*Задание местоположения камеры
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
+    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetZ(GetPosZ());
+    //ManagerCamera::getInstance()->GetCurrentCamera()->SetPos(QVector3D(0, 0, -1));
     //Тряска камеры
     if (flag_jolt)
     {

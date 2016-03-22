@@ -50,7 +50,8 @@ SOURCES += \
     Engine/managerfont.cpp \
     ghost.cpp \
     Engine/managergamescene.cpp \
-    bullet.cpp
+    bullet.cpp \
+    background.cpp
 
 HEADERS  += \
     mainform.h \
@@ -89,7 +90,8 @@ HEADERS  += \
     Engine/managerfont.h \
     ghost.h \
     Engine/managergamescene.h \
-    bullet.h
+    bullet.h \
+    background.h
 
 FORMS    +=
 

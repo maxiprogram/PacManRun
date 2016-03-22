@@ -34,7 +34,7 @@ void MainForm::initialize()
     ///*Настройки экрана
     QMatrix4x4 proj;
     proj.setToIdentity();
-    proj.ortho(0, this->width(), 0, this->height(), -1, 1);
+    proj.ortho(0, this->width(), 0, this->height(), -10, 10);
     Setting::SetProjection(proj);
     Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
     //Настройки экрана*/
@@ -65,6 +65,13 @@ void MainForm::timerEvent(QTimerEvent *t)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //*/
+
+    glEnable(GL_DEPTH_TEST);
+    //glDepthFunc(GL_LEQUAL);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glEnable(GL_CULL_FACE); //отсечение нивидимых поверхностей
+    //glClearDepth(1.0f);
+
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -122,7 +129,7 @@ void MainForm::timerEvent(QTimerEvent *t)
                 ///*Настройки экрана
                 QMatrix4x4 proj;
                 proj.setToIdentity();
-                proj.ortho(0, this->width(), 0, this->height(), -1, 1);
+                proj.ortho(0, this->width(), 0, this->height(), -10, 10);
                 Setting::SetProjection(proj);
                 Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
                 //Настройки экрана*/
@@ -135,7 +142,7 @@ void MainForm::timerEvent(QTimerEvent *t)
                 ///*Настройки экрана
                 QMatrix4x4 proj;
                 proj.setToIdentity();
-                proj.ortho(0, this->width(), 0, this->height(), -1, 1);
+                proj.ortho(0, this->width(), 0, this->height(), -10, 10);
                 Setting::SetProjection(proj);
                 Setting::SetViewPort(QRectF(0, 0, this->width(), this->height()));
                 //Настройки экрана*/
@@ -183,6 +190,7 @@ void MainForm::timerEvent(QTimerEvent *t)
         case Dead:
         {
             qDebug()<<"CurrentStatusGame Dead";
+
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
@@ -194,6 +202,7 @@ void MainForm::timerEvent(QTimerEvent *t)
         case Finish:
         {
             qDebug()<<"CurrentStatusGame Finish";
+
             Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
             Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
 

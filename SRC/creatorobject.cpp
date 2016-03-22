@@ -34,6 +34,11 @@ GameObject* CreatorObject::CreateGameObject(uint type)
         return new Ghost();
         break;
     }
+    case BackGroundObject:
+    {
+        return new BackGround();
+        break;
+    }
 
     default:{return 0;break;}
     }

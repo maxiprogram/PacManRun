@@ -12,6 +12,7 @@
   <Texture id="7">Resources/bullet.png</Texture>
   <Texture id="8">Resources/tileset2.png</Texture>
   <Texture id="11">Resources/fire.png</Texture>
+  <Texture id="12">Resources/background.png</Texture>
 
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
@@ -25,10 +26,15 @@
  <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
  <Sprite id="6" mid="0" sid="0" tid="7"></Sprite>
  <Sprite id="7" mid="0" sid="0" tid="11"></Sprite>
+ <Sprite id="8" mid="0" sid="0" tid="12"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
  
+ <GameObject name="BackGround" type="5">
+  <id_sprite>8</id_sprite>
+ </GameObject>
+
  <GameObject name="Player" type="0">
   <pos_x>126</pos_x>
   <pos_y>320</pos_y>
