@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QSurfaceFormat surface;
+    surface.setDepthBufferSize(24);
 
     MainForm w;
     w.setFormat(surface);

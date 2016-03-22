@@ -66,11 +66,10 @@ void MainForm::timerEvent(QTimerEvent *t)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //*/
 
+    ///*Буфер глубины(QSurfaceFormat.setDepthBufferSize(24);)
+    //glDepthMask(GL_TRUE);
     glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LEQUAL);
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glEnable(GL_CULL_FACE); //отсечение нивидимых поверхностей
-    //glClearDepth(1.0f);
+    //Буфер глубины(QSurfaceFormat.setDepthBufferSize(24);)*/
 
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -286,8 +286,6 @@ void Player::Update(float dt)
     ///*Задание местоположения камеры
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
     ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
-    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetZ(GetPosZ());
-    //ManagerCamera::getInstance()->GetCurrentCamera()->SetPos(QVector3D(0, 0, -1));
     //Тряска камеры
     if (flag_jolt)
     {
@@ -430,7 +428,7 @@ void Player::Draw()
         Transformer pos;
         pos.SetScal(QVector3D(32, 32, 1));
         pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
-                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 0) );
+                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 0.1) );
 
         ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 2, 2);
         ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),

@@ -157,7 +157,7 @@ void PauseGame::Draw()
     if (CurrentStatusGame==Pause)
     {
         ///*Вывод заголовка Pause
-        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+200, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+200, 1));
         SetScal(QVector3D(256, 50, 0));
         ManagerSprite::getInstance()->GetValue(id_header)->Bind(256, 50, 0, 0);
         ManagerSprite::getInstance()->GetValue(id_header)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_header)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
@@ -170,7 +170,7 @@ void PauseGame::Draw()
 
 
         ///*Вывод кнопки Continue
-        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+80, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+80, 1));
         SetScal(QVector3D(201, 39, 0));
         ManagerSprite::getInstance()->GetValue(id_button)->Bind(201, 39, 0, 2);
         ManagerSprite::getInstance()->GetValue(id_button)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
@@ -182,7 +182,7 @@ void PauseGame::Draw()
         //Вывод кнопки Continue*/
 
         ///*Вывод кнопки Restart
-        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY(), 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY(), 1));
         SetScal(QVector3D(201, 39, 0));
         ManagerSprite::getInstance()->GetValue(id_button)->Bind(201, 39, 0, 1);
         ManagerSprite::getInstance()->GetValue(id_button)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
@@ -194,7 +194,7 @@ void PauseGame::Draw()
         //Вывод кнопки Restart*/
 
         ///*Вывод кнопки Main menu
-        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()-80, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()-80, 1));
         SetScal(QVector3D(201, 39, 0));
         ManagerSprite::getInstance()->GetValue(id_button)->Bind(201, 39, 0, 0);
         ManagerSprite::getInstance()->GetValue(id_button)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_button)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
