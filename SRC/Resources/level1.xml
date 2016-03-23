@@ -7,7 +7,10 @@
   <Texture id="2">Resources/header_pause.png</Texture>
   <Texture id="3">Resources/buttons_pause.png</Texture>
   <Texture id="4">Resources/close.png</Texture>
+  <Texture id="5">Resources/background.png</Texture>
+  <Texture id="6">Resources/ice1.png</Texture>
 
+  <Texture id="8">Resources/tileset2.png</Texture>
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
  </Resources>
@@ -16,10 +19,68 @@
  <Sprite id="1" mid="0" sid="0" tid="2"></Sprite>
  <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
+ <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
  
+ <GameObject name="BackGround" type="5">
+  <id_sprite>4</id_sprite>
+ </GameObject>
+
+ <GameObject name="Decor" type="6">
+  <pos_x>2784</pos_x>
+  <pos_y>266</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>320</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <id_sprite>5</id_sprite>
+ </GameObject>
+
+ <GameObject name="Decor" type="6">
+  <pos_x>4224</pos_x>
+  <pos_y>266</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>192</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <id_sprite>5</id_sprite>
+ </GameObject>
+
+ <GameObject name="Decor" type="6">
+  <pos_x>4768</pos_x>
+  <pos_y>266</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>192</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <id_sprite>5</id_sprite>
+ </GameObject>
+
+ <GameObject name="Decor" type="6">
+  <pos_x>5792</pos_x>
+  <pos_y>426</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <id_sprite>5</id_sprite>
+ </GameObject>
+
  <GameObject name="Player" type="0">
   <pos_x>600</pos_x>
   <pos_y>200</pos_y>
