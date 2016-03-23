@@ -39,6 +39,11 @@ GameObject* CreatorObject::CreateGameObject(uint type)
         return new BackGround();
         break;
     }
+    case DecorObject:
+    {
+        return new Decor();
+        break;
+    }
 
     default:{return 0;break;}
     }

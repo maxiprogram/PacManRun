@@ -33,6 +33,8 @@ public:
     void Destroy();
     void Draw();
     void Draw(QRectF rect);
+    void Draw(QString layer_name);
+    void Draw(QString layer_name, QRectF rect);
     QVector2D GetTileIJ(QVector3D pos);
     QRectF GetTilePos(QVector2D ij);
     bool CollisionX(QString layer_name, QVector3D& pos, QRectF bound, QVector2D dir);

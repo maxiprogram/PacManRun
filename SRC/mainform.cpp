@@ -65,13 +65,15 @@ void MainForm::timerEvent(QTimerEvent *t)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //*/
+    //glEnable(GL_ALPHA_TEST);
 
     ///*Буфер глубины(QSurfaceFormat.setDepthBufferSize(24);)
-    //glDepthMask(GL_TRUE);
     glEnable(GL_DEPTH_TEST);
+    //glDepthFunc(GL_LESS);
+    //glDepthMask(GL_TRUE);
     //Буфер глубины(QSurfaceFormat.setDepthBufferSize(24);)*/
 
-
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     switch(CurrentStatusGame)
@@ -182,16 +184,19 @@ void MainForm::timerEvent(QTimerEvent *t)
             qDebug()<<"CurrentStatusGame Play";
 
             Resources::GAMESCENE()->GetValue("Level")->Update(/*Fps::getInstance()->GetFps()/1000.0*/);
-            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Main", Resources::CAMERA()->GetCurrentCamera()->GetRect());
             Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Object", Resources::CAMERA()->GetCurrentCamera()->GetRect());
+
             break;
         }
         case Dead:
         {
             qDebug()<<"CurrentStatusGame Dead";
 
-            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Main", Resources::CAMERA()->GetCurrentCamera()->GetRect());
             Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Object", Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
             Resources::GAMEOBJECT()->GetValue("Pause")->Update();
             Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
@@ -202,8 +207,9 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Finish";
 
-            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Main", Resources::CAMERA()->GetCurrentCamera()->GetRect());
             Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Object", Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
             Resources::GAMEOBJECT()->GetValue("Pause")->Update();
             Resources::GAMEOBJECT()->GetValue("Pause")->Draw();
@@ -214,8 +220,9 @@ void MainForm::timerEvent(QTimerEvent *t)
         {
             qDebug()<<"CurrentStatusGame Pause";
 
-            Resources::TILEMAP()->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Main", Resources::CAMERA()->GetCurrentCamera()->GetRect());
             Resources::GAMESCENE()->GetValue("Level")->Draw(Resources::CAMERA()->GetCurrentCamera()->GetRect());
+            Resources::TILEMAP()->Draw("Object", Resources::CAMERA()->GetCurrentCamera()->GetRect());
 
             Resources::GAMEOBJECT()->GetValue("Pause")->Update();
             Resources::GAMEOBJECT()->GetValue("Pause")->Draw();

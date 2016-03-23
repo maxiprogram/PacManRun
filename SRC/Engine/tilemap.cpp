@@ -290,6 +290,123 @@ void TileMap::Draw(QRectF rect)
     }
 }
 
+void TileMap::Draw(QString layer_name)
+{
+    Transformer tr;
+    tr.SetScalX(tile_width);
+    tr.SetScalY(tile_height);
+
+    Layer* layer = 0;
+    layer = this->GetLayer(layer_name);
+    if (layer==0)
+        return;
+    for (int i=count_y-1; i>=0; i--)
+    {
+        for (int j=0; j<count_x; j++)
+        {
+            Sprite* sprite = 0;
+            int id = layer->GetValue(i, j);
+            int tmp_summa = 0;
+            for (int i=0; i<list_sprite.size(); i++)
+            {
+                sprite = list_sprite.value(i);
+                int tmp = sprite->GetTexture()->GetWidth()/tile_width*sprite->GetTexture()->GetHeight()/tile_height;
+                if ((tmp_summa+tmp)>=id)
+                    break;
+                else
+                    tmp_summa+=tmp;
+            }
+            if (sprite!=0 && id!=0)
+            {
+                int tmp_x = sprite->GetTexture()->GetWidth()/tile_width;
+                int tmp_y = sprite->GetTexture()->GetHeight()/tile_height;
+                int tmp_id = tmp_x*tmp_y-(id-tmp_summa);
+                id = id-tmp_summa;
+                int frame_y = tmp_id/tmp_x;
+                int frame_x = (tmp_x*tmp_y)-(frame_y*tmp_x)-tmp_id;
+                sprite->Bind(tile_width, tile_height, frame_x-1, frame_y);
+                sprite->GetShader()->setUniformValue(sprite->GetShader()->GetNameMatrixPos().toStdString().c_str(), Setting::GetProjection()*ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix()*tr.GetMatrix());
+                glDrawArrays(GL_TRIANGLES, 0, sprite->GetMesh()->GetCountVertex());
+                sprite->UnBind();
+            }
+            tr.MoveX(tile_width);
+        }
+        tr.SetPosX(0);
+        tr.SetPosY((count_y-i)*tile_height);
+    }
+}
+
+void TileMap::Draw(QString layer_name, QRectF rect)
+{
+    Transformer tr;
+    tr.SetScalX(tile_width);
+    tr.SetScalY(tile_height);
+
+    QVector2D s_ij = this->GetTileIJ(QVector3D(rect.left(), rect.y(), 0));
+    QVector2D f_ij = this->GetTileIJ(QVector3D(rect.right(), rect.bottom(), 0));
+    if (s_ij.x()<0)
+        s_ij.setX(0);
+    if (s_ij.x()>=count_x)
+        s_ij.setX(count_x-1);
+    if (f_ij.x()<0)
+        f_ij.setX(0);
+    if (f_ij.x()>=count_x)
+        f_ij.setX(count_x-1);
+
+    if (s_ij.y()<0)
+        s_ij.setY(0);
+    if (s_ij.y()>count_y)
+        s_ij.setY(count_y-1);
+    if (f_ij.y()<0)
+        f_ij.setY(0);
+    if (f_ij.y()>count_y)
+        f_ij.setY(count_y-1);
+
+    //qDebug()<<"s_ij:"<<s_ij<<"f_ij:"<<f_ij;
+
+    tr.SetPosX(tile_width*s_ij.x());
+    tr.SetPosY(tile_height*f_ij.y());
+
+    Layer* layer = 0;
+    layer = this->GetLayer(layer_name);
+    if (layer==0)
+        return;
+    for (int i=s_ij.y()+1; i>=f_ij.y(); i--)
+    {
+        for (int j=s_ij.x(); j<=f_ij.x(); j++)
+        {
+            Sprite* sprite = 0;
+            int id = layer->GetValue(i, j);
+            int tmp_summa = 0;
+            for (int i=0; i<list_sprite.size(); i++)
+            {
+                sprite = list_sprite.value(i);
+                int tmp = sprite->GetTexture()->GetWidth()/tile_width*sprite->GetTexture()->GetHeight()/tile_height;
+                if ((tmp_summa+tmp)>=id)
+                    break;
+                else
+                    tmp_summa+=tmp;
+            }
+            if (sprite!=0 && id!=0)
+            {
+                int tmp_x = sprite->GetTexture()->GetWidth()/tile_width;
+                int tmp_y = sprite->GetTexture()->GetHeight()/tile_height;
+                int tmp_id = tmp_x*tmp_y-(id-tmp_summa);
+                id = id-tmp_summa;
+                int frame_y = tmp_id/tmp_x;
+                int frame_x = (tmp_x*tmp_y)-(frame_y*tmp_x)-tmp_id;
+                sprite->Bind(tile_width, tile_height, frame_x-1, frame_y);
+                sprite->GetShader()->setUniformValue(sprite->GetShader()->GetNameMatrixPos().toStdString().c_str(), Setting::GetProjection()*ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix()*tr.GetMatrix());
+                glDrawArrays(GL_TRIANGLES, 0, sprite->GetMesh()->GetCountVertex());
+                sprite->UnBind();
+            }
+            tr.MoveX(tile_width);
+        }
+        tr.SetPosX(tile_width*s_ij.x());
+        tr.SetPosY((count_y-i)*tile_height);
+    }
+}
+
 QVector2D TileMap::GetTileIJ(QVector3D pos)
 {
     QVector2D res;

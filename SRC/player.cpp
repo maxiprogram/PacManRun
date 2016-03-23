@@ -43,6 +43,9 @@ void Player::Init(QHash<QString, QString> property)
     y_sprite = 1;
     flag_jolt = false;
 
+    Resources::FONT()->GetValue("green")->SetKerning(1);
+    Resources::FONT()->GetValue("orange")->SetKerning(1);
+
     frame = 0;
 }
 

@@ -51,7 +51,8 @@ SOURCES += \
     ghost.cpp \
     Engine/managergamescene.cpp \
     bullet.cpp \
-    background.cpp
+    background.cpp \
+    decor.cpp
 
 HEADERS  += \
     mainform.h \
@@ -91,7 +92,8 @@ HEADERS  += \
     ghost.h \
     Engine/managergamescene.h \
     bullet.h \
-    background.h
+    background.h \
+    decor.h
 
 FORMS    +=
 
