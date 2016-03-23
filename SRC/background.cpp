@@ -16,8 +16,9 @@ void BackGround::Init(QHash<QString, QString> property)
 
 void BackGround::Update(float dt)
 {
-    this->SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX(), Resources::CAMERA()->GetCurrentCamera()->GetPosY(), -5));
-    this->SetScal(QVector3D(Setting::GetViewPort().width(), Setting::GetViewPort().height(), 1));
+    this->SetPivot(QVector3D(0.03, 0.06, 0));
+    this->SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX(), Resources::CAMERA()->GetCurrentCamera()->GetPosY(), -4));
+    this->SetScal(QVector3D(Setting::GetViewPort().width()+100, Setting::GetViewPort().height()+100, 1));
 }
 
 void BackGround::Draw()

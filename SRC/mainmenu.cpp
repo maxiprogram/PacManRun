@@ -317,7 +317,7 @@ void MainMenu::Draw()
 
         SetScal(QVector3D(48, 48, 0));
         ///*Вывод Player
-        SetPos(QVector3D(pos_x_player, Setting::GetViewPort().height()-128, 0));
+        SetPos(QVector3D(pos_x_player, Setting::GetViewPort().height()-128, 1));
         Resources::SPRITE()->GetValue(id_player)->Bind(GetScalX(), GetScalY(), qFloor(frame_player), 1);
         Resources::SPRITE()->GetValue(id_player)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_player)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -407,7 +407,7 @@ void MainMenu::Draw()
 
         SetScal(QVector3D(418, 124, 0));
         ///*Вывод заголовка Header_menu
-        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-48, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-48, 1));
         Resources::SPRITE()->GetValue(id_header_menu)->Bind(GetScalX(), GetScalY(), 0, 2);
         Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -420,7 +420,7 @@ void MainMenu::Draw()
 
         ///*Вывод стрелки назад к главному меню
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
-        SetPos(QVector3D(60, 40, 0));
+        SetPos(QVector3D(60, 40, 1));
         Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
         Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -435,7 +435,7 @@ void MainMenu::Draw()
         if (current_level_menu!=3 && PlayProfile::last_level>(current_level_menu*9))
         {
             SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_next)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_next)->GetTexture()->GetHeight(), 0));
-            SetPos(QVector3D(Setting::GetViewPort().width()-60, 40, 0));
+            SetPos(QVector3D(Setting::GetViewPort().width()-60, 40, 1));
             Resources::SPRITE()->GetValue(id_item_next)->Bind(GetScalX(), GetScalY());
             Resources::SPRITE()->GetValue(id_item_next)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_next)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                    Setting::GetProjection() *
@@ -477,7 +477,7 @@ void MainMenu::Draw()
 
         for (int i=start_lock; i<9; i++)
         {
-            SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2, 0));
+            SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2, 1));
             Resources::SPRITE()->GetValue(id_item_lock)->Bind(GetScalX(), GetScalY());
             Resources::SPRITE()->GetValue(id_item_lock)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_lock)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                    Setting::GetProjection() *
@@ -508,7 +508,7 @@ void MainMenu::Draw()
 
         SetScal(QVector3D(418, 124, 0));
         ///*Вывод заголовка Header_menu
-        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-62, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2, Setting::GetViewPort().height()-62, 1));
         Resources::SPRITE()->GetValue(id_header_menu)->Bind(GetScalX(), GetScalY(), 0, 1);
         Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_header_menu)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -522,7 +522,7 @@ void MainMenu::Draw()
         SetPivot(QVector3D(0, 0, 0));
         SetScal(QVector3D(72, 78, 0));
         ///*Вывод checkbox_fullscreen и checkbox_sound
-        SetPos(QVector3D(Setting::GetViewPort().width()/2+50, Setting::GetViewPort().height()/2+75, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+50, Setting::GetViewPort().height()/2+75, 1));
         Resources::SPRITE()->GetValue(id_checkbox)->Bind(GetScalX(), GetScalY(), checkbox_fullscreen, 0);
         Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -532,7 +532,7 @@ void MainMenu::Draw()
         glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(id_checkbox)->GetMesh()->GetCountVertex());
         Resources::SPRITE()->GetValue(id_checkbox)->UnBind();
         //--
-        SetPos(QVector3D(Setting::GetViewPort().width()/2+50, Setting::GetViewPort().height()/2-75, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+50, Setting::GetViewPort().height()/2-75, 1));
         Resources::SPRITE()->GetValue(id_checkbox)->Bind(GetScalX(), GetScalY(), checkbox_sound, 0);
         Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_checkbox)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -546,7 +546,7 @@ void MainMenu::Draw()
 
         ///*Вывод стрелки назад в меню настроек
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
-        SetPos(QVector3D(60, 40, 0));
+        SetPos(QVector3D(60, 40, 1));
         Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
         Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -559,7 +559,7 @@ void MainMenu::Draw()
 
         ///*Вывод кнопки Apply в меню настроек
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_button_apply)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_button_apply)->GetTexture()->GetHeight(), 0));
-        SetPos(QVector3D(Setting::GetViewPort().width()-60, 40, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()-60, 40, 1));
         Resources::SPRITE()->GetValue(id_button_apply)->Bind(GetScalX(), GetScalY());
         Resources::SPRITE()->GetValue(id_button_apply)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_button_apply)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *
@@ -590,7 +590,7 @@ void MainMenu::Draw()
 
         ///*Вывод стрелки назад в меню Author
         SetScal(QVector3D(Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetWidth(), Resources::SPRITE()->GetValue(id_item_back)->GetTexture()->GetHeight(), 0));
-        SetPos(QVector3D(60, 40, 0));
+        SetPos(QVector3D(60, 40, 1));
         Resources::SPRITE()->GetValue(id_item_back)->Bind(GetScalX(), GetScalY());
         Resources::SPRITE()->GetValue(id_item_back)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(id_item_back)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                Setting::GetProjection() *

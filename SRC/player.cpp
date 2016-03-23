@@ -26,6 +26,7 @@ void Player::Init(QHash<QString, QString> property)
     this->SetScalY(property.value("scal_y").toFloat());
     this->SetPosX(property.value("pos_x").toFloat());
     this->SetPosY(property.value("pos_y").toFloat());
+    this->SetPosZ(0.1);
     id_sprite = property.value("id_sprite").toInt();
     id_close = property.value("id_close").toInt();
     speed_x = property.value("speed_x").toFloat();
@@ -335,6 +336,7 @@ void Player::Update(float dt)
             QVector3D pos_bullet = this->GetPos();
             pos_bullet.setX(pos_bullet.x()+24);
             pos_bullet.setY(pos_bullet.y()+24);
+            pos_bullet.setZ(0.15);
             bullet->SetPos(pos_bullet);
             bullet->SetRotZ(Geometry::RadianToDegree(rotation_shoot));
             bullet->SetScal(QVector3D(48, 16, 1));
@@ -387,10 +389,10 @@ void Player::Draw()
 {
     ///*Вывод текста
     Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
-                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
+                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10, 1);
 
     Resources::FONT()->GetValue("orange")->Draw("Level-"+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,
-                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10);
+                   Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10, 1);
 
     ///*  :) балуемся с динамикой sprite :)
     if (count_bonus>0)
@@ -402,7 +404,7 @@ void Player::Draw()
         Transformer pos;
         pos.SetScal(QVector3D(32, 32, 1));
         pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
-                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 0) );
+                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 1) );
 
         ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 1, 2);
         ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
@@ -416,7 +418,7 @@ void Player::Draw()
         ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(tmp_id_tex);
 
         Resources::FONT()->GetValue("green")->Draw(" "+QString::number(count_bonus), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
-                       Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50);
+                       Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50, 1);
     }
     //Отображение bonus_shoot
     if (count_bonus_shoot>0)
@@ -428,7 +430,7 @@ void Player::Draw()
         Transformer pos;
         pos.SetScal(QVector3D(32, 32, 1));
         pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
-                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 0.1) );
+                             Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 1) );
 
         ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 2, 2);
         ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
@@ -442,7 +444,7 @@ void Player::Draw()
         ManagerSprite::getInstance()->GetValue(id_sprite)->SetTextureKey(tmp_id_tex);
 
         Resources::FONT()->GetValue("green")->Draw(" "+QString::number(count_bonus_shoot), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 32 + 10,
-                       Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50);
+                       Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50, 1);
 
     }
     //  :) балуемся с динамикой sprite :) */
@@ -467,7 +469,7 @@ void Player::Draw()
         QVector3D tmp_pos = this->GetPos();
         tmp_pos.setX(tmp_pos.x()+24);
         tmp_pos.setY(tmp_pos.y()+24);
-        //tmp_pos.setZ(1);
+        tmp_pos.setZ(0.2);
         tr.SetRotZ(Geometry::RadianToDegree(rotation_shoot));
         tr.SetPivot(QVector3D(0.2, 0.2, 0));
         tr.SetPos(tmp_pos);
@@ -487,7 +489,7 @@ void Player::Draw()
     Transformer tr;
     tr.SetScal(QVector3D(58, 58, 0));
     tr.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+Setting::GetViewPort().width()-58-10,
-                        Resources::CAMERA()->GetCurrentCamera()->GetPosY()+Setting::GetViewPort().height()-58-10, 0));
+                        Resources::CAMERA()->GetCurrentCamera()->GetPosY()+Setting::GetViewPort().height()-58-10, 1));
     ManagerSprite::getInstance()->GetValue(id_close)->Bind();
     ManagerSprite::getInstance()->GetValue(id_close)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_close)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                     Setting::GetProjection() *

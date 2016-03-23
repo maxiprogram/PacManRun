@@ -15,6 +15,7 @@ void Ghost::Init(QHash<QString, QString> property)
     this->SetScalY(property.value("scal_y").toFloat());
     this->SetPosX(property.value("pos_x").toFloat());
     this->SetPosY(property.value("pos_y").toFloat());
+    this->SetPosZ(0.16);
 
     start_pos.setX(this->GetPosX());
     start_pos.setY(this->GetPosY());
