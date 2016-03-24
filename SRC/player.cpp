@@ -288,8 +288,12 @@ void Player::Update(float dt)
     //Взаимодействие с объктами*/
 
     ///*Задание местоположения камеры
-    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
-    ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
+    int width_x = Resources::TILEMAP()->GetTileCountWidth() * 32;
+    if (ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX()<width_x-Setting::GetViewPort().width())
+    {
+        ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
+        ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
+    }
     //Тряска камеры
     if (flag_jolt)
     {
