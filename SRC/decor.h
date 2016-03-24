@@ -16,6 +16,9 @@ private:
     int id_sprite;
     float atlas_x, atlas_y;
     int width, height;
+
+    float frame;
+    int count_frame;
 };
 
 #endif // DECOR_H
