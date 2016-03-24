@@ -50,5 +50,6 @@ void Decor::Draw()
     glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_sprite)->GetMesh()->GetCountVertex());
     ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
     //Вывод Decor*/
+    qDebug()<<this->GetName();
 
 }
