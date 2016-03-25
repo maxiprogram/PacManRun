@@ -14,6 +14,7 @@ void PauseGame::Init(QHash<QString, QString> property)
 {
     id_header = property.value("id_header").toInt();
     id_button = property.value("id_button").toInt();
+    id_blood = property.value("id_blood").toInt();
     SetPivot(QVector3D(0.5, 0.5, 0));
 
     time_pause_dead = 1 * 40;//2 секунд при fps 40
@@ -244,6 +245,27 @@ void PauseGame::Draw()
         glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_button)->GetMesh()->GetCountVertex());
         ManagerSprite::getInstance()->GetValue(id_button)->UnBind();
         //Вывод кнопки Main menu*/
+
+        ///*Вывод Blood
+        //SetPivot(QVector3D(0, 0, 0));
+        SetPos(QVector3D(Setting::GetViewPort().width()/4+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY(), 1.1));
+        SetScal(QVector3D(132, Setting::GetViewPort().height(), 1));
+        ManagerSprite::getInstance()->GetValue(id_blood)->Bind(132, 207);
+        ManagerSprite::getInstance()->GetValue(id_blood)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_blood)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                        Setting::GetProjection() *
+                                                                                        ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                        this->GetMatrix());
+        glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_blood)->GetMesh()->GetCountVertex());
+
+        SetPos(QVector3D(Setting::GetViewPort().width()/2+Setting::GetViewPort().width()/4+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY(), 1.1));
+        SetScal(QVector3D(132, Setting::GetViewPort().height(), 1));
+        ManagerSprite::getInstance()->GetValue(id_blood)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_blood)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                        Setting::GetProjection() *
+                                                                                        ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                        this->GetMatrix());
+        glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_blood)->GetMesh()->GetCountVertex());
+        ManagerSprite::getInstance()->GetValue(id_blood)->UnBind();
+        //Вывод кнопки Blood*/
     }
     //Если стату Dead*/
 

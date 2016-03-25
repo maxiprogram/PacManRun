@@ -21,6 +21,7 @@ public:
 private:
     int id_header;
     int id_button;
+    int id_blood;
     int time_pause_dead;
 };
 
