@@ -11,7 +11,7 @@ public:
     void Init(QHash<QString, QString> property);
     void Update(float dt = 1);
     void Draw();
-
+    void SetCountFrame(int count);
 private:
     int id_sprite;
     float atlas_x, atlas_y;

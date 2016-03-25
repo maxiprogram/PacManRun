@@ -9,6 +9,11 @@ Decor::~Decor()
     qDebug()<<"Destroy ~Decor";
 }
 
+void Decor::SetCountFrame(int count)
+{
+    count_frame = count;
+}
+
 void Decor::Init(QHash<QString, QString> property)
 {
     this->SetPosX(property.value("pos_x").toFloat());
@@ -50,6 +55,6 @@ void Decor::Draw()
     glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_sprite)->GetMesh()->GetCountVertex());
     ManagerSprite::getInstance()->GetValue(id_sprite)->UnBind();
     //Вывод Decor*/
-    qDebug()<<this->GetName();
 
+    //qDebug()<<this->GetName();
 }
