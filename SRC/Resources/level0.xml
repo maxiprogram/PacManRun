@@ -8,6 +8,7 @@
   <Texture id="3">Resources/buttons_pause.png</Texture>
   <Texture id="4">Resources/close.png</Texture>
   <Texture id="5">Resources/background.png</Texture>
+  <Texture id="19">Resources/blood.png</Texture>
 
   <Texture id="8">Resources/tileset2.png</Texture>
   <Texture id="9">Resources/font_green.png</Texture>
@@ -19,6 +20,7 @@
  <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
  <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
@@ -41,6 +43,7 @@
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>
   <id_button>2</id_button>
+  <id_blood>15</id_blood>
  </GameObject>
  
  <TileMap mid="0" sid="0">Resources/level0_0.tmx</TileMap>
