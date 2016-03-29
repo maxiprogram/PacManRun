@@ -51,6 +51,41 @@ void Bullet::Update(float dt)
                 this->SetScal(QVector3D(100, 100, 1));
                 flag_move = false;
                 frame = 0;
+
+                for (int j=0; j<100; j++)
+                {
+                    ///*Particle
+                    QHash<QString, QString> prop;
+                    prop.insert("id_sprite", QString::number(16));
+                    prop.insert("time_life", QString::number(qrand()%15000));
+
+                    float angle = qrand()%360;
+                    float speed = qrand()%15;
+                    Transformer tr;
+                    tr.SetRotZ(angle);
+                    QVector3D vel;
+                    vel.setX(1);
+                    vel.setY(0);
+                    vel = vel * tr.GetMatrix();
+                    vel.normalize();
+                    vel = vel * speed;
+                    prop.insert("vel_x", QString::number(vel.x()));
+                    prop.insert("vel_y", QString::number(vel.y()));
+
+                    GameObject* part = new Particle;
+                    QVector3D pos_particle = list.at(i)->GetPos();
+                    pos_particle.setX(pos_particle.x()+24);
+                    pos_particle.setY(pos_particle.y()+24);
+                    pos_particle.setZ(1.0);
+                    part->SetPos(pos_particle);
+                    part->SetRotZ(Geometry::RadianToDegree(qrand()%360));
+                    part->SetScal(QVector3D(16, 16, 1));
+
+                    part->Init(prop);
+                    Resources::GAMESCENE()->GetValue("Level")->AddGameObject(part);
+                    //Particle*/
+                }
+
                 Resources::GAMESCENE()->GetValue("Level")->DeleteGameObject(list.at(i));
                 qDebug()<<"Remove Ghost";
             }

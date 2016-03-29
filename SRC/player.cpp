@@ -94,6 +94,49 @@ void Player::Update(float dt)
         //Если нажата на Close*/
     }
 
+/////////////////////////////////////////
+    ///*Если нажата мышка Right
+    if (Resources::MOUSE()->GetButton()==Qt::RightButton)
+    {
+        for (int i=0; i<100; i++)
+        {
+            ///*Particle
+            QHash<QString, QString> prop;
+            prop.insert("id_sprite", QString::number(16));
+            prop.insert("time_life", QString::number(qrand()%15000));
+
+            float angle = qrand()%360;
+            float speed = qrand()%10;
+            Transformer tr;
+            tr.SetRotZ(angle);
+            QVector3D vel;
+            vel.setX(1);
+            vel.setY(0);
+            vel = vel * tr.GetMatrix();
+            vel.normalize();
+            vel = vel * speed;
+            prop.insert("vel_x", QString::number(vel.x()));
+            prop.insert("vel_y", QString::number(vel.y()));
+
+            GameObject* part = new Particle;
+            QVector3D pos_particle = this->GetPos();
+            pos_particle.setX(pos_particle.x()+24);
+            pos_particle.setY(pos_particle.y()+24);
+            pos_particle.setZ(1.0);
+            part->SetPos(pos_particle);
+            part->SetRotZ(Geometry::RadianToDegree(qrand()%360));
+            part->SetScal(QVector3D(16, 16, 1));
+
+            part->Init(prop);
+            Resources::GAMESCENE()->GetValue("Level")->AddGameObject(part);
+            //Particle*/
+        }
+
+        Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+    }
+    //Если нажата мышка Right*/
+/////////////////////////////////////////
+
     if (ManagerKeyboard::getInstance()->GetKey(Qt::Key_Space) && Status==OnGround)
     {
         Status = Jump;
@@ -269,8 +312,43 @@ void Player::Update(float dt)
             if (count_bonus>0)
             {
                 count_bonus--;
+
+                for (int j=0; j<100; j++)
+                {
+                    ///*Particle
+                    QHash<QString, QString> prop;
+                    prop.insert("id_sprite", QString::number(16));
+                    prop.insert("time_life", QString::number(qrand()%15000));
+
+                    float angle = qrand()%360;
+                    float speed = qrand()%10;
+                    Transformer tr;
+                    tr.SetRotZ(angle);
+                    QVector3D vel;
+                    vel.setX(1);
+                    vel.setY(0);
+                    vel = vel * tr.GetMatrix();
+                    vel.normalize();
+                    vel = vel * speed;
+                    prop.insert("vel_x", QString::number(vel.x()));
+                    prop.insert("vel_y", QString::number(vel.y()));
+
+                    GameObject* part = new Particle;
+                    qDebug()<<"ERROR PARTICLE";
+                    QVector3D pos_particle = list.at(i)->GetPos();
+                    pos_particle.setX(pos_particle.x()+24);
+                    pos_particle.setY(pos_particle.y()+24);
+                    pos_particle.setZ(1.0);
+                    part->SetPos(pos_particle);
+                    part->SetRotZ(Geometry::RadianToDegree(qrand()%360));
+                    part->SetScal(QVector3D(16, 16, 1));
+
+                    part->Init(prop);
+                    Resources::GAMESCENE()->GetValue("Level")->AddGameObject(part);
+                    //Particle*/
+                }
+
                 Resources::GAMESCENE()->GetValue("Level")->DeleteGameObject(list.at(i));
-                //int n = ManagerGameObject::getInstance()->GetHashTab()->remove("Ghost", list.at(i));
                 qDebug()<<"Remove Ghost";
             }else
             {

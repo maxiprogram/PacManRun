@@ -52,7 +52,8 @@ SOURCES += \
     Engine/managergamescene.cpp \
     bullet.cpp \
     background.cpp \
-    decor.cpp
+    decor.cpp \
+    particle.cpp
 
 HEADERS  += \
     mainform.h \
@@ -93,7 +94,8 @@ HEADERS  += \
     Engine/managergamescene.h \
     bullet.h \
     background.h \
-    decor.h
+    decor.h \
+    particle.h
 
 FORMS    +=
 

@@ -8,6 +8,7 @@
   <Texture id="3">Resources/buttons_pause.png</Texture>
   <Texture id="4">Resources/close.png</Texture>
   <Texture id="5">Resources/ghost.png</Texture>
+  <Texture id="20">Resources/particle_blood.png</Texture>
 
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
@@ -18,6 +19,7 @@
  <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
  <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="16" mid="0" sid="0" tid="20"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>

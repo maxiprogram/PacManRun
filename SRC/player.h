@@ -10,6 +10,7 @@
 #include "statusgame.h"
 #include "portal.h"
 #include "bullet.h"
+#include "particle.h"
 
 class Player:public GameObject
 {
