@@ -58,6 +58,8 @@ void Bullet::Update(float dt)
                     QHash<QString, QString> prop;
                     prop.insert("id_sprite", QString::number(16));
                     prop.insert("time_life", QString::number(qrand()%15000));
+                    prop.insert("width", QString::number(qrand()%48));
+                    prop.insert("height", QString::number(qrand()%48));
 
                     float angle = qrand()%360;
                     float speed = qrand()%15;
@@ -76,7 +78,7 @@ void Bullet::Update(float dt)
                     QVector3D pos_particle = list.at(i)->GetPos();
                     pos_particle.setX(pos_particle.x()+24);
                     pos_particle.setY(pos_particle.y()+24);
-                    pos_particle.setZ(1.0);
+                    pos_particle.setZ(0.14);
                     part->SetPos(pos_particle);
                     part->SetRotZ(Geometry::RadianToDegree(qrand()%360));
                     part->SetScal(QVector3D(16, 16, 1));
@@ -117,6 +119,7 @@ void Bullet::Update(float dt)
 
 void Bullet::Draw()
 {
+    glDepthMask(false);
     if (flag_move)
     {
         ///*Вывод Bullet
@@ -140,4 +143,5 @@ void Bullet::Draw()
         ManagerSprite::getInstance()->GetValue(id_sprite_fire)->UnBind();
         //Вывод Fire*/
     }
+    glDepthMask(true);
 }

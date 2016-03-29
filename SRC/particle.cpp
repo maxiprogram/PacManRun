@@ -12,6 +12,9 @@ Particle::~Particle()
 void Particle::Init(QHash<QString, QString> property)
 {
     id_sprite = property.value("id_sprite").toInt();
+    this->SetScalX(property.value("width").toFloat());
+    this->SetScalY(property.value("height").toFloat());
+
     time_life = property.value("time_life").toFloat();
     velocity.setX(property.value("vel_x").toFloat());
     velocity.setY(property.value("vel_y").toFloat());
@@ -35,7 +38,7 @@ void Particle::Draw()
 {
     glDepthMask(false);
     ///*Вывод Particle
-    ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(this->GetScalX(), this->GetScalY());
+    ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(16, 16);
     ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                     Setting::GetProjection() *
                                                                                     ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
