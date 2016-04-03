@@ -42,6 +42,7 @@ void Player::Init(QHash<QString, QString> property)
     rotation_shoot = 0;
     y_sprite = 1;
     flag_jolt = false;
+    score = 0;
 
     Resources::FONT()->GetValue("green")->SetKerning(1);
     Resources::FONT()->GetValue("orange")->SetKerning(1);
@@ -161,7 +162,7 @@ void Player::Update(float dt)
                     TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
             {
                 TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
-                PlayProfile::score+=1;
+                score++;
             }
         }
         //Если шип
@@ -407,8 +408,12 @@ void Player::Update(float dt)
     {
         speed_x = 0;
         qDebug()<<"FINISH";
+        //qDebug()<<"ScorePlan="<<PlayProfile::score_plan[PlayProfile::current_level]<<"ScorePrev="<<PlayProfile::score[PlayProfile::current_level];
         if ((PlayProfile::current_level+1)==PlayProfile::last_level)
             PlayProfile::last_level = PlayProfile::last_level + 1;
+        if (PlayProfile::score[PlayProfile::current_level]<score)
+            PlayProfile::score[PlayProfile::current_level] = score;
+        PlayProfile::Save();
         CurrentStatusGame = Finish;
     }
 
@@ -431,7 +436,7 @@ void Player::Update(float dt)
 void Player::Draw()
 {
     ///*Вывод текста
-    Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(PlayProfile::score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
+    Resources::FONT()->GetValue("green")->Draw("Score:"+QString::number(score), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + 10,
                    Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 10, 1);
 
     Resources::FONT()->GetValue("orange")->Draw("Level-"+QString::number(PlayProfile::current_level+1), Resources::CAMERA()->GetCurrentCamera()->GetPosX() + Setting::GetViewPort().width()/2 - 50,

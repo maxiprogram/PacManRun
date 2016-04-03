@@ -22,6 +22,7 @@ public:
     void Draw();
     QRectF GetBoundBox();
     void SetJolt(bool flag);
+    int score;
 private:
     enum _Status {OnGround, Jump, Down} Status;
     bool flag_jolt;

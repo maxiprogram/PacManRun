@@ -475,6 +475,13 @@ void MainMenu::Draw()
                 start_lock = PlayProfile::last_level - 18;
         }
 
+        ///*Вывод Cherry
+        for (int i=0; i<9; i++)
+        {
+
+        }
+        //Вывод Cherry*/
+
         for (int i=start_lock; i<9; i++)
         {
             SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2, 1));

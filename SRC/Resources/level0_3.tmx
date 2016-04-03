@@ -4,7 +4,7 @@
   <image tid="0" source="tileset.png" width="96" height="224"/>
  </tileset>
  <tileset firstgid="22" name="tileset2" tilewidth="32" tileheight="32">
-  <image tid="8" source="../../../Release/Resources/tileset2.png" width="96" height="32"/>
+  <image tid="8" source="tileset2.png" width="96" height="32"/>
  </tileset>
  <layer name="Main" width="200" height="19">
   <data>

@@ -15,6 +15,7 @@ void PauseGame::Init(QHash<QString, QString> property)
     id_header = property.value("id_header").toInt();
     id_button = property.value("id_button").toInt();
     id_blood = property.value("id_blood").toInt();
+    id_cherry = property.value("id_cherry").toInt();
     SetPivot(QVector3D(0.5, 0.5, 0));
 
     time_pause_dead = 1 * 40;//2 секунд при fps 40
@@ -323,6 +324,51 @@ void PauseGame::Draw()
         ManagerSprite::getInstance()->GetValue(id_header)->UnBind();
         //Вывод заголовка Pause*/
 
+        ///*Вывод Cherry
+        Player* player = (Player*)Resources::GAMEOBJECT()->GetValue("Player");
+        int score = player->score;
+        int procent = score*1.0/PlayProfile::score_plan[PlayProfile::current_level]*100;
+        qDebug()<<"Plan="<<PlayProfile::score_plan[PlayProfile::current_level]<<"Current="<<PlayProfile::score[PlayProfile::current_level];
+        qDebug()<<"Score="<<score<<"Procent="<<procent;
+        if (score>0)
+        {
+            SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX()-100, Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+140, 1));
+            SetScal(QVector3D(64, 64, 0));
+            ManagerSprite::getInstance()->GetValue(id_cherry)->Bind();
+            ManagerSprite::getInstance()->GetValue(id_cherry)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_cherry)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                            Setting::GetProjection() *
+                                                                                            ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                            this->GetMatrix());
+            glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_cherry)->GetMesh()->GetCountVertex());
+            ManagerSprite::getInstance()->GetValue(id_cherry)->UnBind();
+        }
+
+        if (procent>=60)
+        {
+            SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+140, 1));
+            SetScal(QVector3D(64, 64, 0));
+            ManagerSprite::getInstance()->GetValue(id_cherry)->Bind();
+            ManagerSprite::getInstance()->GetValue(id_cherry)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_cherry)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                            Setting::GetProjection() *
+                                                                                            ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                            this->GetMatrix());
+            glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_cherry)->GetMesh()->GetCountVertex());
+            ManagerSprite::getInstance()->GetValue(id_cherry)->UnBind();
+        }
+
+        if (procent>=80)
+        {
+            SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX()+100, Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+140, 1));
+            SetScal(QVector3D(64, 64, 0));
+            ManagerSprite::getInstance()->GetValue(id_cherry)->Bind();
+            ManagerSprite::getInstance()->GetValue(id_cherry)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_cherry)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                            Setting::GetProjection() *
+                                                                                            ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
+                                                                                            this->GetMatrix());
+            glDrawArrays(GL_TRIANGLES, 0, ManagerSprite::getInstance()->GetValue(id_cherry)->GetMesh()->GetCountVertex());
+            ManagerSprite::getInstance()->GetValue(id_cherry)->UnBind();
+        }
+        //Вывод Cherry*/
 
         ///*Вывод кнопки Continue
         SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX(), Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+80, 1));

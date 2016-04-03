@@ -19,6 +19,7 @@ private:
     int id_header;
     int id_button;
     int id_blood;
+    int id_cherry;
     int time_pause_dead;
 };
 

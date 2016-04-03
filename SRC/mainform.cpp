@@ -27,6 +27,7 @@ MainForm::~MainForm()
 void MainForm::render(QPainter *painter)
 {
     Q_UNUSED(painter);
+
 }
 
 void MainForm::initialize()
