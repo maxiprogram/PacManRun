@@ -475,13 +475,6 @@ void MainMenu::Draw()
                 start_lock = PlayProfile::last_level - 18;
         }
 
-        ///*Вывод Cherry
-        for (int i=0; i<9; i++)
-        {
-
-        }
-        //Вывод Cherry*/
-
         for (int i=start_lock; i<9; i++)
         {
             SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2, 1));
@@ -495,6 +488,54 @@ void MainMenu::Draw()
             Resources::SPRITE()->GetValue(id_item_lock)->UnBind();
         }
         //Вывод заблокированных уровней*/
+
+        ///*Вывод Cherry
+        for (int i=0; i<start_lock; i++)
+        {
+            int procent = PlayProfile::score[i+(9*(current_level_menu-1))]*1.0/PlayProfile::score_plan[i+(9*(current_level_menu-1))]*100;
+            if (PlayProfile::score[i]>0)
+            {
+                SetScal(QVector3D(64, 64, 1));
+                SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2-60, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2-50-10, 1));
+                Resources::SPRITE()->GetValue(13)->Bind();
+                Resources::SPRITE()->GetValue(13)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(13)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                       Setting::GetProjection() *
+                                                                                       Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                                       this->GetMatrix()
+                                                                                       );
+                glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(13)->GetMesh()->GetCountVertex());
+                Resources::SPRITE()->GetValue(13)->UnBind();
+            }
+
+            if (procent>=60)
+            {
+                SetScal(QVector3D(64, 64, 1));
+                SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2-50-32, 1));
+                Resources::SPRITE()->GetValue(13)->Bind();
+                Resources::SPRITE()->GetValue(13)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(13)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                       Setting::GetProjection() *
+                                                                                       Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                                       this->GetMatrix()
+                                                                                       );
+                glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(13)->GetMesh()->GetCountVertex());
+                Resources::SPRITE()->GetValue(13)->UnBind();
+            }
+
+            if (procent>=80)
+            {
+                SetScal(QVector3D(64, 64, 1));
+                SetPos(QVector3D(mas_pos[i].x()+(Setting::GetViewPort().width()-800)/2+60, mas_pos[i].y()+(Setting::GetViewPort().height()-600)/2-50-10, 1));
+                Resources::SPRITE()->GetValue(13)->Bind();
+                Resources::SPRITE()->GetValue(13)->GetShader()->setUniformValue(Resources::SPRITE()->GetValue(13)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
+                                                                                       Setting::GetProjection() *
+                                                                                       Resources::CAMERA()->GetCurrentCamera()->GetMatrix() *
+                                                                                       this->GetMatrix()
+                                                                                       );
+                glDrawArrays(GL_TRIANGLES, 0, Resources::SPRITE()->GetValue(13)->GetMesh()->GetCountVertex());
+                Resources::SPRITE()->GetValue(13)->UnBind();
+            }
+        }
+        //Вывод Cherry*/
     }
     //Если сейчас в меню выбора уровня*/
 

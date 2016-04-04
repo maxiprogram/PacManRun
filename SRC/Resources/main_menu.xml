@@ -17,6 +17,8 @@
   <Texture id="11">Resources/button_apply.png</Texture>
   <Texture id="12">Resources/header_menu.png</Texture>
   <Texture id="13">Resources/checkbox.png</Texture>
+  <Texture id="15">Resources/cherry.png</Texture>
+  <Texture id="16">Resources/background0.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="0"></Sprite>
@@ -32,9 +34,15 @@
  <Sprite id="10" mid="0" sid="0" tid="11"></Sprite>
  <Sprite id="11" mid="0" sid="0" tid="12"></Sprite>
  <Sprite id="12" mid="0" sid="0" tid="13"></Sprite>
+ <Sprite id="13" mid="0" sid="0" tid="15"></Sprite>
+ <Sprite id="14" mid="0" sid="0" tid="16"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="14">Resources/font_orange.font</Font>
+
+ <GameObject name="BackGround" type="5">
+  <id_sprite>14</id_sprite>
+ </GameObject>
 
  <GameObject name="MainMenu" type="1">
   <id_button>0</id_button>

@@ -328,8 +328,8 @@ void PauseGame::Draw()
         Player* player = (Player*)Resources::GAMEOBJECT()->GetValue("Player");
         int score = player->score;
         int procent = score*1.0/PlayProfile::score_plan[PlayProfile::current_level]*100;
-        qDebug()<<"Plan="<<PlayProfile::score_plan[PlayProfile::current_level]<<"Current="<<PlayProfile::score[PlayProfile::current_level];
-        qDebug()<<"Score="<<score<<"Procent="<<procent;
+        //qDebug()<<"Plan="<<PlayProfile::score_plan[PlayProfile::current_level]<<"Current="<<PlayProfile::score[PlayProfile::current_level];
+        //qDebug()<<"Score="<<score<<"Procent="<<procent;
         if (score>0)
         {
             SetPos(QVector3D(Setting::GetViewPort().width()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX()-100, Setting::GetViewPort().height()/2+ManagerCamera::getInstance()->GetCurrentCamera()->GetPosY()+140, 1));

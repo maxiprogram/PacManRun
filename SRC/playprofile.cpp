@@ -13,32 +13,32 @@ PlayProfile::PlayProfile()
 void PlayProfile::ResetScorePlan()
 {
     score_plan[0] = 39;
-    score_plan[1] = 0;
-    score_plan[2] = 0;
-    score_plan[3] = 0;
-    score_plan[4] = 0;
-    score_plan[5] = 0;
-    score_plan[6] = 0;
-    score_plan[7] = 0;
-    score_plan[8] = 0;
-    score_plan[9] = 0;
-    score_plan[10] = 0;
-    score_plan[11] = 0;
-    score_plan[12] = 0;
-    score_plan[13] = 0;
-    score_plan[14] = 0;
-    score_plan[15] = 0;
-    score_plan[16] = 0;
-    score_plan[17] = 0;
-    score_plan[18] = 0;
-    score_plan[19] = 0;
-    score_plan[20] = 0;
-    score_plan[21] = 0;
-    score_plan[22] = 0;
-    score_plan[23] = 0;
-    score_plan[24] = 0;
-    score_plan[25] = 0;
-    score_plan[26] = 0;
+    score_plan[1] = 1;
+    score_plan[2] = 1;
+    score_plan[3] = 1;
+    score_plan[4] = 1;
+    score_plan[5] = 1;
+    score_plan[6] = 1;
+    score_plan[7] = 1;
+    score_plan[8] = 1;
+    score_plan[9] = 1;
+    score_plan[10] = 1;
+    score_plan[11] = 1;
+    score_plan[12] = 1;
+    score_plan[13] = 1;
+    score_plan[14] = 1;
+    score_plan[15] = 1;
+    score_plan[16] = 1;
+    score_plan[17] = 1;
+    score_plan[18] = 1;
+    score_plan[19] = 1;
+    score_plan[20] = 1;
+    score_plan[21] = 1;
+    score_plan[22] = 1;
+    score_plan[23] = 1;
+    score_plan[24] = 1;
+    score_plan[25] = 1;
+    score_plan[26] = 1;
 }
 
 bool PlayProfile::Load()
