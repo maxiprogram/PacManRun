@@ -1,6 +1,6 @@
 <GameScene>
  <Resources>
-  <Shader id="0"></Shader>
+  <Shader id="0">Resources/default.vert;Resources/default.frag</Shader>
   <Mesh id="0"></Mesh>
   <Texture id="0">Resources/tileset.png</Texture>
   <Texture id="1">Resources/player_sprite.png</Texture>

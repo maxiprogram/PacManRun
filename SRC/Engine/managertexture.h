@@ -12,6 +12,7 @@ public:
     void Add(int key, Texture* value);
     void Delete(int key);
     Texture* GetValue(int key);
+    QHash<int, Texture*>* GetHash();
     void Clear();
     void Destroy();
 

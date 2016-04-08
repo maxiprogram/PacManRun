@@ -36,6 +36,11 @@ Shader* ManagerShader::GetValue(int key)
     return hash_tab.value(key);
 }
 
+QHash<int, Shader*>* ManagerShader::GetHash()
+{
+    return &hash_tab;
+}
+
 void ManagerShader::Clear()
 {
     QHash<int, Shader*>::iterator it = hash_tab.begin();

@@ -36,6 +36,11 @@ Mesh* ManagerMesh::GetValue(int key)
     return hash_tab.value(key);
 }
 
+QHash<int, Mesh*>* ManagerMesh::GetHash()
+{
+    return &hash_tab;
+}
+
 void ManagerMesh::Clear()
 {
     QHash<int, Mesh*>::iterator it = hash_tab.begin();

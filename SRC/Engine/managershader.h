@@ -12,6 +12,7 @@ public:
     void Add(int key, Shader* value);
     void Delete(int key);
     Shader* GetValue(int key);
+    QHash<int, Shader*>* GetHash();
     void Clear();
     void Destroy();
 

@@ -19,6 +19,7 @@ class GameScene
 {
 public:
     GameScene();
+    ~GameScene();
     void AddGameObject(GameObject* object);
     void DeleteGameObject(GameObject* object, bool scene=false);
     bool Load(QString filename, CreatorGameObject* creator);

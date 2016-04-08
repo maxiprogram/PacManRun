@@ -36,6 +36,11 @@ Texture* ManagerTexture::GetValue(int key)
     return hash_tab.value(key);
 }
 
+QHash<int, Texture*>* ManagerTexture::GetHash()
+{
+    return &hash_tab;
+}
+
 void ManagerTexture::Clear()
 {
     QHash<int, Texture*>::iterator it = hash_tab.begin();

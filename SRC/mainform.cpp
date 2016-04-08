@@ -46,6 +46,9 @@ void MainForm::initialize()
         qDebug()<<"Not Load MainMenu";
     //Загрузка главного меню*/
 
+    //PlayProfile::current_level = 20;
+    //CurrentStatusGame = Load_Level;
+
     //Таймер обновления логики игры win=40fps lin=30fps
     id_timer = this->startTimer(1000/40);
 

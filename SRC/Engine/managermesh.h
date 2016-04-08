@@ -12,6 +12,7 @@ public:
     void Add(int key, Mesh* value);
     void Delete(int key);
     Mesh* GetValue(int key);
+    QHash<int, Mesh*>* GetHash();
     void Clear();
     void Destroy();
 

@@ -6,7 +6,7 @@ Shader::Shader()
     attr_tex = "Texture";
     unif_mat_pos = "MatrixPos";
     unif_mat_tex = "MatrixTex";
-    Load("://Resources/default.vert", "://Resources/default.frag");
+    //Load("://Resources/default.vert", "://Resources/default.frag");
 }
 
 Shader::Shader(QString vert_file, QString frag_file)

@@ -24,6 +24,14 @@ void ManagerGameScene::Add(QString key, GameScene* value)
     hash_tab.insert(key, value);
 }
 
+void ManagerGameScene::Delete(QString key)
+{
+    GameScene* scene = GetValue(key);
+    scene->Clear();
+    delete scene;
+    hash_tab.remove(key);
+}
+
 GameScene* ManagerGameScene::GetValue(QString key)
 {
     return hash_tab.value(key);

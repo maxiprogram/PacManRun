@@ -4,6 +4,11 @@ GameScene::GameScene()
 {
 }
 
+GameScene::~GameScene()
+{
+    qDebug()<<"~GameScene";
+}
+
 void GameScene::AddGameObject(GameObject* object)
 {
     QMultiHash<QString, GameObject*>::iterator it = ManagerGameObject::getInstance()->Add(object->GetName(), object);
@@ -71,7 +76,16 @@ bool GameScene::Load(QString filename, CreatorGameObject* creator)
                 if (reader.attributes().hasAttribute("id"))
                 {
                     qDebug()<<"Tag:"<<reader.name()<<"Id:"<<reader.attributes().value("id").toString();
-                    ManagerShader::getInstance()->Add(reader.attributes().value("id").toInt(),new Shader());
+                    reader.readNext();
+                    QString name = reader.text().toString();
+                    QString tmp = name;
+                    QString vert = tmp.replace(tmp.indexOf(";"), tmp.length()-tmp.indexOf(";"), "");
+                    QString frag = name.replace(0, name.indexOf(";")+1, "");
+
+                    qDebug()<<"Path vertex:"<<vert<<"Path fragment:"<<frag;
+                    Shader* shader = new Shader;
+                    shader->Load(vert, frag);
+                    ManagerShader::getInstance()->Add(reader.attributes().value("id").toInt(), shader);
                 }
             }
             //Считка текстуры
