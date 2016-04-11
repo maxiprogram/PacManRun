@@ -1,6 +1,6 @@
 <GameScene>
  <Resources>
-  <Shader id="0"></Shader>
+  <Shader id="0">Resources/default.vert;Resources/default.frag</Shader>
   <Mesh id="0"></Mesh>
   <Texture id="0">Resources/tileset.png</Texture>
   <Texture id="1">Resources/player_sprite.png</Texture>
@@ -11,6 +11,7 @@
   <Texture id="6">Resources/ice1.png</Texture>
   <Texture id="7">Resources/ice2.png</Texture>
   <Texture id="19">Resources/blood.png</Texture>
+  <Texture id="21">Resources/cherry.png</Texture>
 
   <Texture id="8">Resources/tileset2.png</Texture>
   <Texture id="9">Resources/font_green.png</Texture>
@@ -25,6 +26,7 @@
  <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
  <Sprite id="6" mid="0" sid="0" tid="7"></Sprite>
  <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
+ <Sprite id="17" mid="0" sid="0" tid="21"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
@@ -126,6 +128,7 @@
   <id_header>1</id_header>
   <id_button>2</id_button>
   <id_blood>15</id_blood>
+  <id_cherry>17</id_cherry>
  </GameObject>
  
  <TileMap mid="0" sid="0">Resources/level0_2.tmx</TileMap>
