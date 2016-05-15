@@ -44,7 +44,7 @@
  <GameObject name="Decor" type="6">
   <id_sprite>5</id_sprite>
   <pos_x>2656</pos_x>
-  <pos_y>234</pos_y>
+  <pos_y>202</pos_y>
   <pos_z>0.01</pos_z>
   <scal_x>128</scal_x>
   <scal_y>30</scal_y>
@@ -59,7 +59,7 @@
  <GameObject name="Decor" type="6">
   <id_sprite>6</id_sprite>
   <pos_x>2976</pos_x>
-  <pos_y>234</pos_y>
+  <pos_y>202</pos_y>
   <pos_z>0.01</pos_z>
   <scal_x>128</scal_x>
   <scal_y>30</scal_y>
@@ -74,7 +74,7 @@
  <GameObject name="Decor" type="6">
   <id_sprite>14</id_sprite>
   <pos_x>3136</pos_x>
-  <pos_y>256</pos_y>
+  <pos_y>224</pos_y>
   <pos_z>0.01</pos_z>
   <scal_x>64</scal_x>
   <scal_y>64</scal_y>
@@ -83,6 +83,111 @@
   <width>64</width>
   <height>64</height>
   <count_frame>4</count_frame>
+ </GameObject>
+
+<!--NOIce(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>6</id_sprite>
+  <pos_x>3680</pos_x>
+  <pos_y>202</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>160</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Ice(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>5</id_sprite>
+  <pos_x>4896</pos_x>
+  <pos_y>458</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>256</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>480</pos_x>
+  <pos_y>144</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>1856</pos_x>
+  <pos_y>176</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>2368</pos_x>
+  <pos_y>176</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>3360</pos_x>
+  <pos_y>336</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>5728</pos_x>
+  <pos_y>368</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
  </GameObject>
 
  <GameObject name="Player" type="0">
