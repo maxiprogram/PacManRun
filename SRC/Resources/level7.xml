@@ -10,6 +10,7 @@
   <Texture id="5">Resources/background.png</Texture>
   <Texture id="6">Resources/ice1.png</Texture>
   <Texture id="13">Resources/tree.png</Texture>
+  <Texture id="18">Resources/spring2.png</Texture>
   <Texture id="14">Resources/portal1.png</Texture>
   <Texture id="15">Resources/portal2.png</Texture>
   <Texture id="19">Resources/blood.png</Texture>
@@ -29,6 +30,7 @@
  <Sprite id="9" mid="0" sid="0" tid="13"></Sprite>
  <Sprite id="10" mid="0" sid="0" tid="14"></Sprite>
  <Sprite id="11" mid="0" sid="0" tid="15"></Sprite>
+ <Sprite id="14" mid="0" sid="0" tid="18"></Sprite>
  <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
  <Sprite id="17" mid="0" sid="0" tid="21"></Sprite>
 
@@ -52,6 +54,156 @@
   <atlas_y>0</atlas_y>
   <width>187</width>
   <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>3616</pos_x>
+  <pos_y>256</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>4256</pos_x>
+  <pos_y>160</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>5216</pos_x>
+  <pos_y>320</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>5568</pos_x>
+  <pos_y>544</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>6016</pos_x>
+  <pos_y>224</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>384</pos_x>
+  <pos_y>208</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>1376</pos_x>
+  <pos_y>112</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>3360</pos_x>
+  <pos_y>144</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>4672</pos_x>
+  <pos_y>112</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>6592</pos_x>
+  <pos_y>400</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
   <count_frame>0</count_frame>
  </GameObject>
 

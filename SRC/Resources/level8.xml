@@ -1,13 +1,23 @@
 <GameScene>
  <Resources>
-  <Shader id="0"></Shader>
+  <Shader id="0">Resources/default.vert;Resources/default.frag</Shader>
   <Mesh id="0"></Mesh>
   <Texture id="0">Resources/tileset.png</Texture>
   <Texture id="1">Resources/player_sprite.png</Texture>
   <Texture id="2">Resources/header_pause.png</Texture>
   <Texture id="3">Resources/buttons_pause.png</Texture>
   <Texture id="4">Resources/close.png</Texture>
+  <Texture id="5">Resources/background.png</Texture>
+  <Texture id="6">Resources/ice1.png</Texture>
+  <Texture id="7">Resources/ice2.png</Texture>
+  <Texture id="13">Resources/tree.png</Texture>
+  <Texture id="18">Resources/spring2.png</Texture>
+  <Texture id="14">Resources/portal1.png</Texture>
+  <Texture id="15">Resources/portal2.png</Texture>
+  <Texture id="19">Resources/blood.png</Texture>
+  <Texture id="21">Resources/cherry.png</Texture>
 
+  <Texture id="8">Resources/tileset2.png</Texture>
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
  </Resources>
@@ -16,9 +26,323 @@
  <Sprite id="1" mid="0" sid="0" tid="2"></Sprite>
  <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
+ <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
+ <Sprite id="6" mid="0" sid="0" tid="7"></Sprite>
+ <Sprite id="9" mid="0" sid="0" tid="13"></Sprite>
+ <Sprite id="10" mid="0" sid="0" tid="14"></Sprite>
+ <Sprite id="11" mid="0" sid="0" tid="15"></Sprite>
+ <Sprite id="14" mid="0" sid="0" tid="18"></Sprite>
+ <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
+ <Sprite id="17" mid="0" sid="0" tid="21"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
+ 
+ <!-- BackGround -->
+ <GameObject name="BackGround" type="5">
+  <id_sprite>4</id_sprite>
+ </GameObject> 
+
+<!--Ice(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>5</id_sprite>
+  <pos_x>576</pos_x>
+  <pos_y>138</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>160</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>832</pos_x>
+  <pos_y>320</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>1120</pos_x>
+  <pos_y>576</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>1344</pos_x>
+  <pos_y>32</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>1664</pos_x>
+  <pos_y>352</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>2496</pos_x>
+  <pos_y>480</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>3776</pos_x>
+  <pos_y>544</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--NOIce(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>6</id_sprite>
+  <pos_x>2240</pos_x>
+  <pos_y>234</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>192</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>2880</pos_x>
+  <pos_y>224</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject>
+
+<!--Ice(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>5</id_sprite>
+  <pos_x>3424</pos_x>
+  <pos_y>266</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--NOIce(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>6</id_sprite>
+  <pos_x>4160</pos_x>
+  <pos_y>330</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>128</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>4832</pos_x>
+  <pos_y>416</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>4864</pos_x>
+  <pos_y>192</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--NOIce(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>6</id_sprite>
+  <pos_x>5216</pos_x>
+  <pos_y>426</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>1024</pos_x>
+  <pos_y>208</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>1824</pos_x>
+  <pos_y>144</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>2880</pos_x>
+  <pos_y>432</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>3552</pos_x>
+  <pos_y>528</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>255</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>5696</pos_x>
+  <pos_y>464</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Tree Fir-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>9</id_sprite>
+  <pos_x>5856</pos_x>
+  <pos_y>464</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>128</scal_y>
+  <atlas_x>384</atlas_x>
+  <atlas_y>128</atlas_y>
+  <width>96</width>
+  <height>128</height>
+  <count_frame>0</count_frame>
+ </GameObject>
  
  <GameObject name="Player" type="0">
   <pos_x>60</pos_x>
@@ -62,6 +386,8 @@
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>
   <id_button>2</id_button>
+  <id_blood>15</id_blood>
+  <id_cherry>17</id_cherry>
  </GameObject>
  
  <TileMap mid="0" sid="0">Resources/level0_8.tmx</TileMap>
