@@ -1,14 +1,19 @@
 <GameScene>
  <Resources>
-  <Shader id="0"></Shader>
+  <Shader id="0">Resources/default.vert;Resources/default.frag</Shader>
   <Mesh id="0"></Mesh>
   <Texture id="0">Resources/tileset.png</Texture>
   <Texture id="1">Resources/player_sprite.png</Texture>
   <Texture id="2">Resources/header_pause.png</Texture>
   <Texture id="3">Resources/buttons_pause.png</Texture>
   <Texture id="4">Resources/close.png</Texture>
-  <Texture id="5">Resources/ghost.png</Texture>
+  <Texture id="5">Resources/background1.png</Texture>
+  <Texture id="6">Resources/ghost.png</Texture>
+  <Texture id="7">Resources/ice1.png</Texture>
+  <Texture id="19">Resources/blood.png</Texture>
+  <Texture id="21">Resources/cherry.png</Texture>
 
+  <Texture id="8">Resources/tileset2.png</Texture>
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
  </Resources>
@@ -18,9 +23,34 @@
  <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
  <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
+ <Sprite id="6" mid="0" sid="0" tid="6"></Sprite>
+<Sprite id="7" mid="0" sid="0" tid="7"></Sprite>
+ <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
+ <Sprite id="17" mid="0" sid="0" tid="21"></Sprite>
 
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
+ 
+ <!-- BackGround -->
+ <GameObject name="BackGround" type="5">
+  <id_sprite>4</id_sprite>
+ </GameObject> 
+
+<!--Ice(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>7</id_sprite>
+  <pos_x>2976</pos_x>
+  <pos_y>202</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>224</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
  
  <GameObject name="Player" type="0">
   <pos_x>60</pos_x>
@@ -38,7 +68,7 @@
   <pos_y>192</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
-  <id_sprite>4</id_sprite>
+  <id_sprite>6</id_sprite>
   <radius>0</radius>
   <speed_x>0</speed_x>
   <speed_y>0</speed_y>
@@ -49,7 +79,7 @@
   <pos_y>192</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
-  <id_sprite>4</id_sprite>
+  <id_sprite>6</id_sprite>
   <radius>64</radius>
   <speed_x>1</speed_x>
   <speed_y>0</speed_y>
@@ -60,7 +90,7 @@
   <pos_y>288</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
-  <id_sprite>4</id_sprite>
+  <id_sprite>6</id_sprite>
   <radius>64</radius>
   <speed_x>0</speed_x>
   <speed_y>1</speed_y>
@@ -71,7 +101,7 @@
   <pos_y>256</pos_y>
   <scal_x>48</scal_x>
   <scal_y>48</scal_y>
-  <id_sprite>4</id_sprite>
+  <id_sprite>6</id_sprite>
   <radius>64</radius>
   <speed_x>2</speed_x>
   <speed_y>1</speed_y>
@@ -81,6 +111,8 @@
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>
   <id_button>2</id_button>
+  <id_blood>15</id_blood>
+  <id_cherry>17</id_cherry>
  </GameObject>
  
  <TileMap mid="0" sid="0">Resources/level1_0.tmx</TileMap>
