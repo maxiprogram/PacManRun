@@ -329,7 +329,8 @@ void Player::Update(float dt)
     if (ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX()<width_x-Setting::GetViewPort().width())
     {
         ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
-        //ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
+        if (PlayProfile::current_level==14)
+            ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
 
     }
     //Тряска камеры
