@@ -1,10 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <QMessageBox>
+
 #include "Engine/gamescene.h"
 #include "Engine/managerkeyboard.h"
 #include "Engine/fps.h"
 #include "Engine/font.h"
+
+#include "SFML/Audio.hpp"
 
 #include "playprofile.h"
 #include "statusgame.h"
@@ -36,6 +40,14 @@ private:
     int count_bonus_shoot;
     int y_sprite;
     float rotation_shoot;
+    sf::SoundBuffer buffer_jump;
+    sf::Sound sound_jump;
+    sf::SoundBuffer buffer_spring;
+    sf::Sound sound_spring;
+    sf::SoundBuffer buffer_bonus;
+    sf::Sound sound_bonus;
+    sf::SoundBuffer buffer_kill;
+    sf::Sound sound_kill;
 };
 
 #endif // PLAYER_H

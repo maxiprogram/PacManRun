@@ -34,6 +34,32 @@ void Player::Init(QHash<QString, QString> property)
     speed_y = 15;
     accel_x = 0;
 
+    ///*Load Sound
+    if (!buffer_jump.loadFromFile("Resources/jump.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'jump.ogg'!");
+    }
+    sound_jump.setBuffer(buffer_jump);
+
+    if (!buffer_spring.loadFromFile("Resources/spring.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'spring.ogg'!");
+    }
+    sound_spring.setBuffer(buffer_spring);
+
+    if (!buffer_bonus.loadFromFile("Resources/bonus.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'bonus.ogg'!");
+    }
+    sound_bonus.setBuffer(buffer_bonus);
+
+    if (!buffer_kill.loadFromFile("Resources/kill.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'kill.ogg'!");
+    }
+    sound_kill.setBuffer(buffer_kill);
+    //Load Sound*/
+
     direction.setX(0);
     direction.setY(0);
     Status = Down;
@@ -100,6 +126,9 @@ void Player::Update(float dt)
         Status = Jump;
         speed_y = 15;
         direction.setY(1);
+
+        sound_jump.play();
+
         Resources::KEYBOARD()->SetKey(Qt::Key_Space, false);
     }
 
@@ -205,6 +234,7 @@ void Player::Update(float dt)
                 Status = Jump;
                 speed_y = 30;
                 direction.setY(1);
+                sound_spring.play();
             }
         }
         //Если портал
@@ -237,6 +267,7 @@ void Player::Update(float dt)
             {
                 TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
                 count_bonus++;
+                sound_bonus.play();
             }
         }
         //Если разрушающая земля
@@ -270,6 +301,7 @@ void Player::Update(float dt)
             if (count_bonus>0)
             {
                 count_bonus--;
+                sound_kill.play();
 
                 for (int j=0; j<100; j++)
                 {

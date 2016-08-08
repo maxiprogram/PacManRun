@@ -14,6 +14,7 @@ public:
     static int score[27];
     static int current_level;
     static int setting_fullscreen;
+    static int setting_sound;
 private:
     static void ResetScorePlan();
 };

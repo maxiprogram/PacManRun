@@ -3,6 +3,7 @@
 int PlayProfile::last_level = 1;
 int PlayProfile::current_level = 0;
 int PlayProfile::setting_fullscreen = 1;
+int PlayProfile::setting_sound = 1;
 int PlayProfile::score_plan[27];
 int PlayProfile::score[27];
 
@@ -54,6 +55,7 @@ bool PlayProfile::Load()
             return flag;
         f.write((char*)&last_level, sizeof(int));
         f.write((char*)&setting_fullscreen, sizeof(bool));
+        f.write((char*)&setting_sound, sizeof(bool));
 
         ResetScorePlan();
         for (int i=0; i<27; i++)
@@ -71,6 +73,7 @@ bool PlayProfile::Load()
     {
         f.read((char*)&last_level, sizeof(int));
         f.read((char*)&setting_fullscreen, sizeof(bool));
+        f.read((char*)&setting_sound, sizeof(bool));
         for (int i=0; i<27; i++)
         {
             f.read((char*)&score_plan[i], sizeof(int));
@@ -92,6 +95,7 @@ bool PlayProfile::Save()
         return false;
     f.write((char*)&last_level, sizeof(int));
     f.write((char*)&setting_fullscreen, sizeof(bool));
+    f.write((char*)&setting_sound, sizeof(bool));
     for (int i=0; i<27; i++)
     {
         f.write((char*)&score_plan[i], sizeof(int));

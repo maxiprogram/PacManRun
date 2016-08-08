@@ -1,8 +1,12 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
+#include <QMessageBox>
+
 #include "Engine/resources.h"
 #include "Engine/font.h"
+
+#include "SFML/Audio.hpp"
 
 #include "statusgame.h"
 #include "playprofile.h"
@@ -37,6 +41,7 @@ private:
     float pos_y_author;
     int checkbox_fullscreen;
     int checkbox_sound;
+    sf::Music background_music;
 
 };
 

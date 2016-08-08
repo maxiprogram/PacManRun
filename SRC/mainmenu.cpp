@@ -6,6 +6,7 @@ MainMenu::MainMenu()
 
 MainMenu::~MainMenu()
 {
+    background_music.stop();
     qDebug()<<"Destroy ~MainMenu";
 }
 
@@ -23,6 +24,14 @@ void MainMenu::Init(QHash<QString, QString> property)
     id_button_apply = property.value("id_button_apply").toInt();
     id_header_menu = property.value("id_header_menu").toInt();
     id_checkbox = property.value("id_checkbox").toInt();
+
+    if (!background_music.openFromFile("Resources/background_menu.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'background_menu.ogg'!");
+    }
+    background_music.setLoop(true);
+    if (PlayProfile::setting_sound==1)
+        background_music.play();
 
     SetPivot(QVector3D(0.5, 0.5, 0));
     SetPos(QVector3D(0, 0, 0));
@@ -64,6 +73,13 @@ void MainMenu::Update(float dt)
 {
     int m_x = Resources::MOUSE()->GetX();
     int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
+
+    if (PlayProfile::setting_sound==0)
+        background_music.stop();
+    else
+        if (background_music.getStatus()!=2)
+            background_music.play();
+
 
     ///*Если сейчас в главном меню
     if (CurrentStatusGame==Main_Menu)
@@ -107,6 +123,7 @@ void MainMenu::Update(float dt)
                 if (m_y>Setting::GetViewPort().height()/2-72/2 && m_y<Setting::GetViewPort().height()/2+72/2)
                 {
                     checkbox_fullscreen = PlayProfile::setting_fullscreen;
+                    checkbox_sound = PlayProfile::setting_sound;
                     CurrentStatusGame = Setting_Menu;
                     Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
                 }
@@ -244,6 +261,7 @@ void MainMenu::Update(float dt)
             {
                 //ОБРАБОТАТЬ СОХРАНЕНИЕ НАСТРОЕК
                 PlayProfile::setting_fullscreen = checkbox_fullscreen;
+                PlayProfile::setting_sound = checkbox_sound;
 
                 CurrentStatusGame = Update_Setting;
                 Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
