@@ -48,6 +48,8 @@ private:
     sf::Sound sound_bonus;
     sf::SoundBuffer buffer_kill;
     sf::Sound sound_kill;
+    sf::SoundBuffer buffer_score;
+    sf::Sound sound_score;
 };
 
 #endif // PLAYER_H

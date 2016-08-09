@@ -58,6 +58,12 @@ void Player::Init(QHash<QString, QString> property)
         QMessageBox::critical(0, "Error load file", "Error load file 'kill.ogg'!");
     }
     sound_kill.setBuffer(buffer_kill);
+
+    if (!buffer_score.loadFromFile("Resources/score.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'score.ogg'!");
+    }
+    sound_score.setBuffer(buffer_score);
     //Load Sound*/
 
     direction.setX(0);
@@ -192,6 +198,7 @@ void Player::Update(float dt)
             {
                 TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
                 score++;
+                sound_score.play();
             }
         }
         //Если шип
