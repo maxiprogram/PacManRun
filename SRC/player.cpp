@@ -64,6 +64,24 @@ void Player::Init(QHash<QString, QString> property)
         QMessageBox::critical(0, "Error load file", "Error load file 'score.ogg'!");
     }
     sound_score.setBuffer(buffer_score);
+
+    if (!buffer_death.loadFromFile("Resources/death.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'death.ogg'!");
+    }
+    sound_death.setBuffer(buffer_death);
+
+    if (!buffer_portal.loadFromFile("Resources/portal.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'portal.ogg'!");
+    }
+    sound_portal.setBuffer(buffer_portal);
+
+    if (!buffer_brick.loadFromFile("Resources/brick.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'brick.ogg'!");
+    }
+    sound_brick.setBuffer(buffer_brick);
     //Load Sound*/
 
     direction.setX(0);
@@ -202,7 +220,7 @@ void Player::Update(float dt)
             }
         }
         //Если шип
-        if (tiles.at(i).id==16 || tiles.at(i).id==17 || tiles.at(i).id==18)
+        if (tiles.at(i).id==16 || tiles.at(i).id==17 || tiles.at(i).id==18 || tiles.at(i).id==22 || tiles.at(i).id==23 || tiles.at(i).id==24)
         {
             if (TileMap::getInstance()->CollisionX("Object", new_pos, GetBoundBox(), direction)==true ||
                     TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
@@ -210,6 +228,7 @@ void Player::Update(float dt)
                 speed_x = 0;
                 frame = 4;
                 y_sprite = 1;
+                sound_death.play();
                 qDebug()<<"DEAD";
                 CurrentStatusGame = Dead;
             }
@@ -256,6 +275,7 @@ void Player::Update(float dt)
                     if(tiles.at(i).ij.x()==((Portal*)list.at(i1))->GetPosStart().x() &&
                             tiles.at(i).ij.y()==((Portal*)list.at(i1))->GetPosStart().y())
                     {
+                        sound_portal.play();
                         QVector3D pos = this->GetPos();
                         pos.setX(((Portal*)list.at(i1))->GetPosFinish().x() * 32 - 48);
                         pos.setY((TileMap::getInstance()->GetTileCountHeight() - ((Portal*)list.at(i1))->GetPosFinish().y() -1) * 32);
@@ -283,6 +303,7 @@ void Player::Update(float dt)
             if (TileMap::getInstance()->CollisionX("Object", new_pos, GetBoundBox(), direction)==true ||
                     TileMap::getInstance()->CollisionY("Object", new_pos, GetBoundBox(), direction)==true)
             {
+                sound_brick.play();
                 TileMap::getInstance()->GetLayer("Object")->SetValue(tiles.at(i).ij.y(), tiles.at(i).ij.x(), 0);
             }
         }
@@ -353,6 +374,7 @@ void Player::Update(float dt)
                 speed_x = 0;
                 frame = 4;
                 y_sprite = 1;
+                sound_death.play();
                 qDebug()<<"DEAD";
                 CurrentStatusGame = Dead;
                 break;
@@ -441,6 +463,7 @@ void Player::Update(float dt)
         speed_x = 0;
         frame = 4;
         y_sprite = 1;
+        sound_death.play();
         qDebug()<<"DEAD";
         CurrentStatusGame = Dead;
     }

@@ -50,6 +50,12 @@ private:
     sf::Sound sound_kill;
     sf::SoundBuffer buffer_score;
     sf::Sound sound_score;
+    sf::SoundBuffer buffer_death;
+    sf::Sound sound_death;
+    sf::SoundBuffer buffer_portal;
+    sf::Sound sound_portal;
+    sf::SoundBuffer buffer_brick;
+    sf::Sound sound_brick;
 };
 
 #endif // PLAYER_H
