@@ -41,7 +41,7 @@ void PauseGame::Update(float dt)
     int m_y = Setting::GetViewPort().height()-Resources::MOUSE()->GetY();
 
     ///*Если стату Play
-    if (CurrentStatusGame==Play && PlayProfile::current_level!=15 && PlayProfile::current_level!=16 && PlayProfile::current_level!=17)
+    if (CurrentStatusGame==Play && PlayProfile::current_level<15)
     {
         if (PlayProfile::setting_sound==0)
             background_music.stop();
@@ -61,7 +61,7 @@ void PauseGame::Update(float dt)
                 background_music.setPlayingOffset(sf::Time(pos));
             }*/
     }else
-        if (CurrentStatusGame==Play && PlayProfile::current_level>=15 && PlayProfile::current_level<=17)
+        if (CurrentStatusGame==Play && PlayProfile::current_level>=15)
         {
             if (PlayProfile::setting_sound==0)
                 background_music1.stop();

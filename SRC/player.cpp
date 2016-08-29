@@ -82,6 +82,12 @@ void Player::Init(QHash<QString, QString> property)
         QMessageBox::critical(0, "Error load file", "Error load file 'brick.ogg'!");
     }
     sound_brick.setBuffer(buffer_brick);
+
+    if (!buffer_win.loadFromFile("Resources/win.ogg"))
+    {
+        QMessageBox::critical(0, "Error load file", "Error load file 'win.ogg'!");
+    }
+    sound_win.setBuffer(buffer_win);
     //Load Sound*/
 
     direction.setX(0);
@@ -472,6 +478,7 @@ void Player::Update(float dt)
     {
         speed_x = 0;
         qDebug()<<"FINISH";
+        sound_win.play();
         //qDebug()<<"ScorePlan="<<PlayProfile::score_plan[PlayProfile::current_level]<<"ScorePrev="<<PlayProfile::score[PlayProfile::current_level];
         if ((PlayProfile::current_level+1)==PlayProfile::last_level)
             PlayProfile::last_level = PlayProfile::last_level + 1;
@@ -518,7 +525,7 @@ void Player::Draw()
         pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
                              Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 1) );
 
-        ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 1, 2);
+        ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 1, 3);
         ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                         Setting::GetProjection() *
                                                                                         ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *
@@ -544,7 +551,7 @@ void Player::Draw()
         pos.SetPos(QVector3D(Resources::CAMERA()->GetCurrentCamera()->GetPosX()+10,
                              Resources::CAMERA()->GetCurrentCamera()->GetPosY() + Setting::GetViewPort().height() - 50 - 32, 1) );
 
-        ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 2, 2);
+        ManagerSprite::getInstance()->GetValue(id_sprite)->Bind(32, 32, 2, 3);
         ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->setUniformValue(ManagerSprite::getInstance()->GetValue(id_sprite)->GetShader()->GetNameMatrixPos().toStdString().c_str(),
                                                                                         Setting::GetProjection() *
                                                                                         ManagerCamera::getInstance()->GetCurrentCamera()->GetMatrix() *

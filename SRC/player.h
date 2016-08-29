@@ -56,6 +56,8 @@ private:
     sf::Sound sound_portal;
     sf::SoundBuffer buffer_brick;
     sf::Sound sound_brick;
+    sf::SoundBuffer buffer_win;
+    sf::Sound sound_win;
 };
 
 #endif // PLAYER_H
