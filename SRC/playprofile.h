@@ -9,6 +9,7 @@ public:
     PlayProfile();
     static bool Load();
     static bool Save();
+    static void ResetProfile();
     static int last_level;
     static int score_plan[27];
     static int score[27];

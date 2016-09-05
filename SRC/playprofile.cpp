@@ -32,7 +32,7 @@ void PlayProfile::ResetScorePlan()
     score_plan[16] = 17;
     score_plan[17] = 34;
     score_plan[18] = 36;
-    score_plan[19] = 1;
+    score_plan[19] = 46;
     score_plan[20] = 1;
     score_plan[21] = 1;
     score_plan[22] = 1;
@@ -40,6 +40,18 @@ void PlayProfile::ResetScorePlan()
     score_plan[24] = 1;
     score_plan[25] = 1;
     score_plan[26] = 1;
+}
+
+void PlayProfile::ResetProfile()
+{
+    ResetScorePlan;
+    for (int i=0; i<27; i++)
+    {
+        score[i] = 0;
+    }
+    last_level = 1;
+    Save();
+
 }
 
 bool PlayProfile::Load()

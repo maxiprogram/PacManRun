@@ -1,6 +1,6 @@
 <GameScene>
  <Resources>
-  <Shader id="0"></Shader>
+  <Shader id="0">Resources/default.vert;Resources/default.frag</Shader>
   <Mesh id="0"></Mesh>
   <Texture id="0">Resources/tileset.png</Texture>
   <Texture id="1">Resources/player_sprite.png</Texture>
@@ -8,9 +8,20 @@
   <Texture id="3">Resources/buttons_pause.png</Texture>
   <Texture id="4">Resources/close.png</Texture>
   <Texture id="5">Resources/ghost.png</Texture>
+  <Texture id="8">Resources/tileset2.png</Texture>  
+  <Texture id="12">Resources/background3.png</Texture>
+  <Texture id="14">Resources/portal1.png</Texture>
+  <Texture id="15">Resources/portal2.png</Texture>
+  <Texture id="16">Resources/ice1.png</Texture>
+  <Texture id="17">Resources/ice2.png</Texture>
+
+  <Texture id="19">Resources/blood.png</Texture>
+  <Texture id="18">Resources/spring2.png</Texture>
+  <Texture id="20">Resources/particle_blood.png</Texture>
 
   <Texture id="9">Resources/font_green.png</Texture>
   <Texture id="10">Resources/font_orange.png</Texture>
+  <Texture id="21">Resources/cherry.png</Texture>
  </Resources>
 
  <Sprite id="0" mid="0" sid="0" tid="1"></Sprite>
@@ -19,9 +30,175 @@
  <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
  <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
 
+ <Sprite id="8" mid="0" sid="0" tid="12"></Sprite>
+ <Sprite id="10" mid="0" sid="0" tid="14"></Sprite>
+ <Sprite id="11" mid="0" sid="0" tid="15"></Sprite>
+ <Sprite id="12" mid="0" sid="0" tid="16"></Sprite>
+ <Sprite id="13" mid="0" sid="0" tid="17"></Sprite>
+ <Sprite id="14" mid="0" sid="0" tid="18"></Sprite>
+ <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
+ <Sprite id="16" mid="0" sid="0" tid="20"></Sprite>
+ <Sprite id="17" mid="0" sid="0" tid="21"></Sprite>
+
  <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
  <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
  
+<!-- BackGround -->
+ <GameObject name="BackGround" type="5">
+  <id_sprite>8</id_sprite>
+ </GameObject>
+
+<!--NOIce(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>13</id_sprite>
+  <pos_x>3008</pos_x>
+  <pos_y>490</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>224</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>5280</pos_x>
+  <pos_y>608</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>128</pos_x>
+  <pos_y>128</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>1024</pos_x>
+  <pos_y>96</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject> 
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>1312</pos_x>
+  <pos_y>96</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject> 
+
+<!--NOIce(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>13</id_sprite>
+  <pos_x>2720</pos_x>
+  <pos_y>170</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>288</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Ice(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>12</id_sprite>
+  <pos_x>3136</pos_x>
+  <pos_y>202</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>288</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>5056</pos_x>
+  <pos_y>256</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject> 
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>5376</pos_x>
+  <pos_y>256</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject> 
+
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>5440</pos_x>
+  <pos_y>256</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject> 
+
  <GameObject name="Player" type="0">
   <pos_x>126</pos_x>
   <pos_y>576</pos_y>
@@ -87,6 +264,8 @@
  <GameObject name="Pause" type="2">
   <id_header>1</id_header>
   <id_button>2</id_button>
+  <id_blood>15</id_blood>
+  <id_cherry>17</id_cherry>
  </GameObject>
  
  <TileMap mid="0" sid="0">Resources/level2_1.tmx</TileMap>

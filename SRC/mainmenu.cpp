@@ -283,6 +283,13 @@ void MainMenu::Update(float dt)
                 else
                     checkbox_sound = 0;
                 Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
+            }else
+            //reset profile
+            if(m_x>Setting::GetViewPort().width()/2-250 && m_x<Setting::GetViewPort().width()/2+100 && m_y>Setting::GetViewPort().height()/2-200 && m_y<Setting::GetViewPort().height()/2-125)
+            {
+                PlayProfile::ResetProfile();
+                CurrentStatusGame = Main_Menu;
+                Resources::MOUSE()->Update(Resources::MOUSE()->GetEvent(),false);
             }
         }
     }
