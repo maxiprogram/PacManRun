@@ -10,8 +10,9 @@
 #include "ghost.h"
 #include "background.h"
 #include "decor.h"
+#include "goal.h"
 
-enum Type_GameObject {Hero=0, MainMenuObject=1, PauseObject=2, PortalObject=3, GhostObject=4, BackGroundObject=5, DecorObject=6};
+enum Type_GameObject {Hero=0, MainMenuObject=1, PauseObject=2, PortalObject=3, GhostObject=4, BackGroundObject=5, DecorObject=6, GoalObject=7};
 
 class CreatorObject:public CreatorGameObject
 {

@@ -4,6 +4,7 @@
 #include "Engine/resources.h"
 
 #include "player.h"
+#include "goal.h"
 
 class Bullet : public GameObject
 {

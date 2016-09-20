@@ -54,7 +54,8 @@ SOURCES += \
     bullet.cpp \
     background.cpp \
     decor.cpp \
-    particle.cpp
+    particle.cpp \
+    goal.cpp
 
 HEADERS  += \
     mainform.h \
@@ -96,7 +97,8 @@ HEADERS  += \
     bullet.h \
     background.h \
     decor.h \
-    particle.h
+    particle.h \
+    goal.h
 
 FORMS    +=
 

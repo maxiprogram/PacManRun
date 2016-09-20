@@ -44,6 +44,12 @@ GameObject* CreatorObject::CreateGameObject(uint type)
         return new Decor();
         break;
     }
+    case GoalObject:
+    {
+        return new Goal();
+        break;
+    }
+
 
     default:{return 0;break;}
     }

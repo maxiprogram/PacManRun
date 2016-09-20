@@ -35,7 +35,7 @@ void PlayProfile::ResetScorePlan()
     score_plan[19] = 46;
     score_plan[20] = 1;
     score_plan[21] = 32;
-    score_plan[22] = 1;
+    score_plan[22] = 23;
     score_plan[23] = 1;
     score_plan[24] = 1;
     score_plan[25] = 1;

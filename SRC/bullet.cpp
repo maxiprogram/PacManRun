@@ -94,6 +94,37 @@ void Bullet::Update(float dt)
         }
         //Взаимодействие с Ghost*/
 
+        ///*Взаимодействие с Goal
+        QList<GameObject*> list_goal = ManagerGameObject::getInstance()->GetValues("Goal");
+        for(int i=0; i<list_goal.size(); i++)
+        {
+            QRectF rect_pos(this->GetPosX(), this->GetPosY(), this->GetScalX(), this->GetScalY());
+            QRectF rect_goal_pos(list_goal.at(i)->GetPosX(), list_goal.at(i)->GetPosY(), list_goal.at(i)->GetScalX(), list_goal.at(i)->GetScalY());
+            if (rect_pos.intersects(rect_goal_pos)==true)
+            {
+                this->SetScal(QVector3D(100, 100, 1));
+                flag_move = false;
+                frame = 0;
+
+                ///*Подмена тайлов
+                Goal* goal = (Goal*)list_goal.at(i);
+                QStringList list_x = goal->list_x.split(",");
+                QStringList list_y = goal->list_y.split(",");
+                int value_tile = goal->value_tile;
+
+                for(int j=0; j<list_x.size(); j++)
+                {
+                    qDebug()<<"Tile GOAL Main:"<<Resources::TILEMAP()->GetLayer("Main")->GetValue(list_x.at(j).toInt(), list_y.at(j).toInt());
+                    qDebug()<<"Tile GOAL Object:"<<Resources::TILEMAP()->GetLayer("Object")->GetValue(list_x.at(j).toInt(), list_y.at(j).toInt());
+                    Resources::TILEMAP()->GetLayer("Main")->SetValue(list_x.at(j).toInt(), list_y.at(j).toInt(), value_tile);
+                    Resources::TILEMAP()->GetLayer("Object")->SetValue(list_x.at(j).toInt(), list_y.at(j).toInt(), value_tile);
+                }
+                qDebug()<<"Goal connect";
+                //Подмена тайлов*/
+            }
+        }
+        //Взаимодействие с Goal*/
+
         ///*Анимация
         frame+=0.08;
         if (frame>3)
