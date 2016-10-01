@@ -1,0 +1,214 @@
+<GameScene>
+ <Resources>
+  <Shader id="0">Resources/default.vert;Resources/default.frag</Shader>
+  <Mesh id="0"></Mesh>
+  <Texture id="0">Resources/tileset.png</Texture>
+  <Texture id="1">Resources/player_sprite.png</Texture>
+  <Texture id="2">Resources/header_pause.png</Texture>
+  <Texture id="3">Resources/buttons_pause.png</Texture>
+  <Texture id="4">Resources/close.png</Texture>
+  <Texture id="5">Resources/ghost.png</Texture>
+  <Texture id="6">Resources/shoot.png</Texture>
+  <Texture id="7">Resources/bullet.png</Texture>
+  <Texture id="8">Resources/tileset2.png</Texture>  
+  <Texture id="11">Resources/fire.png</Texture>
+  <Texture id="12">Resources/background3.png</Texture>
+  <Texture id="14">Resources/portal1.png</Texture>
+  <Texture id="15">Resources/portal2.png</Texture>
+  <Texture id="16">Resources/ice1.png</Texture>
+  <Texture id="17">Resources/ice2.png</Texture>
+
+  <Texture id="19">Resources/blood.png</Texture>
+  <Texture id="18">Resources/spring2.png</Texture>
+  <Texture id="20">Resources/particle_blood.png</Texture>
+
+  <Texture id="9">Resources/font_green.png</Texture>
+  <Texture id="10">Resources/font_orange.png</Texture>
+  <Texture id="21">Resources/cherry.png</Texture>
+  <Texture id="22">Resources/goal.png</Texture>
+ </Resources>
+
+ <Sprite id="0" mid="0" sid="0" tid="1"></Sprite>
+ <Sprite id="1" mid="0" sid="0" tid="2"></Sprite>
+ <Sprite id="2" mid="0" sid="0" tid="3"></Sprite>
+ <Sprite id="3" mid="0" sid="0" tid="4"></Sprite>
+ <Sprite id="4" mid="0" sid="0" tid="5"></Sprite>
+ <Sprite id="5" mid="0" sid="0" tid="6"></Sprite>
+ <Sprite id="6" mid="0" sid="0" tid="7"></Sprite>
+ <Sprite id="7" mid="0" sid="0" tid="11"></Sprite>
+ <Sprite id="8" mid="0" sid="0" tid="12"></Sprite>
+ <Sprite id="10" mid="0" sid="0" tid="14"></Sprite>
+ <Sprite id="11" mid="0" sid="0" tid="15"></Sprite>
+ <Sprite id="12" mid="0" sid="0" tid="16"></Sprite>
+ <Sprite id="13" mid="0" sid="0" tid="17"></Sprite>
+ <Sprite id="14" mid="0" sid="0" tid="18"></Sprite>
+ <Sprite id="15" mid="0" sid="0" tid="19"></Sprite>
+ <Sprite id="16" mid="0" sid="0" tid="20"></Sprite>
+ <Sprite id="17" mid="0" sid="0" tid="21"></Sprite>
+ <Sprite id="18" mid="0" sid="0" tid="22"></Sprite>
+
+
+ <Font name="green" mid="0" sid="0" tid="9">Resources/font_green.font</Font>
+ <Font name="orange" mid="0" sid="0" tid="10">Resources/font_orange.font</Font>
+ 
+<!-- BackGround -->
+ <GameObject name="BackGround" type="5">
+  <id_sprite>8</id_sprite>
+ </GameObject>
+
+<!--Spring-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>14</id_sprite>
+  <pos_x>6912</pos_x>
+  <pos_y>288</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>64</scal_x>
+  <scal_y>64</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>64</width>
+  <height>64</height>
+  <count_frame>4</count_frame>
+ </GameObject>
+
+<!--Portal IN-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>10</id_sprite>
+  <pos_x>8480</pos_x>
+  <pos_y>160</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Portal OUT-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>11</id_sprite>
+  <pos_x>8096</pos_x>
+  <pos_y>480</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>96</scal_x>
+  <scal_y>96</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>96</width>
+  <height>96</height>
+  <count_frame>5</count_frame>
+ </GameObject>
+
+<!--Ice(<pos_y>-22)-->
+ <GameObject name="Decor" type="6">
+  <id_sprite>12</id_sprite>
+  <pos_x>8672</pos_x>
+  <pos_y>458</pos_y>
+  <pos_z>0.01</pos_z>
+  <scal_x>160</scal_x>
+  <scal_y>30</scal_y>
+  <atlas_x>0</atlas_x>
+  <atlas_y>0</atlas_y>
+  <width>187</width>
+  <height>30</height>
+  <count_frame>0</count_frame>
+ </GameObject>
+
+<!-- Goal -->
+ <GameObject name="Goal" type="7">
+  <pos_x>3936</pos_x>
+  <pos_y>352</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>18</id_sprite>
+  <list_x>13,13,12,12,11,11,10,10,9,9,8,8,7,7,6,6</list_x>
+  <list_y>137,138,137,138,137,138,137,138,137,138,137,138,137,138,137,138</list_y>
+  <value_tile>0</value_tile>
+ </GameObject>
+
+<!-- Goal -->
+ <GameObject name="Goal" type="7">
+  <pos_x>5632</pos_x>
+  <pos_y>480</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>18</id_sprite>
+  <list_x>9,9,9,9,9,9,9,9,9,9,9</list_x>
+  <list_y>172,173,174,175,176,177,178,179,180,181,182</list_y>
+  <value_tile>28</value_tile>
+ </GameObject>
+
+<!-- Goal -->
+ <GameObject name="Goal" type="7">
+  <pos_x>9152</pos_x>
+  <pos_y>288</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>18</id_sprite>
+  <list_x>13,13,13,13,13,13,13,13,13,13,13</list_x>
+  <list_y>285,286,287,288,289,290,291,292,293,294,295</list_y>
+  <value_tile>28</value_tile>
+ </GameObject>
+
+<!-- Ghost -->
+ <GameObject name="Ghost" type="4">
+  <pos_x>1984</pos_x>
+  <pos_y>288</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>128</radius>
+  <speed_x>2</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+<!-- Ghost -->
+ <GameObject name="Ghost" type="4">
+  <pos_x>9184</pos_x>
+  <pos_y>480</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>4</id_sprite>
+  <radius>128</radius>
+  <speed_x>0</speed_x>
+  <speed_y>0</speed_y>
+ </GameObject>
+
+
+ <GameObject name="Portal" type="3">
+  <pos_i_start>265</pos_i_start>
+  <pos_j_start>14</pos_j_start>
+  <pos_i_finish>253</pos_i_finish>
+  <pos_j_finish>4</pos_j_finish>
+ </GameObject>
+
+ <GameObject name="Player" type="0">
+  <pos_x>128</pos_x>
+  <pos_y>320</pos_y>
+  <scal_x>48</scal_x>
+  <scal_y>48</scal_y>
+  <id_sprite>0</id_sprite>
+  <id_close>3</id_close>
+  <speed_x>12</speed_x>
+  <accel_y>1</accel_y>
+ </GameObject>
+
+
+ <GameObject name="Pause" type="2">
+  <id_header>1</id_header>
+  <id_button>2</id_button>
+  <id_blood>15</id_blood>
+  <id_cherry>17</id_cherry>
+ </GameObject>
+ 
+ <TileMap mid="0" sid="0">Resources/level2_5.tmx</TileMap>
+ 
+ <Camera name="MainCamera" type="2">
+  <pos_x>0</pos_x>
+  <pos_y>0</pos_y>
+  <pos_z>0</pos_z>
+ </Camera>
+
+</GameScene>
