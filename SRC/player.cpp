@@ -396,7 +396,7 @@ void Player::Update(float dt)
     if (ManagerCamera::getInstance()->GetCurrentCamera()->GetPosX()<width_x-Setting::GetViewPort().width())
     {
         ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetX(GetPosX()-(Setting::GetViewPort().width()/2-GetScalX()/2));
-        if (PlayProfile::current_level==14 || PlayProfile::current_level==21 || PlayProfile::current_level==22 || PlayProfile::current_level==23 || PlayProfile::current_level==24)
+        if (PlayProfile::current_level==14 || PlayProfile::current_level==20 || PlayProfile::current_level==21 || PlayProfile::current_level==22 || PlayProfile::current_level==23 || PlayProfile::current_level==24)
             ManagerCamera::getInstance()->GetCurrentCamera()->SetTargetY(GetPosY()-(Setting::GetViewPort().height()/2-GetScalY()/2));
 
     }
