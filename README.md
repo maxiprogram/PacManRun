@@ -94,7 +94,7 @@ time to time. Thus, you are advised to review this page
 periodically for any changes. I will
 notify you of any changes by posting the new Privacy Policy on
 this page.
-</p> <p>This policy is effective as of 2023-05-24</p> <p><strong>Contact Us</strong></p> <p>
+</p> <p>This policy is effective as of 2024-08-15</p> <p><strong>Contact Us</strong></p> <p>
 If you have any questions or suggestions about my
 Privacy Policy, do not hesitate to contact me at maxiprogram@gmail.com.
 </p>
